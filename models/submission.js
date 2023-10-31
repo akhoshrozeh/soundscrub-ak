@@ -40,10 +40,10 @@ const SubmissionSchema = new Schema({
   tags: {
     type: [String],
   },
-  upvotes: {
-    type: Number,
-    default: 0,
-  },
+  upvotes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }],
 }, {
   timestamps: true,
 });

@@ -1,7 +1,6 @@
-'use client'
 
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
@@ -9,18 +8,46 @@ import { usePathname, useRouter } from 'next/navigation';
 const ReleaseItem = ({ release, handleVote }) => {
     const pathName = usePathname();
     const router = useRouter();
+    const [upvotes, setUpvotes] = useState(0);
+    const [voting, setVoting] = useState(false);
+    const { data: session } = useSession();
+    const releaseUpvotes = release.upvotes;
 
-    // const updateVote = async (e) => {
+    useEffect(() => {
+        console.log(typeof(releaseUpvotes))
+        if(typeof(releaseUpvotes) === 'object'){
+            console.log('array type confirmed')
+            setUpvotes(releaseUpvotes.length)
+        }
+    }, [])
 
-    //     try {
-    
-    //       const response = await fetch(`/api/releases/${releasesId}`)
-    //     } catch (error) {
-    //         console.log("updating vote count");
-    //         console.log(error);
-    //     }
-        
-    //   }
+    console.log(release.upvotes)
+    const updateVote = async (e) => {
+        console.log("update vote");
+
+        try {
+
+            console.log("update vote button");
+
+            console.log(release.id)
+
+            const response = await fetch(`/api/releases/${release._id}/update-vote`, {
+                method: 'PATCH',
+                body: JSON.stringify({
+                    new_upvote: session?.user.id
+                })
+            })
+
+            console.log("updating vote button")
+
+
+        } catch (error) {
+            console.log(error);
+        }
+
+        setUpvotes((prev) => prev + 1);
+        setVoting(true);
+    }
     
     return (
 
@@ -50,13 +77,22 @@ const ReleaseItem = ({ release, handleVote }) => {
             
             <div className='px-4 m-auto'>
                 
-                <button className="vote_btn mt-3 mb-3" onClick={handleVote}> 
-
+                {voting || typeof(releaseUpvotes) === 'object' && releaseUpvotes.includes(session?.user.id) ? (
+                    <button className="voted_btn mt-3 mb-3" onClick={()=>{}}> 
                     <div className="flex flex-col items-center">
                         <span className='font-bold'>^</span>
-                        <span>{release.upvotes}</span>
+                        <span>{upvotes}</span>
                     </div>
                 </button>
+                ) : (
+                    <button className="vote_btn mt-3 mb-3" onClick={updateVote}> 
+                        <div className="flex flex-col items-center">
+                            <span className='font-bold'>^</span>
+                            <span>{upvotes}</span>
+                        </div>
+                    </button>
+                )}
+                
             </div>
             
         </li>
