@@ -64,6 +64,7 @@ const ReleaseItem = ({ release, handleVote }) => {
                 <p className="text-gray-600">{release.artist}</p>
             </div>
 
+            {/* TODO : make the link redirect to the correct website */}
             <div className="flex-2 flex-col m-auto">
                 <a href={release.link} target="_blank" rel="noopener noreferrer">
                     <Image
