@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import ReleaseItem from '@components/ReleaseItem'
 
-const ReleaseList = ({data, handleVote}) => {
+const ReleaseList = ({data}) => {
   return (
     <div className="w-full flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent ">
       <ol className="flex flex-col divide-y w-full">
@@ -12,7 +12,6 @@ const ReleaseList = ({data, handleVote}) => {
           <ReleaseItem
             key={release._id}
             release={release}
-            handleVote={handleVote}
           />
         ))} 
       </ol>
@@ -58,7 +57,6 @@ const Feed = () => {
       </div>
       <ReleaseList
         data={releases}
-        handleVote = {() => {}}
       />
     </section>
   )

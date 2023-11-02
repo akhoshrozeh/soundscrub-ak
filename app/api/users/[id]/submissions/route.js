@@ -1,5 +1,5 @@
 import { connectToDB } from '@utils/database';
-import Submission from "@models/submission";
+import Release from "@models/release";
 
 export const GET = async(request, {params}) => {
 

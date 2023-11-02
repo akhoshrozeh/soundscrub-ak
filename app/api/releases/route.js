@@ -1,12 +1,12 @@
 import { connectToDB } from '@utils/database';
-import Submission from '@models/submission';
+import Release from '@models/release';
 
 export const GET = async () => {
     try {
         await connectToDB();
         
         // Eventually filter based on date
-        const releases = await Submission.find({ isAccepted: true }).populate('creator').sort({ upvotes: -1 });
+        const releases = await Release.find({ isAccepted: true }).populate('creator').sort({ upvotesLength: -1 });
         console.log('Awaiting release retrieval...')
         // console.log(releases)
         return new Response(JSON.stringify(releases), {status: 200})

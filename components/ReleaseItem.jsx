@@ -4,12 +4,13 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
+import * as VOTES from '@constants/votes';
 
-const ReleaseItem = ({ release, handleVote }) => {
+const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
     const router = useRouter();
     const [upvotes, setUpvotes] = useState(0);
-    const [voted, setVoted] = useState(false);
+    const [voted, setVoted] = useState(null);
     const { data: session } = useSession();
     const releaseUpvotes = release.upvotes;
 
@@ -18,15 +19,24 @@ const ReleaseItem = ({ release, handleVote }) => {
         if(typeof(releaseUpvotes) === 'object'){
             console.log('array type confirmed')
             setUpvotes(releaseUpvotes.length)
+            setVoted(releaseUpvotes.includes(session?.user.id))
         }
     }, [])
 
-    console.log(release.upvotes)
-    const updateVote = async (e) => {
+    console.log(VOTES.TYPES.UPVOTE)
+    const updateVote = async (voteType) => {
+
         console.log("update vote");
 
-        setUpvotes((prev) => prev + 1);
-        setVoted(true);
+        if (voteType === "upvote"){
+            setUpvotes((prev) => prev + 1);
+            setVoted((prev) => !prev);
+        }
+        else if (voteType === "downvote"){
+            setUpvotes((prev) => prev - 1);
+            setVoted((prev) => !prev);
+        }
+        
         try {
 
             console.log("update vote button");
@@ -36,7 +46,8 @@ const ReleaseItem = ({ release, handleVote }) => {
             const response = await fetch(`/api/releases/${release._id}/update-vote`, {
                 method: 'PATCH',
                 body: JSON.stringify({
-                    new_upvote: session?.user.id
+                    user: session?.user.id,
+                    voteType: voteType
                 })
             })
 
@@ -50,15 +61,19 @@ const ReleaseItem = ({ release, handleVote }) => {
         
     }
     
+    const notifySignInRequired = (e) => {
+
+    }
+
     return (
 
         <li className="flex flex-row ">
             <Image 
                 src="/assets/images/placeholder-logo.svg" 
+                alt="Placeholder"
                 width={37}
                 height={37}
-                alt={"Placeholder Img"} 
-                className='ml-4 mr-4'
+                className="ml-4 mr-4"
             />
             <div className="flex-1 pl-1 mr-16 m-auto">
                 <div className="text-xl font-semibold">{release.title}</div>
@@ -79,31 +94,46 @@ const ReleaseItem = ({ release, handleVote }) => {
             
             <div className='px-4 m-auto'>
                 
-                {voted || releaseUpvotes.includes(session?.user.id) ? (
-                    <button className="voted_btn mt-3 mb-3" onClick={()=>{}}> 
+                {(voted ) ? (
+                    <button className="voted_btn mt-3 mb-3" onClick={() => updateVote(VOTES.TYPES.DOWNVOTE)}> 
                         <div className="flex flex-col items-center  ml-1 mr-1">
                             <Image 
                                 src="/assets/icons/216604_come_icon.svg"
                                 width={10}
                                 height={10}
                                 className="black_arrow_svg"
+                                alt="black arrow"
                             />
                             <span className="mb-1">{upvotes}</span>
                         </div>
                 </button>
-                ) : (
-                    <button className="vote_btn mt-3 mb-3" onClick={updateVote}> 
+                ) : session?.user ? (
+                    <button className="vote_btn mt-3 mb-3" onClick={() => updateVote(VOTES.TYPES.UPVOTE)}> 
                         <div className="flex flex-col items-center ml-1 mr-1">
                             <Image 
                                 src="/assets/icons/216604_come_icon_white.svg"
                                 width={10}
                                 height={10}
                                 className="white_arrow_svg"
+                                alt="white arrow"
                             />
                             <span className="mb-1">{upvotes}</span>
                         </div>
                     </button>
-                )}
+                ) : (
+                    <button className="vote_btn mt-3 mb-3" onClick={notifySignInRequired}> 
+                        <div className="flex flex-col items-center ml-1 mr-1">
+                            <Image 
+                                src="/assets/icons/216604_come_icon_white.svg"
+                                width={10}
+                                height={10}
+                                className="white_arrow_svg"
+                                alt="white arrow"
+                            />
+                            <span className="mb-1">{upvotes}</span>
+                        </div>
+                    </button>
+                ) }
                 
             </div>
             
