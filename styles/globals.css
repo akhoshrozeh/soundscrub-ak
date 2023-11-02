@@ -77,6 +77,15 @@
   @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
 }
 
+.black_arrow_svg {
+
+  @apply mt-2 mb-1  hover:fill-white
+}
+
+.white_arrow_svg {
+  @apply mt-2 mb-1  hover:fill-black
+}
+
 .vote_btn {
   @apply rounded-xl border border-black bg-black py-1 px-4 text-white transition-all hover:bg-white hover:text-black text-sm;
 }

@@ -6,7 +6,7 @@ import ReleaseItem from '@components/ReleaseItem'
 
 const ReleaseList = ({data, handleVote}) => {
   return (
-    <div className="w-full flex flex-col container mt-10 mx-auto items-center justify-center bg-white rounded-lg shadow">
+    <div className="w-full flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent ">
       <ol className="flex flex-col divide-y w-full">
         {data.map((release) => (
           <ReleaseItem
@@ -29,8 +29,16 @@ const Feed = () => {
 
       const fetchReleases = async () => {
         const response = await fetch('/api/releases');
-        const data = await response.json();
-        setReleases(data);
+
+        try {
+          const data = await response.json();
+
+          console.log('Data successfully retrieved')
+          setReleases(data);
+        } catch(error){
+          console.log('error getting json', error)
+        }
+        
       }
 
       fetchReleases();

@@ -20,5 +20,4 @@ export const POST = async (req) => {
 
         return new Response("Failed to create a new submission", {status: 500});
     }
-    console.log("Finishing new submission route execution...")
 }

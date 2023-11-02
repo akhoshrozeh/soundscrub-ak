@@ -9,7 +9,7 @@ const ReleaseItem = ({ release, handleVote }) => {
     const pathName = usePathname();
     const router = useRouter();
     const [upvotes, setUpvotes] = useState(0);
-    const [voting, setVoting] = useState(false);
+    const [voted, setVoted] = useState(false);
     const { data: session } = useSession();
     const releaseUpvotes = release.upvotes;
 
@@ -25,6 +25,8 @@ const ReleaseItem = ({ release, handleVote }) => {
     const updateVote = async (e) => {
         console.log("update vote");
 
+        setUpvotes((prev) => prev + 1);
+        setVoted(true);
         try {
 
             console.log("update vote button");
@@ -44,9 +46,8 @@ const ReleaseItem = ({ release, handleVote }) => {
         } catch (error) {
             console.log(error);
         }
-
-        setUpvotes((prev) => prev + 1);
-        setVoting(true);
+        
+        
     }
     
     return (
@@ -78,18 +79,28 @@ const ReleaseItem = ({ release, handleVote }) => {
             
             <div className='px-4 m-auto'>
                 
-                {voting || typeof(releaseUpvotes) === 'object' && releaseUpvotes.includes(session?.user.id) ? (
+                {voted || releaseUpvotes.includes(session?.user.id) ? (
                     <button className="voted_btn mt-3 mb-3" onClick={()=>{}}> 
-                    <div className="flex flex-col items-center">
-                        <span className='font-bold'>^</span>
-                        <span>{upvotes}</span>
-                    </div>
+                        <div className="flex flex-col items-center  ml-1 mr-1">
+                            <Image 
+                                src="/assets/icons/216604_come_icon.svg"
+                                width={10}
+                                height={10}
+                                className="black_arrow_svg"
+                            />
+                            <span className="mb-1">{upvotes}</span>
+                        </div>
                 </button>
                 ) : (
                     <button className="vote_btn mt-3 mb-3" onClick={updateVote}> 
-                        <div className="flex flex-col items-center">
-                            <span className='font-bold'>^</span>
-                            <span>{upvotes}</span>
+                        <div className="flex flex-col items-center ml-1 mr-1">
+                            <Image 
+                                src="/assets/icons/216604_come_icon_white.svg"
+                                width={10}
+                                height={10}
+                                className="white_arrow_svg"
+                            />
+                            <span className="mb-1">{upvotes}</span>
                         </div>
                     </button>
                 )}

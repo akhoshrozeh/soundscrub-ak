@@ -13,7 +13,9 @@ const MyProfile = () => {
   const [mySubmissions, setMyPosts] = useState([]);
   
   return (
-    <Profile/>
+    <Profile
+    name="My"
+    desc="Welcome to your personalized profile page"/>
   )
 }
 
