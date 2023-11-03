@@ -94,6 +94,10 @@
   @apply rounded-xl border border-black bg-white py-1 px-4 text-black transition-all hover:bg-black hover:text-white text-sm;
 }
 
+.profile_btn {
+  @apply rounded-xl border border-black bg-black py-1 px-4 text-white transition-all hover:bg-white hover:text-black text-sm;
+}
+
 .black_btn {
   @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
 }

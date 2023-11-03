@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
-import * as VOTES from '@constants/votes';
+import * as VOTES from '@constants/global';
 
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
