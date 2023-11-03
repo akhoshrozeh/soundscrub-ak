@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
-import * as VOTES from '@constants/global';
+import {VOTE_TYPES} from '@constants/global';
 
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
@@ -23,7 +23,7 @@ const ReleaseItem = ({ release }) => {
         }
     }, [])
 
-    console.log(VOTES.TYPES.UPVOTE)
+    console.log(VOTE_TYPES.UPVOTE)
     const updateVote = async (voteType) => {
 
         console.log("update vote");
@@ -95,7 +95,7 @@ const ReleaseItem = ({ release }) => {
             <div className='px-4 m-auto'>
                 
                 {(voted ) ? (
-                    <button className="voted_btn mt-3 mb-3" onClick={() => updateVote(VOTES.TYPES.DOWNVOTE)}> 
+                    <button className="voted_btn mt-3 mb-3" onClick={() => updateVote(VOTE_TYPES.DOWNVOTE)}> 
                         <div className="flex flex-col items-center  ml-1 mr-1">
                             <Image 
                                 src="/assets/icons/216604_come_icon.svg"
@@ -108,7 +108,7 @@ const ReleaseItem = ({ release }) => {
                         </div>
                 </button>
                 ) : session?.user ? (
-                    <button className="vote_btn mt-3 mb-3" onClick={() => updateVote(VOTES.TYPES.UPVOTE)}> 
+                    <button className="vote_btn mt-3 mb-3" onClick={() => updateVote(VOTE_TYPES.UPVOTE)}> 
                         <div className="flex flex-col items-center ml-1 mr-1">
                             <Image 
                                 src="/assets/icons/216604_come_icon_white.svg"

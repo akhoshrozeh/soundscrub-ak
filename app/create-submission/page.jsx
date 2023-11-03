@@ -54,13 +54,15 @@ const CreateSubmission = () => {
     }
 
     return (
-        <Form
-            type="Create"
-            releaseSubmission={releaseSubmission}
-            setReleaseSubmission={setReleaseSubmission}
-            submitting={submitting}
-            handleSubmit={createSubmission}
-        />
+        <section>
+            <Form
+                type="Create"
+                releaseSubmission={releaseSubmission}
+                setReleaseSubmission={setReleaseSubmission}
+                submitting={submitting}
+                handleSubmit={createSubmission}
+            />
+        </section>
     )
 
 

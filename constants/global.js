@@ -1,4 +1,4 @@
-export const TYPES = {
+export const VOTE_TYPES = {
     UPVOTE: "upvote",
     DOWNVOTE: "downvote"
 }

@@ -13,6 +13,9 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
         <p className="desc text-left max-w-md">
             {type} a submission for your newest release. If we like your submission, it'll be posted on our main feed for the world to see!
         </p>
+        <p className='text-sm text-center'>
+            <a href="/about" className="font-semibold text-red-400">How does it work? Click here!</a>
+        </p>
 
 
         <label>
