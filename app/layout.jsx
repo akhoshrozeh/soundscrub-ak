@@ -6,7 +6,7 @@ export const metadata = {
     title: "SoundScrub",
     description: "Tech-enabled music discovery & community platform"
 }
-const RootLayout = ({children}) => {
+const RootLayout = ({children, modal}) => {
   return (
     <html lang="en">
         <body suppressHydrationWarning={true}>
@@ -18,6 +18,7 @@ const RootLayout = ({children}) => {
                 <main className="app">
                     <Nav/>
                     {children}
+                    {modal}  
                 </main>
             </Provider>
         </body>
