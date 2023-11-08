@@ -89,13 +89,17 @@ const Profile = ({session}) => {
                   <h6 className='italic'> Without music, life would be a mistake.</h6>
                 </span>
 
-                <button className='edit_profile_btn mt-2'>
-                  Edit Profile Settings
-                </button>
+                
 
                 
             </div> 
-            <div className="flex-grow border-t border-gray-400 mb-2"></div> 
+                
+            <div className="flex flex-row my-3 justify-center">
+                <button className='edit_profile_btn'>
+                  Edit Profile Settings
+                </button>
+            </div>
+
             <div className="flex flex-row space-x-1 justify-center">
 
               { filter !== 'upvotes' ? 
@@ -114,11 +118,9 @@ const Profile = ({session}) => {
               }
 
             </div>
-            <div className="flex-grow border-t border-gray-400 mt-2"></div> 
-
-            <ReleaseList
+            {/* <ReleaseList
               data={releases}
-            />
+            /> */}
     </section>
   )
 }
