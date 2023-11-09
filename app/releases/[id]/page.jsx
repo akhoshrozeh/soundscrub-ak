@@ -1,9 +1,11 @@
-import ReleaseView from "@components/ReleaseModal"
+import ReleaseModal from "@components/ReleaseModal"
 
-const ReleasePage = () => {
+const ReleasePageView = (params) => {
   return (
-    <ReleaseView/>
+    <ReleaseModal
+      params={params}
+    />
   )
 }
 
-export default ReleasePage
+export default ReleasePageView

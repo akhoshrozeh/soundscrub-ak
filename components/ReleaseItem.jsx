@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import {VOTE_TYPES} from '@constants/global';
+import Link from 'next/link';
 
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
@@ -13,6 +14,7 @@ const ReleaseItem = ({ release }) => {
     const [voted, setVoted] = useState(null);
     const { data: session } = useSession();
     const releaseUpvotes = release.upvotes;
+    const releaseId = release._id;
 
     useEffect(() => {
         console.log(typeof(releaseUpvotes))
@@ -41,8 +43,6 @@ const ReleaseItem = ({ release }) => {
 
             console.log("update vote button");
 
-            console.log(release.id)
-
             const response = await fetch(`/api/releases/${release._id}/update-vote`, {
                 method: 'PATCH',
                 body: JSON.stringify({
@@ -67,18 +67,20 @@ const ReleaseItem = ({ release }) => {
 
     return (
 
-        <li className="flex flex-row ">
-            <Image 
-                src="/assets/images/placeholder-logo.svg" 
-                alt="Placeholder"
-                width={37}
-                height={37}
-                className="ml-4 mr-4"
-            />
-            <div className="flex-1 pl-1 mr-16 m-auto">
-                <div className="text-xl font-semibold">{release.title}</div>
-                <p className="text-gray-600">{release.artist}</p>
-            </div>
+        <li className="flex flex-row  ">
+            <Link className="flex flex-row" href={`/releases/${release._id}`}>
+                <Image 
+                    src="/assets/images/placeholder-logo.svg" 
+                    alt="Placeholder"
+                    width={37}
+                    height={37}
+                    className="ml-4 mr-4"
+                />
+                <div className="flex-1 pl-1 mr-16 m-auto">
+                    <div className="text-xl font-semibold">{release.title}</div>
+                    <p className="text-gray-600">{release.artist}</p>
+                </div>
+            </Link>
 
             {/* TODO : make the link redirect to the correct website */}
             <div className="flex-2 flex-col m-auto">
