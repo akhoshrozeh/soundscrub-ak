@@ -1,11 +1,12 @@
 
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import {VOTE_TYPES} from '@constants/global';
 import Link from 'next/link';
+import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
@@ -15,6 +16,9 @@ const ReleaseItem = ({ release }) => {
     const { data: session } = useSession();
     const releaseUpvotes = release.upvotes;
     const releaseId = release._id;
+
+    const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
+    console.log(currentRelease);
 
     useEffect(() => {
         console.log(typeof(releaseUpvotes))
@@ -65,10 +69,15 @@ const ReleaseItem = ({ release }) => {
 
     }
 
+    const handleLink = (e) => {
+        setCurrentRelease(release);
+        console.log(currentRelease)
+    }
+
     return (
 
         <li className="flex flex-row  ">
-            <Link className="flex flex-row" href={`/releases/${release._id}`}>
+            <Link className="flex flex-row" href={`/releases/${release._id}`} onClick={handleLink}>
                 <Image 
                     src="/assets/images/placeholder-logo.svg" 
                     alt="Placeholder"

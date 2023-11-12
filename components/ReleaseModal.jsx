@@ -1,14 +1,22 @@
 'use client'
+import { useState, useEffect, useContext } from 'react';
+import ReleaseViewProvider from '@contexts/ReleaseViewContext';
+import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 
-const ReleaseModal = (params) => {
 
+
+const ReleaseModal = () => {
+
+  const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
+  console.log(currentRelease)
 
   return (
     
         <div className='bg-white rounded-md'>
-          <h3> Current Release</h3>
-          <h3>title</h3>
-          <p>artist</p>
+          <h3>{currentRelease._id}</h3>
+          <h1>{currentRelease.title}</h1>
+          <p>{currentRelease.artist}</p>
+
         </div>
   );
 }

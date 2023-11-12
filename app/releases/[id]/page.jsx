@@ -1,10 +1,13 @@
 import ReleaseModal from "@components/ReleaseModal"
 
-const ReleasePageView = (params) => {
+
+const ReleasePageView = () => {
+
   return (
-    <ReleaseModal
-      params={params}
-    />
+    <section>
+      <h1> Page View</h1>
+      <ReleaseModal/>
+    </section>
   )
 }
 

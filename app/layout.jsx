@@ -1,6 +1,7 @@
 import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
+import { ReleaseViewProvider } from '@contexts/ReleaseViewContext'
 
 export const metadata = {
     title: "SoundScrub",
@@ -11,15 +12,16 @@ const RootLayout = ({children, modal}) => {
     <html lang="en">
         <body suppressHydrationWarning={true}>
             <Provider>
-                <div className="main">
-                    <div className="gradient"/>
-                </div>
-
-                <main className="app">
-                    <Nav/>
-                    {children}
-                    {modal}  
-                </main>
+                <ReleaseViewProvider>
+                    <div className="main">
+                        <div className="gradient"/>
+                    </div>
+                    <main className="app">
+                        <Nav/>
+                        {children}
+                        {modal}  
+                    </main>
+                </ReleaseViewProvider>
             </Provider>
         </body>
     </html>
