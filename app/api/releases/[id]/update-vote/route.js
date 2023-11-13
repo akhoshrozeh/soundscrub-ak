@@ -3,7 +3,7 @@ import Release from '@models/release';
 
 export const PATCH = async (request, { params }) => {
     const { user, voteType } = await request.json();
-
+    console.log(params.id)
     try {
         await connectToDB();
 

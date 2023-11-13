@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
-import {VOTE_TYPES} from '@constants/global';
+import {VOTE_TYPES} from '@constants/enums';
 import Link from 'next/link';
 import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 
@@ -28,8 +28,6 @@ const ReleaseItem = ({ release }) => {
     }, [])
 
     const updateVote = async (voteType) => {
-
-        // console.log("update vote");
 
         if (voteType === "upvote"){
             setUpvotes((prev) => prev + 1);
@@ -73,7 +71,7 @@ const ReleaseItem = ({ release }) => {
 
     return (
 
-        <li className="flex flex-row  ">
+        <li className="flex flex-row justify-evenly items-center py-2 px-2">
             <Link className="flex flex-row" href={`/releases/${release._id}`} onClick={handleLink}>
                 <Image 
                     src="/assets/images/placeholder-logo.svg" 
@@ -89,7 +87,7 @@ const ReleaseItem = ({ release }) => {
             </Link>
 
             {/* TODO : make the link redirect to the correct website */}
-            <div className="flex-2 flex-col m-auto">
+            <div className="flex flex-row m-auto">
                 <a href={release.link} target="_blank" rel="noopener noreferrer">
                     <Image
                         src="/assets/icons/headphones.svg"
@@ -100,7 +98,7 @@ const ReleaseItem = ({ release }) => {
                 </a>
             </div>
             
-            <div className='px-4 m-auto'>
+            <div className='flex flex-row px-4 m-auto'>
                 
                 {(voted ) ? (
                     <button className="voted_btn mt-3 mb-3" onClick={() => updateVote(VOTE_TYPES.DOWNVOTE)}> 

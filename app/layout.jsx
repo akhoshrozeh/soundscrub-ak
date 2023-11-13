@@ -2,6 +2,7 @@ import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 import { ReleaseViewProvider } from '@contexts/ReleaseViewContext'
+import PlaybackFooter from '@components/PlaybackFooter'
 
 export const metadata = {
     title: "SoundScrub",
@@ -19,7 +20,8 @@ const RootLayout = ({children, modal}) => {
                     <main className="app">
                         <Nav/>
                         {children}
-                        {modal}  
+                        {modal}
+                        <PlaybackFooter/>  
                     </main>
                 </ReleaseViewProvider>
             </Provider>

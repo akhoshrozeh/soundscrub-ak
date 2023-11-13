@@ -6,16 +6,14 @@ import ReleaseItem from '@components/ReleaseItem'
 
 const ReleaseList = ({data}) => {
   return (
-    <div className="w-full flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent ">
-      <ol className="flex flex-col divide-y w-full">
-        {data.map((release) => (
-          <ReleaseItem
-            key={release._id}
-            release={release}
-          />
-        ))} 
-      </ol>
-    </div>
+      <>
+      {data.map((release) => (
+        <ReleaseItem
+          key={release._id}
+          release={release}
+        />
+      ))} 
+      </>
   )
 }
 
@@ -55,9 +53,13 @@ const Feed = () => {
           <span className="flex-shrink mx-4 blue_gradient">Today's Releases</span>
           <div className="flex-grow border-t border-gray-400"></div>
       </div>
-      <ReleaseList
-        data={releases}
-      />
+      <div className="flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent w-full ">
+        <ol className="flex flex-col divide-y w-full">
+          <ReleaseList
+            data={releases}
+          />
+        </ol>
+      </div>
     </section>
   )
 }

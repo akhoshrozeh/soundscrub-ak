@@ -1,5 +1,5 @@
 'use client'
-import ReleaseModal from "@components/ReleaseModal"
+import ReleaseCard from "@components/ReleaseCard"
 import { useEffect, useState } from 'react'
 
 const ReleasePageView = ({params}) => {
@@ -7,7 +7,6 @@ const ReleasePageView = ({params}) => {
   const [release, setRelease] = useState();
 
   useEffect(() => {
-
     const fetchReleases = async () => {
       console.log(`/api/releases/${params.id}`)
       const response = await fetch(`/api/releases/${params.id}`);
@@ -22,13 +21,12 @@ const ReleasePageView = ({params}) => {
       }
       
     }
-
     fetchReleases();
 }, []);
 
   return (
-    <section>
-      <ReleaseModal release={release}/>
+    <section className="w-full">
+      <ReleaseCard release={release}/>
     </section>
   )
 }

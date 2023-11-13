@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import { PROFILE_REQ } from '@constants/global';
+import { PROFILE_REQ } from '@constants/enums';
 import { useState, useEffect } from 'react';
 
 import ReleaseItem from '@components/ReleaseItem'
