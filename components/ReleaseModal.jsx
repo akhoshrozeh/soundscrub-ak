@@ -1,24 +1,30 @@
-'use client'
-import { useState, useEffect, useContext } from 'react';
-import ReleaseViewProvider from '@contexts/ReleaseViewContext';
-import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 
+const initRelease = {
+  id: null,
+  title: 'placeholder',
+  artist: 'placeholder',
+  link: '',
+  upvotes: [],
+  upvotesLength: 0,
+  coverImage: '',
+  description: '',
+  genre: '',
+  tags: [],
+  releaseData: Date.now()
+}
 
+const ReleaseModal = ({release = initRelease}) => {
 
-const ReleaseModal = () => {
-
-  const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
-  console.log(currentRelease)
+  console.log(release.title)
 
   return (
     
         <div className='bg-white rounded-md'>
-          <h3>{currentRelease._id}</h3>
-          <h1>{currentRelease.title}</h1>
-          <p>{currentRelease.artist}</p>
-
+          <h3>{release._id}</h3>
+          <h1>{release.title}</h1>
+          <p>{release.artist}</p>
         </div>
   );
 }
 
-export default ReleaseModal
+export default ReleaseModal;

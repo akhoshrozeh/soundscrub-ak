@@ -18,8 +18,6 @@ const ReleaseItem = ({ release }) => {
     const releaseId = release._id;
 
     const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
-    console.log(currentRelease);
-
     useEffect(() => {
         console.log(typeof(releaseUpvotes))
         if(typeof(releaseUpvotes) === 'object'){
@@ -29,10 +27,9 @@ const ReleaseItem = ({ release }) => {
         }
     }, [])
 
-    console.log(VOTE_TYPES.UPVOTE)
     const updateVote = async (voteType) => {
 
-        console.log("update vote");
+        // console.log("update vote");
 
         if (voteType === "upvote"){
             setUpvotes((prev) => prev + 1);

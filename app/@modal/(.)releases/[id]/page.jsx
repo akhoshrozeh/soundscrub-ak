@@ -1,7 +1,8 @@
 'use client'
 import ReleaseModal from "@components/ReleaseModal"
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 
 
 const ReleaseModalView = ({ params }) => {
@@ -9,6 +10,8 @@ const ReleaseModalView = ({ params }) => {
   const overlay = useRef(null);
   const wrapper = useRef(null);
   const router = useRouter();
+  const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
+  console.log(currentRelease)
 
   const onDismiss = () => {
     router.back();
@@ -41,7 +44,7 @@ const ReleaseModalView = ({ params }) => {
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:w-10/12 md:w-8/12 lg:w-1/2 p-6"
       >
         <ReleaseModal
-          params={params}
+          release={currentRelease}
         />
       </div>
     </div>
