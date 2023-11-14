@@ -53,7 +53,8 @@ const Feed = () => {
           <span className="flex-shrink mx-4 blue_gradient">Today's Releases</span>
           <div className="flex-grow border-t border-gray-400"></div>
       </div>
-      <div className="flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent w-full ">
+
+      <div className="flex flex-col container mt-10 bg-transparent  w-full">
         <ol className="flex flex-col divide-y w-full">
           <ReleaseList
             data={releases}

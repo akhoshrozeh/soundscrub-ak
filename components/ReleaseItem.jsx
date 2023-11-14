@@ -71,7 +71,7 @@ const ReleaseItem = ({ release }) => {
 
     return (
 
-        <li className="flex flex-row justify-evenly items-center py-2 px-2">
+        <li className="grid grid-cols-3 justify-items-stretch col-auto py-2 px-2 ">
             <Link className="flex flex-row" href={`/releases/${release._id}`} onClick={handleLink}>
                 <Image 
                     src="/assets/images/placeholder-logo.svg" 
@@ -98,7 +98,7 @@ const ReleaseItem = ({ release }) => {
                 </a>
             </div>
             
-            <div className='flex flex-row px-4 m-auto'>
+            <div className='flex flex-row m-auto mr-10'>
                 
                 {(voted ) ? (
                     <button className="voted_btn mt-3 mb-3" onClick={() => updateVote(VOTE_TYPES.DOWNVOTE)}> 
