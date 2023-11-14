@@ -1,5 +1,4 @@
-
-import {useRouter} from 'next/navigation';
+'use client'
 import { useSession } from 'next-auth/react';
 
 
