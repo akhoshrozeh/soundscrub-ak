@@ -22,17 +22,17 @@ export const ReleaseViewProvider = ({ children }) => {
     const [currentRelease, setCurrentRelease] = useState(initRelease);
 
     /** HELPFUL SNIPPET: Enables persistent state using storage, but results in hydration errors ?? */
-    /** const [currentRelease, setCurrentRelease] = useState(() => {
-        if (typeof window !== "undefined") {
-            const saved = localStorage.getItem('currentRelease');
-            return saved ? JSON.parse(saved) : initRelease;
-        }
-        return initRelease;
-    });
+    // const [currentRelease, setCurrentRelease] = useState(() => {
+    //     if (typeof window !== "undefined") {
+    //         const saved = localStorage.getItem('currentRelease');
+    //         return saved ? JSON.parse(saved) : initRelease;
+    //     }
+    //     return initRelease;
+    // });
 
-    useEffect(() => {
-        localStorage.setItem('currentRelease', JSON.stringify(currentRelease));
-    }, [currentRelease]); */
+    // useEffect(() => {
+    //     localStorage.setItem('currentRelease', JSON.stringify(currentRelease));
+    // }, [currentRelease]); 
 
     return (
         <ReleaseViewContext.Provider value={{currentRelease, setCurrentRelease}}>

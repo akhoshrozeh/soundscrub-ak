@@ -39,10 +39,22 @@ const ReleaseModalView = ({ params }) => {
       className="fixed z-10 left-0 right-0 top-0 bottom-0 mx-auto bg-black/60"
       onClick={onClick}
     >
+      <div className="absolute inset-x-0 top-10 m-10 text-2xl">
+        <button 
+            onClick={onDismiss} 
+            className="font-bold bg-stone-900 rounded-full text-white"
+            aria-label="Close"
+          >
+            <span className="px-3">&times;</span>
+          </button>
+        </div>
       <div
         ref={wrapper}
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full sm:w-10/12 md:w-8/12 lg:w-1/2 p-6"
       >
+        
+        
+
         <ReleaseCard
           release={currentRelease}
         />

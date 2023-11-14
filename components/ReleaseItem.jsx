@@ -98,7 +98,7 @@ const ReleaseItem = ({ release }) => {
                 </a>
             </div>
             
-            <div className='flex flex-row m-auto mr-10'>
+            <div className='flex flex-row m-auto mr-8'>
                 
                 {(voted ) ? (
                     <button className="voted_btn mt-3 mb-3" onClick={() => updateVote(VOTE_TYPES.DOWNVOTE)}> 
