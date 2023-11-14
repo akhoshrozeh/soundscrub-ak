@@ -42,7 +42,7 @@ const ReleaseModalView = ({ params }) => {
       <div className="absolute inset-x-0 top-10 m-10 text-2xl">
         <button 
             onClick={onDismiss} 
-            className="font-bold bg-stone-900 rounded-full text-white"
+            className="font-bold bg-stone-600 rounded-full text-white"
             aria-label="Close"
           >
             <span className="px-3">&times;</span>

@@ -43,7 +43,7 @@ const Feed = () => {
 
   return ( 
 
-    <section className="feed">
+    <section className="feed pb-12">
       <h2>
         
       </h2>
@@ -54,7 +54,7 @@ const Feed = () => {
           <div className="flex-grow border-t border-gray-400"></div>
       </div>
 
-      <div className="flex flex-col container mt-10 bg-transparent  w-full">
+      <div className="flex flex-col container mt-10 bg-transparent  w-full mb-2">
         <ol className="flex flex-col divide-y w-full">
           <ReleaseList
             data={releases}

@@ -19,7 +19,7 @@ const Nav = () => {
         setUpProviders();
     }, [])
     return (
-    <nav className="flex-between w-full mb-16 pt-3 sticky top-0">
+    <nav className="flex-between w-full mb-16 pt-3 pb-3 bg-white sticky top-0">
         <Link href="/" className="flex gap-2 flex-center">
             <Image
                 src="/assets/images/placeholder-logo.svg"
