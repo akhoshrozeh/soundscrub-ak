@@ -11,6 +11,7 @@ export const connectToDB = async () => {
     }
 
     try {
+        console.log("Attempting MongoDB connection")
         await mongoose.connect(process.env.MONGODB_URI, {
             dbName: "soundscrub_db",
             useNewUrlParser: true,
@@ -19,9 +20,10 @@ export const connectToDB = async () => {
         }) 
 
         isConnected = true;
-
+    
         console.log('MongoDB connected!') 
     } catch(error) {
+        console.log("Failed MongoDB connection")
         console.log(error);
     }
 }

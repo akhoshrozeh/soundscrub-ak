@@ -54,7 +54,7 @@ const CreateSubmission = () => {
     }
 
     return (
-        <section>
+        <section className="pb-10">
             <Form
                 type="Create"
                 releaseSubmission={releaseSubmission}
