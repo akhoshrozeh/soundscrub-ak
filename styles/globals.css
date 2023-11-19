@@ -199,11 +199,3 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
-
-.app_navbar {
-  @apply z-20;
-}
-
-.app_footer {
-  @apply z-20;
-}
