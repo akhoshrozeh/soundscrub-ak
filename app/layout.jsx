@@ -18,12 +18,14 @@ const RootLayout = ({children, modal}) => {
                         <div className="gradient"/>
                     </div>
                     
-                        <Nav/>
-                        <main className="app">
-                        {children}
-                        {modal}
-                        </main>
-                        <PlaybackFooter/>  
+                    <main>
+                        <Nav className="app_navbar"/>
+                            <div className="app">
+                                {children}
+                                {modal}
+                            </div>
+                        <PlaybackFooter className="app_footer"/>  
+                    </main>
                     
                 </ReleaseViewProvider>
             </Provider>

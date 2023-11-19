@@ -74,7 +74,7 @@
 /* Tailwind Styles */
 
 .app {
-  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
 }
 
 .black_arrow_svg {
@@ -195,4 +195,12 @@
 
 .flex-between {
   @apply flex justify-between items-center;
+}
+
+.app_navbar {
+  @apply z-20;
+}
+
+.app_footer {
+  @apply z-20;
 }
