@@ -30,7 +30,6 @@
 
 .main:after {
   content: "";
-  /* background-image: url("/assets/images/grid.svg"); */
   z-index: 1;
   position: absolute;
   width: 100%;
@@ -87,11 +86,11 @@
 }
 
 .vote_btn {
-  @apply rounded-xl border border-black bg-black py-1 px-4 text-white transition-all hover:bg-white hover:text-black text-sm;
+  @apply rounded-xl border border-stone-900 border-2 bg-purple-500	 py-1 px-4 text-white transition-all hover:bg-white hover:text-purple-500 text-sm;
 }
 
 .voted_btn {
-  @apply rounded-xl border border-black bg-white py-1 px-4 text-black transition-all hover:bg-black hover:text-white text-sm;
+  @apply rounded-xl border border-stone-900 border-2 bg-white py-1 px-4 text-black transition-all hover:bg-purple-500	 hover:text-white text-sm;
 }
 
 .profile_btn_clicked {
@@ -107,11 +106,11 @@
 }
 
 .black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-black bg-purple-500	 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-purple-500 text-center text-sm font-inter flex items-center justify-center;
 }
 
 .outline_btn {
-  @apply rounded-full border border-white bg-transparent py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+  @apply rounded-full border border-white bg-transparent py-1.5 px-5 text-white transition-all hover:bg-white hover:text-purple-500 text-center text-sm font-inter flex items-center justify-center;
 }
 
 .head_text {
@@ -128,6 +127,10 @@
 
 .blue_gradient {
   @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
+}
+
+.purple_gradient {
+  @apply bg-gradient-to-r from-purple-600 to-violet-600 bg-clip-text text-transparent;
 }
 
 .desc {
