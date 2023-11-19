@@ -9,3 +9,8 @@ export const PROFILE_REQ = {
     PENDING: "pending",
     ACCEPTED: "accepted"
 }
+
+export const INPUT_TYPES = {
+    FORM_INPUT: "form_input",
+    FORM_TEXTAREA: "form_textarea"
+}

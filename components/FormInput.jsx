@@ -1,18 +1,40 @@
-const FormInput = ({ label, value, onChange, placeholder, className="form_input" }) => {
+const FormInput = ({ label, value, onChange, placeholder, inputType="form_input" }) => {
+    console.log(label)
+    console.log(inputType)
     return (
-      <label>
-        <span className="font-satoshi font-semibold text-base text-gray-700">
-          {label}
-        </span>
-  
-        <input
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          required
-          className={className}
-        />
-      </label>
+        <>
+        {inputType == "form_textarea" ? (
+            <label>
+                <span className="font-satoshi font-semibold text-base text-gray-700">
+                {label}
+                </span>
+
+                <textarea
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    required
+                    className={inputType}
+                />
+            </label>
+        ) : (
+            <label>
+                <span className="font-satoshi font-semibold text-base text-gray-700">
+                {label}
+                </span>
+
+                <input
+                    value={value}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    required
+                    className={inputType}
+                />
+            </label>
+
+        )}
+        </>
+      
     );
   };
   

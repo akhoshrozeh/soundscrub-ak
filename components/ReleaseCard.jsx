@@ -26,8 +26,8 @@ const ReleaseCard = ({release = initRelease}) => {
               <Image 
                   src={release.coverImage}
                   alt="Placeholder"
-                  width={50}
-                  height={50}
+                  width={200}
+                  height={200}
                   className="ml-4 mr-4 rounded-lg object-cover h-80 w-80"
               /> 
           ) : (

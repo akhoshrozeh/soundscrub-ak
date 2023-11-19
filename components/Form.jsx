@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import FormInput from './FormInput';
+import { INPUT_TYPES } from "@constants/enums";
 const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit }) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
@@ -19,30 +20,26 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
         </p>
 
 
+        {/* Text-based form inputs  */}
         <FormInput
             label="Release Title"
             value={releaseSubmission.title}
             onChange={(e) => setReleaseSubmission({ ...releaseSubmission, title: e.target.value })}
             placeholder="What's the name of your album?"
         />
-
-
         <FormInput
             label="Artist Name"
             value={releaseSubmission.artist}
             onChange={(e) => setReleaseSubmission({ ...releaseSubmission, artist: e.target.value })}
             placeholder="What's your artist name?"
         />
-
-
         <FormInput
             label="Description"
             value={releaseSubmission.description}
             onChange={(e) => setReleaseSubmission({ ...releaseSubmission, description: e.target.value })}
             placeholder="Enter a description for your release!"
-            className="form_textarea"
+            inputType={INPUT_TYPES.FORM_TEXTAREA}
         />
-
         <FormInput
             label="Music URL"
             value={releaseSubmission.link}
@@ -50,6 +47,7 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
             placeholder="What's the weblink to your music?"
         />
 
+        {/* Form submit/cancel mechanism */}
         <div className="flex-end mx-3 mb-5 gap-4">
             <Link href="/" className='text-gray-500'>
                 Cancel
