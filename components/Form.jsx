@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FormInput from './FormInput';
 const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit }) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
@@ -18,68 +19,36 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
         </p>
 
 
-        <label>
-            <span className="font-satoshi font-semibold text-base text-gray-700">
-                Release Title
-            </span>
+        <FormInput
+            label="Release Title"
+            value={releaseSubmission.title}
+            onChange={(e) => setReleaseSubmission({ ...releaseSubmission, title: e.target.value })}
+            placeholder="What's the name of your album?"
+        />
 
-            <input
-                value={releaseSubmission.title}
-                onChange={(e) => setReleaseSubmission({
-                    ...releaseSubmission, title: e.target.value })}
-                placeholder="What's the name of your album?"
-                required
-                className="form_input"
-            />
-        </label>
 
-        <label>
-            <span className="font-satoshi font-semibold text-base text-gray-700">
-                Artist Name
-            </span>
+        <FormInput
+            label="Artist Name"
+            value={releaseSubmission.artist}
+            onChange={(e) => setReleaseSubmission({ ...releaseSubmission, artist: e.target.value })}
+            placeholder="What's your artist name?"
+        />
 
-            <input
-                value={releaseSubmission.artist}
-                onChange={(e) => setReleaseSubmission({
-                    ...releaseSubmission, artist: e.target.value })}
-                placeholder="What's your artist name?"
-                required
-                className="form_input"
-            />
 
-        </label>
+        <FormInput
+            label="Description"
+            value={releaseSubmission.description}
+            onChange={(e) => setReleaseSubmission({ ...releaseSubmission, description: e.target.value })}
+            placeholder="Enter a description for your release!"
+            className="form_textarea"
+        />
 
-        <label>
-            <span className="font-satoshi font-semibold text-base text-gray-700">
-                Description
-            </span>
-
-            <textarea
-                value={releaseSubmission.description}
-                onChange={(e) => setReleaseSubmission({
-                    ...releaseSubmission, description: e.target.value })}
-                placeholder="Enter a description for your release!"
-                required
-                className="form_textarea"
-            />
-
-        </label>
-
-        <label>
-            <span className="font-satoshi font-semibold text-base text-gray-700">
-                Music URL
-            </span>
-
-            <input
-                value={releaseSubmission.link}
-                onChange={(e) => setReleaseSubmission({
-                    ...releaseSubmission, link: e.target.value })}
-                placeholder="What's the weblink to your music?"
-                required
-                className="form_input"
-            />
-
-        </label>
+        <FormInput
+            label="Music URL"
+            value={releaseSubmission.link}
+            onChange={(e) => setReleaseSubmission({ ...releaseSubmission, link: e.target.value })}
+            placeholder="What's the weblink to your music?"
+        />
 
         <div className="flex-end mx-3 mb-5 gap-4">
             <Link href="/" className='text-gray-500'>
