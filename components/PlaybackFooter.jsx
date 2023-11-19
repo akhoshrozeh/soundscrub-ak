@@ -6,7 +6,7 @@ const PlaybackFooter = () => {
 
     const [isPlaying, setIsPlaying] = useState(false);
   return (
-    <footer className='w-full flex flex-row justify-center bg-stone-900	shadow-full px-1 py-2 fixed bottom-0'>
+    <footer className='w-full flex flex-row justify-center bg-stone-800	shadow-full px-1 py-2 fixed bottom-0'>
         
         <div className="space-x-7">
             <button>
