@@ -21,14 +21,15 @@ const Nav = () => {
     return (
     <nav className="w-full flex flex-between mb-16 px-6 pt-3 pb-3 bg-stone-800 sticky top-0">
         <Link href="/" className="flex gap-2 flex-center">
+            <div className="flex w-[200px] h-[50px] overflow-hidden items-center">
             <Image
-                src="/assets/images/placeholder-logo.svg"
+                src="/assets/images/soundscrub-logo.svg"
                 alt="SoundScrub Logo"
-                width={30}
-                height={30}
+                width={200}
+                height={200}
                 className="object-contain"
             />
-            <p className='logo_text'>SoundScrub</p>
+            </div>
         </Link>
 
         {/* Desktop Navigation*/}
