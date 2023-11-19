@@ -51,6 +51,22 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
 
         <label>
             <span className="font-satoshi font-semibold text-base text-gray-700">
+                Description
+            </span>
+
+            <textarea
+                value={releaseSubmission.description}
+                onChange={(e) => setReleaseSubmission({
+                    ...releaseSubmission, description: e.target.value })}
+                placeholder="Enter a description for your release!"
+                required
+                className="form_textarea"
+            />
+
+        </label>
+
+        <label>
+            <span className="font-satoshi font-semibold text-base text-gray-700">
                 Music URL
             </span>
 

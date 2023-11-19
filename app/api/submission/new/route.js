@@ -3,14 +3,14 @@ import Release from '@models/release';
 
 export const POST = async (req) => {
 
-    const { userId, title, artist, link} = await req.json();
+    const { userId, title, artist, link, description} = await req.json();
 
     console.log("preparing to send new Release route");
 
     try {
         await connectToDB();
-        const newRelease = new Release({ creator: userId, title, artist, link});
-
+        const newRelease = new Release({ creator: userId, title, artist, link, description});
+        console.log(newRelease)
         console.log("Attempting to save the new Release to db")
         await newRelease.save();
         

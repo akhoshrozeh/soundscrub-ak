@@ -16,6 +16,7 @@ const CreateSubmission = () => {
         title: '',
         artist: '',
         link: '',
+        description: ''
 
     });
 
@@ -32,7 +33,8 @@ const CreateSubmission = () => {
                     userId: session?.user.id,
                     title: releaseSubmission.title,
                     artist: releaseSubmission.artist,
-                    link: releaseSubmission.link
+                    link: releaseSubmission.link,
+                    description: releaseSubmission.description
                 })
             })
             console.log("Sending new submission...");

@@ -53,10 +53,10 @@ const ReleaseCard = ({release = initRelease}) => {
           </a>
         )}
 
-        <div className='mt-4'>
+        <div className='mt-4 pb-10'>
           {release.genre && <p className='text-sm text-gray-600'>Genre: {release.genre}</p>}
           {release.tags.length > 0 && <p className='text-sm text-gray-600'>Tags: {release.tags.join(', ')}</p>}
-          {release.description && <p className='mt-2 text-gray-800'>{release.description}</p>}
+          {release.description && <p className='mt-2 text-gray-800 my-3'>{release.description}</p>}
           <p className='text-sm text-gray-600'>Release Date: {release.releaseDate}</p>
           <p className='text-sm text-gray-600'>Upvotes: {release.upvotesLength}</p>
         </div>
