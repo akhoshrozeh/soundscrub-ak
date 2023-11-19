@@ -11,14 +11,20 @@ const CreateSubmission = () => {
 
     const { data: session } = useSession();
     const [submitting, setSubmitting] = useState(false);
+    const [image, setImage] = useState(null);
     
     const [releaseSubmission, setReleaseSubmission] = useState({
         title: '',
         artist: '',
         link: '',
-        description: ''
+        description: '',
+        imgUrl: ''
 
-    });
+    }); 
+
+    const handleImgFileChange = (e) => {
+        setImage(e.target.files[0]);
+    }
 
     const createSubmission = async(e) => {
         e.preventDefault();
@@ -27,6 +33,19 @@ const CreateSubmission = () => {
         try {
             console.log("Attempting to create submission");
 
+            // Storage Logic
+            const formData = new FormData();
+            formData.append("img", image)
+
+            const uploadResponse = await fetch('/api/submission/new/s3-upload', {
+                method: "POST",
+                body: formData
+            })
+
+            const uploadData = await uploadResponse.json();
+
+            console.log(uploadData)
+            // Database Logic
             const response = await fetch('/api/submission/new', {
                 method: 'POST',
                 body: JSON.stringify({
@@ -63,6 +82,7 @@ const CreateSubmission = () => {
                 setReleaseSubmission={setReleaseSubmission}
                 submitting={submitting}
                 handleSubmit={createSubmission}
+                handleImgFileChange={handleImgFileChange}
             />
         </section>
     )

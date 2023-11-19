@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import FormInput from './FormInput';
 import { INPUT_TYPES } from "@constants/enums";
-const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit }) => {
+const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit, handleImgFileChange }) => {
   return (
     <section className="w-full max-w-full flex-start flex-col">
         <form 
@@ -46,6 +46,14 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
             onChange={(e) => setReleaseSubmission({ ...releaseSubmission, link: e.target.value })}
             placeholder="What's the weblink to your music?"
         />
+
+        {/* Storage upload inputs */}
+        <label>
+            <span className="font-satoshi font-semibold text-base text-gray-700">
+                Upload Cover Artwork
+            </span>
+            <input type="file" accept="image/" onChange={handleImgFileChange}/>
+        </label>
 
         {/* Form submit/cancel mechanism */}
         <div className="flex-end mx-3 mb-5 gap-4">

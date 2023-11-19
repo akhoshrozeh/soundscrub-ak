@@ -31,7 +31,11 @@ async function uploadFileToS3(file, fileName, fileType="image/png") {
 
 export const POST = async (request) => {
 
+    console.log("s3 upload post data")
+    console.log(request.formData())
+
     try {
+        console.log("Beginning asset upload")
         const formData = await request.formData();
         const image = formData.get("image");
         if (!image){

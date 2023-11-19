@@ -1,6 +1,4 @@
 const FormInput = ({ label, value, onChange, placeholder, inputType="form_input" }) => {
-    console.log(label)
-    console.log(inputType)
     return (
         <>
         {inputType == "form_textarea" ? (
