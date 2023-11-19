@@ -1,4 +1,4 @@
-const FormInput = ({ label, value, onChange, placeholder, inputType="form_input" }) => {
+const FormInput = ({ label, value, onChange, placeholder, inputType="form_input"}) => {
     return (
         <>
         {inputType == "form_textarea" ? (

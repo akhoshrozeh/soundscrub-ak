@@ -23,28 +23,43 @@ const CreateSubmission = () => {
     }); 
 
     const handleImgFileChange = (e) => {
-        setImage(e.target.files[0]);
+        const newImage = e.target.files[0];
+        setImage(newImage);
+        
     }
 
     const createSubmission = async(e) => {
         e.preventDefault();
         setSubmitting(true);
 
+        let imageUrl = releaseSubmission.imgUrl;
+
         try {
             console.log("Attempting to create submission");
 
             // Storage Logic
-            const formData = new FormData();
-            formData.append("img", image)
+            if (image){
+                console.log("Attempting to send storage request")
+                const formData = new FormData();
+                formData.append("image", image)
 
-            const uploadResponse = await fetch('/api/submission/new/s3-upload', {
-                method: "POST",
-                body: formData
-            })
+                const uploadResponse = await fetch('/api/submission/new/s3-upload', {
+                    method: "POST",
+                    body: formData
+                })
 
-            const uploadData = await uploadResponse.json();
+                const uploadData = await uploadResponse.json();
+                console.log(uploadData)
+                if (uploadData && uploadData.fileUrl) {
+                    imageUrl = uploadData.fileUrl; // Update imgUrl with the new file URL
+                    console.log(imageUrl)
+                }
+            } else {
+                
+                console.log("No image selected")
+            }
 
-            console.log(uploadData)
+            
             // Database Logic
             const response = await fetch('/api/submission/new', {
                 method: 'POST',
@@ -53,7 +68,8 @@ const CreateSubmission = () => {
                     title: releaseSubmission.title,
                     artist: releaseSubmission.artist,
                     link: releaseSubmission.link,
-                    description: releaseSubmission.description
+                    description: releaseSubmission.description,
+                    coverImage: imageUrl
                 })
             })
             console.log("Sending new submission...");
@@ -83,6 +99,7 @@ const CreateSubmission = () => {
                 submitting={submitting}
                 handleSubmit={createSubmission}
                 handleImgFileChange={handleImgFileChange}
+                image={image}
             />
         </section>
     )
