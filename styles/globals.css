@@ -73,7 +73,7 @@
 /* Tailwind Styles */
 
 .app {
-  @apply relative flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
+  @apply relative flex justify-center items-center flex-col max-w-7xl pt-20 mx-auto sm:px-16 px-6;
 }
 
 .black_arrow_svg {

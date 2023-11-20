@@ -19,7 +19,8 @@ const Nav = () => {
         setUpProviders();
     }, [])
     return (
-    <nav className="w-full z-20 flex flex-between mb-16 px-6 pt-3 pb-3 bg-stone-800 sticky top-0">
+
+    <nav className="w-full z-20 flex flex-between mb-16 px-6 pt-3 pb-3 bg-stone-800 fixed top-0">
         <Link href="/" className="flex gap-2 flex-center">
             <div className="flex w-[200px] h-[50px] overflow-hidden items-center">
             <Image
