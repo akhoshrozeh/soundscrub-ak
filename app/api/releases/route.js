@@ -4,6 +4,8 @@ import Release from '@models/release';
 export const GET = async () => {
     try {
         await connectToDB();
+
+        let query = {};
         
         // Eventually filter based on date
         const releases = await Release.find({ isAccepted: true }).populate('creator').sort({ upvotesLength: -1 });

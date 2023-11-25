@@ -50,57 +50,61 @@ const Profile = ({session}) => {
   const changeFilterMode = (filterMode) => {
 
     setFilter(filterMode);
+    
   }
 
 
   return (
-    <section className="w-full">
-        <h1 className="head_text text_full"> <span className="blue_gradient">
-            
-            My Profile</span>
-          </h1>
-            {/* <p className='desc text-left'></p> */}
+    <section className="w-full flex flex-col">
+          <div>
+            <h1 className="head_text text_full"> 
+              <span className="blue_gradient">
+                My Profile
+              </span>
+            </h1>
+          </div>
 
-            {/* <div className="flex-grow border-t border-gray-400"></div> */}
+          <div className="flex flex-row mt-5 mb-5 justify-between">
 
-            <div className="flex flex-grow flex-col mx-auto mt-6 mb-5 justify-center items-center">
-
+            <div className="flex flex-row">
                 { session?.user.image ? (
                   <Image
                   src={session?.user.image}
-                  width={70}
-                  height={70}
+                  width={100}
+                  height={100}
                   className="rounded-full"
                   alt="profile"
                 />
                 ) : (
                   <Image
                   src={'/assets/images/placeholder-logo.svg'}
-                  width={70}
-                  height={70}
+                  width={100}
+                  height={100}
                   className="rounded-full"
                   alt="profile"
                 />
                 )}
                 
+              
+                <div className="ml-5 pt-3">
+                    <text className='text-xl font-bold text-center'> {session?.user.name} </text>
+                    <h3 className='text-stone-500'> Here's goes the headline!</h3>
+                </div>
+              </div>
 
-                <span className='text-center'>
-                  <h3 className='font-bold'> {session?.user.name} </h3>
-                  <h6 className='italic'> Without music, life would be a mistake.</h6>
-                </span>
-
+              <div className="flex items-center">
+                <button className='edit_profile_btn'>
+                  Edit My Profile
+                </button>
+              </div>
                 
 
                 
             </div> 
                 
-            <div className="flex flex-row my-3 justify-center">
-                <button className='edit_profile_btn'>
-                  Edit Profile Settings
-                </button>
-            </div>
+            
 
-            <div className="flex flex-row space-x-1 justify-center">
+            <div className="flex flex-row space-x-1 justify-center mt-3">
 
               { filter !== 'upvotes' ? 
                 <button className='profile_btn_unclicked' onClick={() => changeFilterMode(PROFILE_REQ.UPVOTES)}>Upvotes</button> : 
