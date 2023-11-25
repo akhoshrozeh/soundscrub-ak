@@ -29,32 +29,35 @@ const ReleaseItem = ({ release }) => {
 
     const updateVote = async (voteType) => {
 
-        if (voteType === "upvote"){
-            setUpvotes((prev) => prev + 1);
-            setVoted((prev) => !prev);
-        }
-        else if (voteType === "downvote"){
-            setUpvotes((prev) => prev - 1);
-            setVoted((prev) => !prev);
-        }
-        
-        try {
+        // HOTFIX (attempted) : Checking to see if user session is valid 
+        if (session?.user.id) {
+            if (voteType === "upvote"){
+                setUpvotes((prev) => prev + 1);
+                setVoted((prev) => !prev);
+            }
+            else if (voteType === "downvote"){
+                setUpvotes((prev) => prev - 1);
+                setVoted((prev) => !prev);
+            }
+            
+            try {
 
-            console.log("update vote button");
+                console.log("update vote button");
 
-            const response = await fetch(`/api/releases/${release._id}/update-vote`, {
-                method: 'PATCH',
-                body: JSON.stringify({
-                    user: session?.user.id,
-                    voteType: voteType
+                const response = await fetch(`/api/releases/${release._id}/update-vote`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        user: session?.user.id,
+                        voteType: voteType
+                    })
                 })
-            })
 
-            console.log("updating vote button")
+                console.log("updating vote button")
 
 
-        } catch (error) {
-            console.log(error);
+            } catch (error) {
+                console.log(error);
+            }
         }
         
         
