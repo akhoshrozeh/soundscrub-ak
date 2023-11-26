@@ -47,6 +47,23 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
             placeholder="What's the weblink to your music?"
         />
 
+        <div>
+            <label className='flex flex-col'>
+                <span className="font-satoshi font-semibold text-base text-gray-700">
+                    Release Type
+                </span>
+            </label>
+            <div className="flex flex-row space-x-3 ">
+                <button className="bg-red-400 border-2 border-black rounded-full text-sm px-1 py-1 transition-all hover:bg-red-100" onClick={(e) => setReleaseSubmission({ ...releaseSubmission, tag: "song" })}>Song</button>
+                <button className="bg-cyan-400 border-2 border-black rounded-full text-sm px-1 py-1 transition-all hover:bg-cyan-100" onClick={(e) => setReleaseSubmission({ ...releaseSubmission, tag: "album" })}>Album</button>
+                <button className="bg-orange-400 border-2 border-black rounded-full text-sm px-3 py-1 transition-all hover:bg-orange-100" onClick={(e) => setReleaseSubmission({ ...releaseSubmission, tag: "ep" })}>EP</button>
+            </div>
+        </div>
+
+            
+
+        
+
         {/* Storage upload inputs */}
         <label>
             <span className="font-satoshi font-semibold text-base text-gray-700">

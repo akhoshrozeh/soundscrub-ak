@@ -18,7 +18,8 @@ const CreateSubmission = () => {
         artist: '',
         link: '',
         description: '',
-        imgUrl: ''
+        imgUrl: '',
+        tags: ''
 
     }); 
 
@@ -69,7 +70,8 @@ const CreateSubmission = () => {
                     artist: releaseSubmission.artist,
                     link: releaseSubmission.link,
                     description: releaseSubmission.description,
-                    coverImage: imageUrl
+                    coverImage: imageUrl,
+                    tags: releaseSubmission.tags
                 })
             })
             console.log("Sending new submission...");
