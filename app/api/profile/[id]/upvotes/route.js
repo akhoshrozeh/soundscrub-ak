@@ -1,14 +1,19 @@
 import { connectToDB } from '@utils/database';
 import Release from '@models/release';
 
-export const GET = async () => {
+
+export const GET = async (req, {params}) => {
     try {
         await connectToDB();
-        
-        // Eventually filter based on date
-        const releases = await Release.find({ isAccepted: true }).populate('creator').sort({ upvotesLength: -1 });
+
+
+        let query = {
+            upvotes: params.id
+        }
+
+        const releases = await Release.find(query).populate('creator').sort({ upvotesLength: -1 });
         console.log('Awaiting release retrieval...')
-        // console.log(releases)
+
         return new Response(JSON.stringify(releases), {status: 200})
     } catch(error) {
 

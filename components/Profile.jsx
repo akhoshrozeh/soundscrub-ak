@@ -7,7 +7,7 @@ import ReleaseItem from '@components/ReleaseItem'
 
 const ReleaseList = ({data}) => {
   return (
-    <div className="w-full flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent ">
+    <div className="w-full flex flex-col container mt-10 mx-auto items-center justify-center bg-transparent pb-14">
       <ol className="flex flex-col divide-y w-full">
         {data.map((release) => (
           <ReleaseItem
@@ -31,8 +31,9 @@ const Profile = ({session}) => {
   useEffect(() => {
 
       const fetchReleases = async () => {
-        const response = await fetch('/api/releases');
 
+        const response = await fetch(`/api/profile/${session?.user.id}/${filter}`);
+        
         try {
           const data = await response.json();
 
@@ -45,7 +46,7 @@ const Profile = ({session}) => {
       }
 
       fetchReleases();
-  }, []);
+  }, [filter]);
 
   const changeFilterMode = (filterMode) => {
 
@@ -122,9 +123,9 @@ const Profile = ({session}) => {
               }
 
             </div>
-            {/* <ReleaseList
+            <ReleaseList
               data={releases}
-            /> */}
+            />
     </section>
   )
 }

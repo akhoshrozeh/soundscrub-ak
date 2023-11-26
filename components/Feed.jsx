@@ -44,9 +44,6 @@ const Feed = () => {
   return ( 
 
     <section className="feed pb-12">
-      <h2>
-        
-      </h2>
 
       <div className="relative flex py-5 items-center w-full">
           <div className="flex-grow border-t border-gray-400"></div>
@@ -54,7 +51,7 @@ const Feed = () => {
           <div className="flex-grow border-t border-gray-400"></div>
       </div>
 
-      <div className="flex flex-col container mt-10 bg-transparent  w-full mb-2">
+      <div className="flex flex-col container mt-2 bg-transparent  w-full mb-2">
         <ol className="flex flex-col divide-y w-full">
           <ReleaseList
             data={releases}
