@@ -37,7 +37,7 @@ const ReleaseSchema = new Schema({
     type: String,
     default: "",
   },
-  genre: {
+  releaseType: {
     type: String,
     default: "",
   },

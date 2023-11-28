@@ -166,6 +166,10 @@
   @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
 }
 
+.form_btn {
+  @apply border-2 rounded-full text-sm px-2 py-1.5 transition-all 
+}
+
 /* Nav Component */
 .logo_text {
   @apply max-sm:hidden font-bold text-lg text-white tracking-wide;

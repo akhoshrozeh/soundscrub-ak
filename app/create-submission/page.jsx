@@ -19,7 +19,8 @@ const CreateSubmission = () => {
         link: '',
         description: '',
         imgUrl: '',
-        tags: ''
+        releaseType: '',
+        tags: []
 
     }); 
 
@@ -71,6 +72,7 @@ const CreateSubmission = () => {
                     link: releaseSubmission.link,
                     description: releaseSubmission.description,
                     coverImage: imageUrl,
+                    releaseType: releaseSubmission.releaseType,
                     tags: releaseSubmission.tags
                 })
             })
@@ -93,7 +95,7 @@ const CreateSubmission = () => {
     }
 
     return (
-        <section className="pb-10">
+        <section className="pb-5">
             <Form
                 type="Create"
                 releaseSubmission={releaseSubmission}
