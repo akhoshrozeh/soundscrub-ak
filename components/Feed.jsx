@@ -43,15 +43,21 @@ const Feed = () => {
 
   return ( 
 
-    <section className="feed pb-12">
+    <section className="pb-12">
 
-      <div className="relative flex py-5 items-center w-full">
+      {/* <div className="relative flex py-5 items-center w-full">
           <div className="flex-grow border-t border-gray-400"></div>
           <span className="flex-shrink mx-4 blue_gradient">Today's Releases</span>
           <div className="flex-grow border-t border-gray-400"></div>
+      </div> */}
+
+      <div className='ml-1 mb-6'>
+        <h1 className=" text-3xl font-bold">
+          Today's Releases
+        </h1>
       </div>
 
-      <div className="flex flex-col container mt-2 bg-transparent  w-full mb-2">
+      <div className="feed flex flex-col container mt-2 bg-transparent  w-full mb-2">
         <ol className="flex flex-col divide-y w-full">
           <ReleaseList
             data={releases}

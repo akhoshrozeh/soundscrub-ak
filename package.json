@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.454.0",
+    "@radix-ui/react-slider": "^1.0.0",
     "bcrypt": "^5.1.1",
     "mongodb": "^6.2.0",
     "mongoose": "^7.6.3",
