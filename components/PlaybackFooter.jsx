@@ -1,10 +1,17 @@
 'use client'
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Image from 'next/image';
+import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 import "@styles/slider.css"
 
 const PlaybackFooter = () => {
+    const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
     const [isPlaying, setIsPlaying] = useState(false);
+
+    const handlePlayButtonClick = () => {
+        console.log("playing song")
+        setIsPlaying(true);
+    }
 
     return (
         <footer className='w-full z-20 bg-stone-800 shadow-full px-4 py-4 fixed bottom-0'>
@@ -20,9 +27,9 @@ const PlaybackFooter = () => {
                         />
                         <div className='flex flex-col px-2'>
                             <span className='text-black text-md'>
-                                Powers That B
+                                {currentRelease.title}
                             </span>
-                            <h2 className='text-stone-500 text-sm'> Death Grips</h2>
+                            <h2 className='text-stone-500 text-sm'> {currentRelease.artist}</h2>
                         </div>
                     </div>
                 </div>
@@ -38,9 +45,8 @@ const PlaybackFooter = () => {
                                 height={20}                                                         
                             />
                         </button>
-
                         {!isPlaying ? (
-                            <button onClick={() => setIsPlaying(!isPlaying)}>
+                            <button onClick={handlePlayButtonClick}>
                                 <Image 
                                     src="/assets/images/play-button.svg"
                                     alt="Play button"
@@ -49,7 +55,7 @@ const PlaybackFooter = () => {
                                 />
                             </button>
                         ) : (
-                            <button onClick={() => setIsPlaying(!isPlaying)}>
+                            <button onClick={(prev) => setIsPlaying(!prev)}>
                                 <Image 
                                     src="/assets/images/pause-button.svg"
                                     alt="Pause button"
