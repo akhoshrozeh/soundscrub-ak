@@ -33,6 +33,10 @@ const ReleaseSchema = new Schema({
     type: String,
     default: null,
   },
+  audioUrl: {
+    type: String,
+    default: null
+  },
   description: {
     type: String,
     default: "",

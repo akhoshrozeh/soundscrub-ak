@@ -12,11 +12,10 @@ import { INPUT_TYPES } from "@constants/enums";
 //             ))} 
 //         </div>
 //     )
-
 // }
 
 
-const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit, handleImgFileChange, image, handleAudioFileChange }) => {
+const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit, handleImgFileChange, uploadState, handleAudioFileChange }) => {
 
     return (
         <section className="w-full max-w-full flex-start flex-col pb-20">
@@ -143,16 +142,16 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                 </Link>
 
                 <button
-                    disabled={!image || submitting}
+                    disabled={!uploadState.audio && !uploadState.image || submitting}
                     className="border border-primary-orange px-5 py-1.5 text-sm bg-transparent rounded-full text-primary-orange hover:bg-orange-300"
                 >
                     Expedite Submission 
                 </button>
 
                 <button
-                type="submit"
-                disabled={!image || submitting}
-                className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white hover:bg-orange-300"
+                    type="submit"
+                    disabled={!uploadState.audio && !uploadState.image || submitting}
+                    className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white hover:bg-orange-300"
                 > {submitting ? `${type}... `: type}</button>
 
             </div>

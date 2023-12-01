@@ -43,7 +43,6 @@ const Feed = () => {
             artist: data[0].artist,
             id: data[0].id
           }
-          // console.log(mySong)
           if (!playbackState.isPlaying){
             setPlaybackState({...playbackState, 
               currentSong: mySong

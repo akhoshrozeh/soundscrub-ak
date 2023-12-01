@@ -9,10 +9,14 @@ const CreateSubmission = () => {
 
     const Router = useRouter();
 
+    let initUploadState = {
+        image: null,
+        audio: null
+    }
+
     const { data: session } = useSession();
     const [submitting, setSubmitting] = useState(false);
-    const [image, setImage] = useState(null);
-    const [audio, setAudio] = useState(null);
+    const [uploadState, setUploadState] = useState(initUploadState);
     
     const [releaseSubmission, setReleaseSubmission] = useState({
         title: '',
@@ -21,20 +25,18 @@ const CreateSubmission = () => {
         description: '',
         imgUrl: '',
         releaseType: '',
-        tags: []
-
+        tags: [],
+        audioUrl: ''
     }); 
 
     const handleImgFileChange = (e) => {
         const newImage = e.target.files[0];
-        setImage(newImage);
-        
+        setUploadState({...uploadState, image: newImage});
     }
 
     const handleAudioFileChange = (e) => {
         const newAudio = e.target.files[0];
-        setAudio(newAudio);
-        
+        setUploadState({...uploadState, audio: newAudio});
     }
     
     const handleTagItemAdd = (e) => {
@@ -54,10 +56,12 @@ const CreateSubmission = () => {
             console.log("Attempting to create submission");
 
             // Storage Logic
-            if (image){
+            if (uploadState.image && uploadState.audio){
                 console.log("Attempting to send storage request")
                 const formData = new FormData();
-                formData.append("image", image)
+                formData.append("image", uploadState.image)
+                formData.append("audio", uploadState.audio)
+
 
                 const uploadResponse = await fetch('/api/submission/new/s3-upload', {
                     method: "POST",
@@ -71,7 +75,6 @@ const CreateSubmission = () => {
                     console.log(imageUrl)
                 }
             } else {
-                
                 console.log("No image selected")
             }
 
@@ -117,7 +120,7 @@ const CreateSubmission = () => {
                 submitting={submitting}
                 handleSubmit={createSubmission}
                 handleImgFileChange={handleImgFileChange}
-                image={image}
+                uploadState={uploadState}
                 handleAudioFileChange={handleAudioFileChange}
             />
         </section>
