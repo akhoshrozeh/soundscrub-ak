@@ -59,9 +59,9 @@ const Profile = ({session}) => {
     <section className="w-full flex flex-col">
           <div>
             <h1 className="head_text text_full"> 
-              <span className="blue_gradient">
+              {/* <span className="blue_gradient">
                 My Profile
-              </span>
+              </span> */}
             </h1>
           </div>
 

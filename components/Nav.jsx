@@ -22,7 +22,7 @@ const Nav = () => {
 
     <nav className="w-full z-20 flex flex-between mb-16 px-6 pt-3 pb-3 bg-stone-800 fixed top-0">
         <div className="flex flex-row">
-            <Link href="/" className="flex gap-2 flex-center">
+            <Link href="/" className="hidden md:flex gap-2 items-center">
                 <div className="flex w-[200px] h-[50px] overflow-hidden items-center">
                 <Image
                     src="/assets/images/soundscrub-logo.svg"
@@ -34,22 +34,34 @@ const Nav = () => {
                 </div>
             </Link>
 
+            <Link href="/" className="md:hidden flex gap-2 items-center justify-center">
+                <div className="flex w-[200px] h-[50px] overflow-hidden items-center">
+                <Image
+                    src="/assets/images/soundscrub-scrub-circle-logo.svg"
+                    alt="SoundScrub Logo"
+                    width={50}
+                    height={50}
+                    className="object-contain"
+                />
+                </div>
+            </Link>
+
             {/* Navbar Links */}
-            {/* <div className="md:flex hidden">
+            <div className="md:flex hidden">
                 <Link href="/archive" className="ml-6 mt-4 text-white text-md font-semibold">
                     Archive
                 </Link>
-                <Link href="/blog" className="ml-6 mt-4 text-white text-md font-semibold">
+                {/* <Link href="/blog" className="ml-6 mt-4 text-white text-md font-semibold">
                     Blog
-                </Link>
+                </Link> */}
                 <Link href="/about" className="ml-6 mt-4 text-white text-md font-semibold">
                     About
                 </Link>
-            </div> */}
+            </div>
         </div>
         {/* Desktop Navigation*/}
 
-        <div className="sm:flex hidden">
+        <div className="md:flex hidden">
             {session?.user ? (
                 <div className="flex gap-3 md:gap-5">
                     <Link href="/create-submission" className="black_btn">
@@ -88,7 +100,7 @@ const Nav = () => {
 
         {/* Mobile Navigation*/}
 
-        <div className="sm:hidden flex relative">
+        <div className="md:hidden flex relative">
             {session?.user ? (
                 <div className="flex">
                     <Image

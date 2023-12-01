@@ -2,19 +2,21 @@ import Link from 'next/link';
 import FormInput from './FormInput';
 import { INPUT_TYPES } from "@constants/enums";
 
-const TagPool = ({tags}) => {
-    return (
-        <div className="flex flex-row space-x-2">
-            {tags.map((tag) => (
-                <button className='form_btn' disabled>
-                    {tag}
-                </button>
-            ))} 
-        </div>
-    )
+// const TagPool = ({tags}) => {
+//     return (
+//         <div className="flex flex-row space-x-2">
+//             {tags.map((tag) => (
+//                 <button className='form_btn' disabled>
+//                     {tag}
+//                 </button>
+//             ))} 
+//         </div>
+//     )
 
-}
-const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit, handleImgFileChange, image, handleTagItemAdd }) => {
+// }
+
+
+const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, handleSubmit, handleImgFileChange, image, handleAudioFileChange }) => {
 
     return (
         <section className="w-full max-w-full flex-start flex-col pb-20">
@@ -61,7 +63,7 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                 placeholder="What's the weblink to your music?"
             />
 
-            <div className='flex flex-col space-y-4'>
+            {/* <div className='flex flex-col space-y-4'>
                 <div className="flex flex-col">
                     <label className='flex flex-col'>
                         <span className="font-satoshi font-semibold text-base text-gray-700">
@@ -70,7 +72,6 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                     </label>
                     <div className="flex flex-row space-x-1 mt-1">
                         <input
-                            onChange={(e)=>setReleaseSubmission(handleTagItemAdd)}
                             placeholder="#dubstep, #hiphop, #thrashmetal, etc."
                             className="w-6/12 flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;"
                         />
@@ -86,7 +87,7 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                 <TagPool
                     tags={releaseSubmission.tags}
                 />
-            </div>
+            </div> */}
 
             {/* Release Type Tags */}
             <div className="flex flex-col">
@@ -127,6 +128,13 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                 </span>
                 <input className="border-2 border-stone-300 p-2 rounded-lg" type="file" accept="image/" onChange={handleImgFileChange}/>
             </div>
+            
+            <div className="flex flex-col space-y-2 ">
+                <span className="font-satoshi font-semibold text-base text-gray-700">
+                    Upload Audio File
+                </span>
+                <input className="border-2 border-stone-300 p-2 rounded-lg" type="file" accept="audio/" onChange={handleAudioFileChange}/>
+            </div>
 
             {/* Form submit/cancel mechanism */}
             <div className="flex-end mx-3 mb-5 gap-4">
@@ -135,9 +143,16 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                 </Link>
 
                 <button
+                    disabled={!image || submitting}
+                    className="border border-primary-orange px-5 py-1.5 text-sm bg-transparent rounded-full text-primary-orange hover:bg-orange-300"
+                >
+                    Expedite Submission 
+                </button>
+
+                <button
                 type="submit"
                 disabled={!image || submitting}
-                className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white"
+                className="px-5 py-1.5 text-sm bg-primary-orange rounded-full text-white hover:bg-orange-300"
                 > {submitting ? `${type}... `: type}</button>
 
             </div>

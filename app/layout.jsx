@@ -2,7 +2,10 @@ import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 import { ReleaseViewProvider } from '@contexts/ReleaseViewContext'
+import { PlaybackProvider } from '@contexts/PlaybackContext'
 import PlaybackFooter from '@components/PlaybackFooter'
+import Head from 'next/head';
+
 
 export const metadata = {
     title: "SoundScrub",
@@ -12,6 +15,7 @@ const RootLayout = ({children, modal}) => {
   return (
     <html lang="en">
         <body suppressHydrationWarning={true}>
+            
             <Provider>
                 <ReleaseViewProvider>
                     <div className="main">

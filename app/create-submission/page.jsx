@@ -12,6 +12,7 @@ const CreateSubmission = () => {
     const { data: session } = useSession();
     const [submitting, setSubmitting] = useState(false);
     const [image, setImage] = useState(null);
+    const [audio, setAudio] = useState(null);
     
     const [releaseSubmission, setReleaseSubmission] = useState({
         title: '',
@@ -28,6 +29,19 @@ const CreateSubmission = () => {
         const newImage = e.target.files[0];
         setImage(newImage);
         
+    }
+
+    const handleAudioFileChange = (e) => {
+        const newAudio = e.target.files[0];
+        setAudio(newAudio);
+        
+    }
+    
+    const handleTagItemAdd = (e) => {
+        const newTag = e.target.value;
+        if (newTag && !releaseSubmission.tags.includes(newTag)) {
+            setReleaseSubmission([...releaseSubmission.tags, newTag]);
+        }
     }
 
     const createSubmission = async(e) => {
@@ -104,6 +118,7 @@ const CreateSubmission = () => {
                 handleSubmit={createSubmission}
                 handleImgFileChange={handleImgFileChange}
                 image={image}
+                handleAudioFileChange={handleAudioFileChange}
             />
         </section>
     )
