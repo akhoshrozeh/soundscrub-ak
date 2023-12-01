@@ -8,7 +8,7 @@ const Archive = () => {
                 </span>
             </h1>
             <p className=" text-sm text_full">
-                Explore past winners and music.
+                
             </p>
         </div>
   )

@@ -18,14 +18,26 @@
     margin-top: -9px; /* Align thumb with the track */
 }
 
+.purple-slider::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px; /* Width of the thumb */
+    height: 25px; /* Height of the thumb */
+    background: #e9d5ff; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -9px; /* Align thumb with the track */
+}
+
 /* WebKit (Chrome, Safari) - Track */
 .purple-slider::-webkit-slider-runnable-track {
     width: 100%;
     height: 8px;
-    background: #e9d5ff; /* Tailwind purple-200 for the track */
+    background: #8b5cf6; /* Tailwind purple-200 for the track */
     cursor: pointer;
     border-radius: 8px; /* Increased border-radius for rounded effect */
 }
+
 
 /* Mozilla (Firefox) - Thumb */
 .purple-slider::-moz-range-thumb {
