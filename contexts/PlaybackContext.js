@@ -17,22 +17,25 @@ const initRelease = {
 
 
 export const PlaybackContext = createContext();
-export const PlaylistContext = createContext();
-export const CurrentSongContext = createContext();
 
 export const PlaybackProvider = ({ children }) => {
 
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [playbackPlaylist, setPlaybackPlaylist] = useState([]);
-    const [currentSong, setCurrentSong] = useState(initRelease)
+    let initPlaybackState = {
+
+        currentSong: {
+            id: null,
+            title: 'No Songs Loaded',
+            artist: 'N/A'
+        },
+        playlist: [],
+        isPlaying: false,
+    }
+    const [playbackState, setPlaybackState] = useState(initPlaybackState)
     return (
-            <PlaylistContext.Provider value={{playbackPlaylist, setPlaybackPlaylist}}>
-                <CurrentSongContext.Provider value={{isPlaying, setIsPlaying}}>
-                    <PlaybackContext.Provider value={{currentSong, setCurrentSong}}>
-                            {children}
-                    </PlaybackContext.Provider> 
-                </CurrentSongContext.Provider>
-            </PlaylistContext.Provider>
+
+        <PlaybackContext.Provider value={{playbackState, setPlaybackState}}>
+                {children}
+        </PlaybackContext.Provider> 
         
     )
 }

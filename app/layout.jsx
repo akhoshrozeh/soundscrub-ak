@@ -17,21 +17,23 @@ const RootLayout = ({children, modal}) => {
         <body suppressHydrationWarning={true}>
             
             <Provider>
-                <ReleaseViewProvider>
-                    <div className="main">
-                        <div className="gradient"/>
-                    </div>
-                    
-                    <main>
-                        <Nav className="app_navbar"/>
-                            <div className="app">
-                                {children}
-                                {modal}
-                            </div>
-                        <PlaybackFooter className="app_footer"/>  
-                    </main>
-                    
-                </ReleaseViewProvider>
+                <PlaybackProvider>
+                    <ReleaseViewProvider>
+                        <div className="main">
+                            <div className="gradient"/>
+                        </div>
+                        
+                        <main>
+                            <Nav className="app_navbar"/>
+                                <div className="app">
+                                    {children}
+                                    {modal}
+                                </div>
+                            <PlaybackFooter className="app_footer"/>  
+                        </main>
+                        
+                    </ReleaseViewProvider>
+                </PlaybackProvider>
             </Provider>
         </body>
     </html>

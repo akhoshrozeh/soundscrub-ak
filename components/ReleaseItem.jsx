@@ -74,7 +74,7 @@ const ReleaseItem = ({ release }) => {
 
     return (
 
-        <li className="grid grid-cols-4 justify-items-stretch col-auto py-2 px-1 ">
+        <li className="grid grid-cols-4 justify-items-stretch col-auto py-2 px-1">
             <div className="flex flex-row">
                 <Link href={`/releases/${release._id}`} onClick={handleLink}>
                 

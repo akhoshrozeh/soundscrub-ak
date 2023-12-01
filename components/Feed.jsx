@@ -1,10 +1,14 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import ReleaseItem from '@components/ReleaseItem'
+import { PlaybackContext } from '@contexts/PlaybackContext';
+
 
 const ReleaseList = ({data}) => {
+  
+
   return (
       <>
       {data.map((release) => (
@@ -21,6 +25,7 @@ const Feed = () => {
 
   const router = useRouter();
   const [releases, setReleases] = useState([]);
+  const {playbackState, setPlaybackState} = useContext(PlaybackContext);
 
   useEffect(() => {
 
@@ -32,6 +37,19 @@ const Feed = () => {
 
           console.log('Data successfully retrieved')
           setReleases(data);
+
+          let mySong = {
+            title: data[0].title,
+            artist: data[0].artist,
+            id: data[0].id
+          }
+          // console.log(mySong)
+          if (!playbackState.isPlaying){
+            setPlaybackState({...playbackState, 
+              currentSong: mySong
+            })
+          }
+
         } catch(error){
           console.log('error getting json', error)
         }
@@ -39,6 +57,9 @@ const Feed = () => {
       }
 
       fetchReleases();
+
+
+      
   }, []);
 
   return ( 
