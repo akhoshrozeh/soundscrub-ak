@@ -89,7 +89,7 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
             </div> */}
 
             {/* Release Type Tags */}
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
                 <label className='flex flex-col'>
                     <span className="font-satoshi font-semibold text-base text-gray-700">
                         Release Type
@@ -98,27 +98,24 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
                 <div className="flex flex-row space-x-2 mt-1">
                     <button 
                         className={`form_btn ${releaseSubmission.releaseType === "song" ? "bg-blue-500 text-white" : "bg-stone-900 text-white hover:bg-stone-300"}`}
-                        onClick={(e) => setReleaseSubmission({ ...releaseSubmission, releaseType: "song" })}
+                        onChange={(e) => setReleaseSubmission({ ...releaseSubmission, releaseType: "song" })}
                     >
                         Song
                     </button>
                     <button 
                         className={`form_btn ${releaseSubmission.releaseType === "album" ? "bg-blue-500 text-white" : "bg-stone-900 text-white hover:bg-stone-300"}`}
-                        onClick={(e) => setReleaseSubmission({ ...releaseSubmission, releaseType: "album" })}
+                        onChange={(e) => setReleaseSubmission({ ...releaseSubmission, releaseType: "album" })}
                     >
                         Album
                     </button>
                     <button 
                         className={`form_btn ${releaseSubmission.releaseType === "ep" ? "bg-blue-500 text-white" : "bg-stone-900 text-white hover:bg-stone-300"}`}
-                        onClick={(e) => setReleaseSubmission({ ...releaseSubmission, releaseType: "ep" })}
+                        onChange={(e) => setReleaseSubmission({ ...releaseSubmission, releaseType: "ep" })}
                     >
                         EP
                     </button>
                 </div>
-
-
-
-            </div>
+            </div> */}
 
             {/* Storage upload inputs */}
             <div className="flex flex-col space-y-2 ">

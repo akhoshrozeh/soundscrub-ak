@@ -69,6 +69,7 @@ const CreateSubmission = () => {
                 })
 
                 const uploadData = await uploadResponse.json();
+                console.log("upload data showing here...")
                 console.log(uploadData)
                 if (uploadData && uploadData.fileUrl) {
                     imageUrl = uploadData.fileUrl; // Update imgUrl with the new file URL
