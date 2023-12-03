@@ -1,9 +1,35 @@
 import { NextResponse } from "next/server"
-import { uploadFileToS3 } from "@utils/uploadFile"
-import { validateAudio } from "@utils/validateAudio"
-import { validateImage } from "@utils/validateImage"
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-// form upload for audio and image
+const storageClient = new S3Client({
+    region: process.env.AWS_S3_REGION,
+    credentials: {
+        accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
+    }
+})
+
+async function uploadFileToS3(file, fileName, fileType="image/png") {
+    const fileBuffer = file;
+    console.log(fileName);
+
+    const key = `${fileName}-${Date.now()}`;
+    
+
+    const params = {
+        Bucket: process.env.AWS_S3_BUCKET_NAME,
+        Key: key,
+        Body: fileBuffer,
+        ContentType: fileType
+    }
+    const command = new PutObjectCommand(params);
+    await storageClient.send(command)
+ 
+    const fileUrl = `https://${params.Bucket}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${key}`;
+    
+    return fileUrl
+}
+
 export const POST = async (request) => {
 
     try {
@@ -11,19 +37,21 @@ export const POST = async (request) => {
         const formData = await request.formData();
         const image = formData.get("image");
         const audio = formData.get("audio")
-        
-        if (!validateImage(image) || !validateAudio(audio)){
+        if (!image || !audio){
             console.log("Failed to reach buffer")
             return NextResponse.json({ error: "File is required"}, {status: 400})
         }
-
-        const uploads = await Promise.all([
-            uploadFileToS3(Buffer.from(await image.arrayBuffer()), image.name),
-            uploadFileToS3(Buffer.from(await audio.arrayBuffer()), audio.name)
-        ]);
-
-        console.log("File Upload success!")
-        return NextResponse.json({success: true, imageUrl: uploads[0], audioUrl: uploads[1] })
+        const imageBuffer = Buffer.from(await image.arrayBuffer());
+        const audioBuffer = Buffer.from(await audio.arrayBuffer());
+        const imageUrl = await uploadFileToS3(imageBuffer, image.name);
+        const audioUrl = await uploadFileToS3(audioBuffer, audio.name, "audio/wav");
+        console.log("Upload success!")
+        console.log(imageUrl, audioUrl)
+        const data = {
+            imageUrl: imageUrl,
+            audioUrl: audioUrl
+        }
+        return NextResponse.json({success: true, data})
 
     } catch (error) {
         console.log("failed to upload")

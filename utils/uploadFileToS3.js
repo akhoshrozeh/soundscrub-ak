@@ -1,5 +1,6 @@
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
+
 const storageClient = new S3Client({
     region: process.env.AWS_S3_REGION,
     credentials: {
@@ -8,9 +9,11 @@ const storageClient = new S3Client({
     }
 })
 
-export const uploadFileToS3 = async ({file, fileName, fileType="image/png"}) => {
+const uploadFileToS3 = async ({file, fileName, fileType="image/png"}) => {
+
+    console.log("entering s3 functionn")
     const fileBuffer = file;
-    console.log(fileName);
+    
 
     const key = `${fileName}-${Date.now()}`;
     
@@ -20,11 +23,15 @@ export const uploadFileToS3 = async ({file, fileName, fileType="image/png"}) => 
         Body: fileBuffer,
         ContentType: fileType
     }
+    console.log("about to send s3");
     const command = new PutObjectCommand(params);
-    await storageClient.send(command)
+    await storageClient.send(command);
+
  
     const fileUrl = `https://${params.Bucket}.s3.${process.env.AWS_S3_REGION}.amazonaws.com/${key}`;
-    
+    console.log(fileUrl)
     return fileUrl
 
 }
+
+export default uploadFileToS3;

@@ -1,7 +1,4 @@
-// Stub function for audio validation
-const validateAudio = ({audioFile}) => {
-
-    return audioFile
-}
-
-export default validateAudio;
+export const validateAudio = (audio) => {
+    // validation logic
+    return audio
+};
