@@ -16,12 +16,18 @@ const PlaybackFooter = () => {
 
     const [playerState, setPlayerState] = useState(initState);
 
+    console.log(playbackState)
+
 
     const handlePlayButtonClick = () => {
         console.log("playing song")
         setPlayerState({...playerState, 
             playing: true
         })
+        setPlaybackState({...playbackState, 
+            isPlaying: true
+        })
+        console.log(playerState, playbackState)
     }
 
     const handlePauseButtonClick = () => {
@@ -29,6 +35,10 @@ const PlaybackFooter = () => {
         setPlayerState({...playerState, 
             playing: false
         })
+        setPlaybackState({...playbackState, 
+            isPlaying: true
+        })
+        console.log(playerState, playbackState)
 
     }
 
@@ -41,7 +51,7 @@ const PlaybackFooter = () => {
     return (
         <footer className='w-full z-20 bg-stone-800 shadow-full px-4 py-4 fixed bottom-0'>
             <ReactHowler
-                src='https://soundscrub-web-storage.s3.us-east-2.amazonaws.com/wakemeup_off.wav'
+                src={playbackState.currentSong.audioUrl}
                 playing={playerState.playing}
                 volume={playerState.volume}
             />

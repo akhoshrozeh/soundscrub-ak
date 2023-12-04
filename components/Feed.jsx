@@ -21,6 +21,15 @@ const ReleaseList = ({data}) => {
   )
 }
 
+const getPlaylist = (songArr) => {
+  return songArr.map(song => ({
+    title: song.title,
+    artist: song.artist,
+    id: song._id,
+    audioUrl: song.audioUrl
+  }));
+};
+
 const Feed = () => {
 
   const router = useRouter();
@@ -38,14 +47,18 @@ const Feed = () => {
           console.log('Data successfully retrieved')
           setReleases(data);
 
-          let mySong = {
-            title: data[0].title,
-            artist: data[0].artist,
-            id: data[0].id
+          const playlist = getPlaylist(data);
+
+          let currSong = {
+            title: playlist[0].title,
+            artist: playlist[0].artist,
+            id: playlist[0]._id,
+            audioUrl: playlist[0].audioUrl
           }
           if (!playbackState.isPlaying){
             setPlaybackState({...playbackState, 
-              currentSong: mySong
+              currentSong: currSong,
+              playlist: playlist,
             })
           }
 

@@ -43,10 +43,12 @@ export const POST = async (request) => {
         }
         const imageBuffer = Buffer.from(await image.arrayBuffer());
         const audioBuffer = Buffer.from(await audio.arrayBuffer());
-        const imageUrl = await uploadFileToS3(imageBuffer, image.name);
-        const audioUrl = await uploadFileToS3(audioBuffer, audio.name, "audio/wav");
+        const [imageUrl, audioUrl] = await Promise.all([
+            uploadFileToS3(imageBuffer, image.name, "image/jpeg"),
+            uploadFileToS3(audioBuffer, audio.name, "audio/wav")
+        ]);
+        
         console.log("Upload success!")
-        console.log(imageUrl, audioUrl)
         const data = {
             imageUrl: imageUrl,
             audioUrl: audioUrl

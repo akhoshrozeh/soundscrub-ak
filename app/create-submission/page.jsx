@@ -82,10 +82,11 @@ const CreateSubmission = () => {
                 }
 
                 const uploadData = await uploadResponse.json();
+                console.log(uploadData);
 
                 if (uploadData && uploadData.data.imageUrl && uploadData.data.audioUrl) {
-                    imageUrl = uploadData.imageUrl;
-                    audioUrl = uploadData.audioUrl;
+                    imageUrl = uploadData.data.imageUrl;
+                    audioUrl = uploadData.data.audioUrl;
                 }
             } else {
                 console.log("Either image or audio not selected")
