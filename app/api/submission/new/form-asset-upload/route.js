@@ -13,7 +13,7 @@ async function uploadFileToS3(file, fileName, fileType="image/png") {
     const fileBuffer = file;
     console.log(fileName);
 
-    const key = `${fileName}-${Date.now()}`;
+    const key = `${Date.now()}-${fileName}`;
     
 
     const params = {

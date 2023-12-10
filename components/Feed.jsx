@@ -49,11 +49,13 @@ const Feed = () => {
 
           const playlist = getPlaylist(data);
 
+          const playlistIdx = playbackState.currentSongIdx;
+
           let currSong = {
-            title: playlist[0].title,
-            artist: playlist[0].artist,
-            id: playlist[0]._id,
-            audioUrl: playlist[0].audioUrl
+            title: playlist[playlistIdx].title,
+            artist: playlist[playlistIdx].artist,
+            id: playlist[playlistIdx]._id,
+            audioUrl: playlist[playlistIdx].audioUrl
           }
           if (!playbackState.isPlaying){
             setPlaybackState({...playbackState, 

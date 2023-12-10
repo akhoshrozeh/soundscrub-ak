@@ -11,10 +11,12 @@ export const PlaybackProvider = ({ children }) => {
             id: null,
             title: 'No Songs Loaded',
             artist: 'N/A',
-            audioUrl: 'https://soundscrub-web-storage.s3.us-east-2.amazonaws.com/wakemeup_off.wav'
+            audioUrl: ''
         },
         playlist: [],
-        isPlaying: false,
+        currentSongIdx: 0,
+        playing: false,
+        volume: 1
     }
     const [playbackState, setPlaybackState] = useState(initPlaybackState)
     return (
