@@ -61,7 +61,8 @@ const Nav = () => {
                     </div>
                 </Link>
         </div>
-        <div className='md:hidden flex justify-center items-center'>
+
+        <div className='md:hidden flex items-center'>
             <Link href="/" >
                 <Image
                     src="/assets/images/soundscrub-scrub-circle-logo.svg"
@@ -114,7 +115,7 @@ const Nav = () => {
         {/* Mobile Navigation*/}
         <div className="md:hidden flex relative">
             {session?.user ? (
-                <div className="flex">
+                <div className="flex ml-3">
                     <Image
                         src={session?.user.image}
                         alt="SoundScrub Logo"
@@ -156,7 +157,7 @@ const Nav = () => {
                             type="button"
                             key={provider.name}
                             onClick={() => signIn(provider.id)}
-                            className='black_btn'
+                            className='signin_sm_btn'
                         >
                             Sign In
                         </button>

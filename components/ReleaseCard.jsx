@@ -60,7 +60,8 @@ const ReleaseCard = ({release = initRelease}) => {
             {release.tags.length > 0 && <p className='text-sm text-gray-600'>Tags: {release.tags.join(', ')}</p>}
             {release.description && <p className='mt-2 text-gray-800 my-3'>{release.description}</p>}
             <p className='text-sm text-gray-600'>Release Date: {release.releaseDate}</p>
-            <p className='text-sm text-gray-600'>Upvotes: {release.upvotesLength}</p>
+            <p className='text-sm text-gray-600'>UpvotesLength: {release.upvotesLength}</p>
+            <p className='text-sm text-gray-600'>Upvotes: {release.upvotes.length}</p>
           </div>
         </div>
         </div>

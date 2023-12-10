@@ -2,11 +2,16 @@
 import React, { useState, useContext } from 'react';
 import Image from 'next/image';
 import { PlaybackContext } from '@contexts/PlaybackContext';
+import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 import "@styles/slider.css"
 import ReactHowler from 'react-howler'
+import Link from 'next/link';
+
 
 const PlaybackFooter = () => {
     const {playbackState, setPlaybackState} = useContext(PlaybackContext);
+    const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
+
 
     const handlePlayButtonClick = () => {
         console.log("playing song")
@@ -43,6 +48,11 @@ const PlaybackFooter = () => {
         }
     }
 
+    const handleLink = (e) => {
+        setCurrentRelease(release);
+        console.log(currentRelease)
+    }
+
     const handleForwardArrow = (e) => {
         console.log("set next song")
         if (playbackState.currentSongIdx <= playbackState.playlist.length){
@@ -75,36 +85,39 @@ const PlaybackFooter = () => {
 
 
             )}
-            <div className="flex flex-row items-center justify-between">
+            {/* Desktop Navigation */}
+            <div className="hidden sm:flex flex-row items-center justify-between">
                 {/* Left Section: Now Playing */}
                 <div className="flex-1 flex justify-start">
-                    <div className="flex px-1 py-1">
+                    <Link href={`/releases/${playbackState.currentSong.id}`} onClick={handleLink}>
+                        <div className="flex px-1 py-1">
 
-                        {playbackState.currentSong.coverImage ? (
+                            {playbackState.currentSong.coverImage ? (
 
-                            <Image
-                                className=" mr-1 rounded-lg object-cover h-12 w-12	"
-                                src={playbackState.currentSong.coverImage}
-                                alt="placeholder"
-                                width={35}
-                                height={35}
-                            />
-                        ) : (
-                            <Image
-                                src="/assets/images/placeholder-logo.svg"
-                                alt="placeholder"
-                                width={35}
-                                height={35}
-                            />
-                        )}
-                        
-                        <div className='flex flex-col px-2'>
-                            <span className='text-white text-md'>
-                                {playbackState.currentSong.title}
-                            </span>
-                            <h2 className='text-stone-300 text-sm'> {playbackState.currentSong.artist}</h2>
+                                <Image
+                                    className=" mr-1 rounded-md object-cover h-12 w-12	"
+                                    src={playbackState.currentSong.coverImage}
+                                    alt="placeholder"
+                                    width={35}
+                                    height={35}
+                                />
+                            ) : (
+                                <Image
+                                    src="/assets/images/placeholder-logo.svg"
+                                    alt="placeholder"
+                                    width={35}
+                                    height={35}
+                                />
+                            )}
+                            
+                            <div className='flex flex-col px-2'>
+                                <span className='text-white text-md'>
+                                    {playbackState.currentSong.title}
+                                </span>
+                                <h2 className='text-stone-400 text-sm'> {playbackState.currentSong.artist}</h2>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Center Section: Control Buttons */}
@@ -162,6 +175,100 @@ const PlaybackFooter = () => {
                     />
                 </div>
             </div>
+
+            {/* Mobile Navigation */}
+            <div className="sm:hidden flex flex-row items-center ">
+
+                {/* Left Section: Now Playing */}
+                <div className="flex-1 flex justify-start">
+                    <Link href={`/releases/${playbackState.currentSong.id}`} onClick={handleLink}>
+                        <div className="flex px-1 py-1">
+
+                            {playbackState.currentSong.coverImage ? (
+                                <Image
+                                    className=" mr-1 rounded-md object-cover h-10 w-10	"
+                                    src={playbackState.currentSong.coverImage}
+                                    alt="placeholder"
+                                    width={35}
+                                    height={35}
+                                />
+                            ) : (
+                                <Image
+                                    src="/assets/images/placeholder-logo.svg"
+                                    alt="placeholder"
+                                    width={35}
+                                    height={35}
+                                />
+                            )}
+                            
+                            <div className='flex flex-col px-2'>
+                                {/* <div className='items-center mt-2'>
+                                    <span className=' text-white text-xs'>
+                                        {playbackState.currentSong.title}
+                                    </span>
+                                </div> */}
+                                {/* <h2 className='text-stone-400 text-xs'> {playbackState.currentSong.artist}</h2> */}
+                            </div>
+                        </div>
+                    </Link>
+                </div>
+
+                {/* Center Section: Control Buttons */}
+                <div className="flex-1 flex justify-center">
+                    <div className="flex justify-center space-x-3">
+                        <button onClick={handleBackArrow}>
+                            <Image 
+                                src="/assets/images/skip-backward-white.svg"
+                                alt="Skip backward"
+                                width={10}
+                                height={10}                                                         
+                            />
+                        </button>
+                        {!playbackState.playing ? (
+                            <button onClick={handlePlayButtonClick}>
+                                <Image 
+                                    src="/assets/images/play-button.svg"
+                                    alt="Play button"
+                                    width={20}
+                                    height={20}                                                         
+                                />
+                            </button>
+                        ) : (
+                            <button onClick={handlePauseButtonClick}>
+                                <Image 
+                                    src="/assets/images/pause-button.svg"
+                                    alt="Pause button"
+                                    width={20}
+                                    height={20}                                                         
+                                />
+                            </button>
+                        )}
+
+                        <button onClick={handleForwardArrow}>
+                            <Image 
+                                src="/assets/images/skip-forward-white.svg"
+                                alt="Skip forward"
+                                width={10}
+                                height={10}                                                         
+                            />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Right Section: Slider */}
+                <div className="flex-1 flex justify-end">
+                    <input
+                        type="range"
+                        className="purple-slider-sm"
+                        min='0'
+                        max='1'
+                        step='.01'
+                        value={playbackState.volume}
+                        onChange={handleVolumeChange}
+                    />
+                </div>
+            </div>
+
         </footer>
     );
 }

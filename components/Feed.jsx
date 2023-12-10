@@ -55,7 +55,7 @@ const Feed = () => {
           let currSong = {
             title: playlist[playlistIdx].title,
             artist: playlist[playlistIdx].artist,
-            id: playlist[playlistIdx]._id,
+            id: playlist[playlistIdx].id,
             audioUrl: playlist[playlistIdx].audioUrl,
             coverImage: playlist[playlistIdx].coverImage
           }

@@ -81,3 +81,46 @@
     background: #e9d5ff;
     border-radius: 8px; /* Increased border-radius for rounded effect */
 }
+
+/* Mobile Slider */
+
+/* Base style for the slider */
+.purple-slider-sm {
+    width:70px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none; /* Removes default focus outline */
+    border-radius: 15px;
+}
+
+/* WebKit (Chrome, Safari) - Thumb */
+.purple-slider-sm::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    background: #8b5cf6; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+.purple-slider-sm::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    background: #e9d5ff; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+/* WebKit (Chrome, Safari) - Track */
+.purple-slider-sm::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #8b5cf6; /* Tailwind purple-200 for the track */
+    cursor: pointer;
+    border-radius: 8px; /* Increased border-radius for rounded effect */
+}

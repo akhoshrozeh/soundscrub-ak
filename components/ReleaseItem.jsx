@@ -19,9 +19,9 @@ const ReleaseItem = ({ release }) => {
 
     const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
     useEffect(() => {
-        console.log(typeof(releaseUpvotes))
+        // console.log(typeof(releaseUpvotes))
         if(typeof(releaseUpvotes) === 'object'){
-            console.log('array type confirmed')
+            // console.log('array type confirmed')
             setUpvotes(releaseUpvotes.length)
             setVoted(releaseUpvotes.includes(session?.user.id))
         }
@@ -79,7 +79,6 @@ const ReleaseItem = ({ release }) => {
         return link;
     }
 
-    console.log(release.link)
     return (
 
         <li className="w-full grid grid-cols-4 justify-items-stretch col-auto py-2 px-1">
@@ -117,7 +116,7 @@ const ReleaseItem = ({ release }) => {
 
             {/* TODO : make the link redirect to the correct website */}
             <div className="flex flex-row m-auto">
-                <a href={formatUrl(release.link)} target="_blank" rel="noopener noreferrer" passHref={true}>
+                <a href={formatUrl(release.link)} target="_blank" rel="noopener noreferrer">
                     <Image
                         src="/assets/icons/url-link.svg"
                         width={30}
