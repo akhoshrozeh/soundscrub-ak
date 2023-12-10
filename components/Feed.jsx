@@ -26,7 +26,8 @@ const getPlaylist = (songArr) => {
     title: song.title,
     artist: song.artist,
     id: song._id,
-    audioUrl: song.audioUrl
+    audioUrl: song.audioUrl,
+    coverImage: song.coverImage
   }));
 };
 
@@ -55,8 +56,10 @@ const Feed = () => {
             title: playlist[playlistIdx].title,
             artist: playlist[playlistIdx].artist,
             id: playlist[playlistIdx]._id,
-            audioUrl: playlist[playlistIdx].audioUrl
+            audioUrl: playlist[playlistIdx].audioUrl,
+            coverImage: playlist[playlistIdx].coverImage
           }
+          console.log(currSong)
           if (!playbackState.isPlaying){
             setPlaybackState({...playbackState, 
               currentSong: currSong,
@@ -78,7 +81,7 @@ const Feed = () => {
 
   return ( 
 
-    <section className="pb-12">
+    <section className="w-full pb-12">
 
       {/* <div className="relative flex py-5 items-center w-full">
           <div className="flex-grow border-t border-gray-400"></div>
@@ -86,14 +89,15 @@ const Feed = () => {
           <div className="flex-grow border-t border-gray-400"></div>
       </div> */}
 
-      <div className='ml-1 mb-6'>
-        <h1 className=" text-3xl font-bold">
-          Today's Releases
-        </h1>
-      </div>
+      
 
-      <div className="feed flex flex-col container mt-2 bg-transparent  w-full mb-2">
-        <ol className="flex flex-col divide-y w-full">
+      <div className="w-full feed flex flex-col container mt-2 bg-transparent mb-2">
+        <div className='flex mb-2'>
+          <h1 className=" text-3xl font-bold">
+            Today's Releases
+          </h1>
+        </div>
+        <ol className="w-full flex flex-col divide-y ">
           <ReleaseList
             data={releases}
           />

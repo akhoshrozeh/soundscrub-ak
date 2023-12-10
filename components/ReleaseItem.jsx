@@ -72,9 +72,17 @@ const ReleaseItem = ({ release }) => {
         console.log(currentRelease)
     }
 
+    function formatUrl(link) {
+        if (!link.startsWith('http://') && !link.startsWith('https://')) {
+            return `https://${link}`;
+        }
+        return link;
+    }
+
+    console.log(release.link)
     return (
 
-        <li className="grid grid-cols-4 justify-items-stretch col-auto py-2 px-1">
+        <li className="w-full grid grid-cols-4 justify-items-stretch col-auto py-2 px-1">
             <div className="flex flex-row">
                 <Link href={`/releases/${release._id}`} onClick={handleLink}>
                 
@@ -109,9 +117,9 @@ const ReleaseItem = ({ release }) => {
 
             {/* TODO : make the link redirect to the correct website */}
             <div className="flex flex-row m-auto">
-                <a href={release.link} target="_blank" rel="noopener noreferrer">
+                <a href={formatUrl(release.link)} target="_blank" rel="noopener noreferrer" passHref={true}>
                     <Image
-                        src="/assets/icons/headphones.svg"
+                        src="/assets/icons/url-link.svg"
                         width={30}
                         height={30}
                         alt="Url Icon"

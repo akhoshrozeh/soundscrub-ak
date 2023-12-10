@@ -11,7 +11,8 @@ export const PlaybackProvider = ({ children }) => {
             id: null,
             title: 'No Songs Loaded',
             artist: 'N/A',
-            audioUrl: ''
+            audioUrl: '',
+            coverImage: ''
         },
         playlist: [],
         currentSongIdx: 0,

@@ -78,18 +78,31 @@ const PlaybackFooter = () => {
             <div className="flex flex-row items-center justify-between">
                 {/* Left Section: Now Playing */}
                 <div className="flex-1 flex justify-start">
-                    <div className="flex bg-stone-100 rounded-xl px-1 py-1">
-                        <Image
-                            src="/assets/images/placeholder-logo.svg"
-                            alt="placeholder"
-                            width={35}
-                            height={35}
-                        />
+                    <div className="flex px-1 py-1">
+
+                        {playbackState.currentSong.coverImage ? (
+
+                            <Image
+                                className=" mr-1 rounded-lg object-cover h-12 w-12	"
+                                src={playbackState.currentSong.coverImage}
+                                alt="placeholder"
+                                width={35}
+                                height={35}
+                            />
+                        ) : (
+                            <Image
+                                src="/assets/images/placeholder-logo.svg"
+                                alt="placeholder"
+                                width={35}
+                                height={35}
+                            />
+                        )}
+                        
                         <div className='flex flex-col px-2'>
-                            <span className='text-black text-md'>
+                            <span className='text-white text-md'>
                                 {playbackState.currentSong.title}
                             </span>
-                            <h2 className='text-stone-500 text-sm'> {playbackState.currentSong.artist}</h2>
+                            <h2 className='text-stone-300 text-sm'> {playbackState.currentSong.artist}</h2>
                         </div>
                     </div>
                 </div>
