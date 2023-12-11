@@ -202,12 +202,12 @@ const PlaybackFooter = () => {
                             )}
                             
                             <div className='flex flex-col px-2'>
-                                {/* <div className='items-center mt-2'>
+                                <div className='items-center'>
                                     <span className=' text-white text-xs'>
                                         {playbackState.currentSong.title}
                                     </span>
-                                </div> */}
-                                {/* <h2 className='text-stone-400 text-xs'> {playbackState.currentSong.artist}</h2> */}
+                                </div>
+                                <h2 className='text-stone-400 text_xxs'> {playbackState.currentSong.artist}</h2>
                             </div>
                         </div>
                     </Link>

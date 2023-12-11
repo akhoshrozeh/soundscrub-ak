@@ -64,6 +64,11 @@
   opacity: 0.15;
 }
 
+.text_xxs {
+  font-size: .55rem;
+  line-height: .75rem;
+}
+
 @media screen and (max-width: 640px) {
   .main {
     padding: 0;
