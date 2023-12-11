@@ -8,6 +8,7 @@ import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 const Nav = () => {
     const { data: session } = useSession(false);
     const [toggleDropdown, setToggleDropdown] = useState(false);
+    const [toggleMenu, setToggleMenu] = useState(false);
     const [providers, setProviders] = useState(null);
 
     useEffect(() => {
@@ -49,17 +50,44 @@ const Nav = () => {
         </div>
 
         <div className='md:hidden flex flex-row gap-2 items-center'>
-            <Link href="/" >
-                    <div className="flex overflow-hidden items-center">
-                    <Image
-                        src="/assets/icons/menu-button.svg"
-                        alt="SoundScrub Logo"
-                        width={30}
-                        height={30}
-                        className="object-contain"
-                    />
-                    </div>
-                </Link>
+            
+            <div className="flex overflow-hidden items-center">
+            <Image
+                src="/assets/icons/menu-button.svg"
+                alt="SoundScrub Logo"
+                width={30}
+                height={30}
+                className="object-contain"
+                onClick={() => setToggleMenu((prev) => !prev)}
+            />
+            {toggleMenu && (
+                <div className='menu'>
+                    <Link
+                        href="/"
+                        className="menu_link font-bold text-xl"
+                        onClick={() => setToggleMenu(false)}
+                    >
+                        Feed
+                    </Link>
+                    <Link
+                        href="/archive"
+                        className="menu_link font-bold text-xl"
+                        onClick={() => setToggleMenu(false)}
+                    >
+                        Archive
+                    </Link>
+                    <Link
+                        href="/about"
+                        className="menu_link font-bold text-xl"
+                        onClick={() => setToggleMenu(false)}
+                    >
+                        About
+                    </Link>
+
+                </div>
+            )}
+            </div>
+        
         </div>
 
         <div className='md:hidden flex items-center'>

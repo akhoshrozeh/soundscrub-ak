@@ -48,14 +48,9 @@ const PlaybackFooter = () => {
         }
     }
 
-    const handleLink = (e) => {
-        setCurrentRelease(release);
-        console.log(currentRelease)
-    }
-
     const handleForwardArrow = (e) => {
         console.log("set next song")
-        if (playbackState.currentSongIdx <= playbackState.playlist.length){
+        if (playbackState.currentSongIdx < playbackState.playlist.length - 1){
             let nextSongIdx = playbackState.currentSongIdx + 1;
             let nextSong = playbackState.playlist[nextSongIdx];
             setPlaybackState({
@@ -65,6 +60,11 @@ const PlaybackFooter = () => {
                 playing: false
             })
         }
+    }
+
+    const handleLink = (e) => {
+        setCurrentRelease(release);
+        console.log(currentRelease)
     }
 
     return (

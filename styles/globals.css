@@ -106,6 +106,14 @@
   @apply rounded-xl border border-purple-500 bg-white py-1 px-4 text-purple-500 transition-all text-sm;
 }
 
+.profile_btn_clicked_mobile {
+  @apply rounded-xl bg-purple-500 py-1 px-4 text-white transition-all text-xs;
+}
+
+.profile_btn_unclicked_mobile {
+  @apply rounded-xl border border-purple-500 bg-white py-1 px-4 text-purple-500 transition-all text-xs;
+}
+
 .edit_profile_btn {
   @apply rounded-xl border border-stone-700 bg-white py-1 px-4 text-stone-700 transition-all hover:bg-stone-700 hover:text-white text-sm;
 }
@@ -120,6 +128,10 @@
 
 .outline_btn {
   @apply rounded-full border border-white bg-transparent py-1.5 px-5 text-white transition-all hover:bg-white hover:text-purple-500 text-center text-sm font-inter flex items-center justify-center;
+}
+
+.cta_btn{
+  @apply rounded-full  shadow-lg bg-red-500	 py-1.5 px-5 text-white transition-all hover:bg-white hover:text-red-200 text-center text-sm font-inter flex items-center justify-center;
 }
 
 .head_text {
@@ -188,8 +200,16 @@
   @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
 }
 
+.menu {
+  @apply absolute left-0 top-full  w-full p-3 rounded-lg bg-white min-w-[210px] flex flex-row gap-2 justify-start items-start space-x-2;
+}
+
 .dropdown_link {
   @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
+}
+
+.menu_link {
+  @apply text-lg font-inter text-black hover:text-purple-500 font-bold;
 }
 
 /* PromptCard Component */

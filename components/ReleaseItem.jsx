@@ -105,16 +105,22 @@ const ReleaseItem = ({ release }) => {
                 </Link>
             </div>
 
-            <div className="flex flex-col justify-center">
+            {/* Desktop View */}
+            <div className="hidden sm:flex flex-col justify-center">
                 <Link href={`/releases/${release._id}`} onClick={handleLink} className="flex flex-col">
                     <span className="text-xl font-semibold">{release.title}</span>
                     <span className="text-sm text-gray-600">{release.artist}</span>
                 </Link>
             </div>
-                
-            
 
-            {/* TODO : make the link redirect to the correct website */}
+            {/* Mobile View */}
+            <div className="sm:hidden flex flex-col justify-center ml-7">
+                <Link href={`/releases/${release._id}`} onClick={handleLink} className="flex flex-col">
+                    <span className="text-md font-semibold">{release.title}</span>
+                    <span className="text_xxs text-gray-600">{release.artist}</span>
+                </Link>
+            </div>
+                
             <div className="flex flex-row m-auto">
                 <a href={formatUrl(release.link)} target="_blank" rel="noopener noreferrer">
                     <Image

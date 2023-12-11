@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import { PROFILE_REQ } from '@constants/enums';
 import { useState, useEffect } from 'react';
+import Link from 'next/link'
 
 import ReleaseItem from '@components/ReleaseItem'
 
@@ -57,13 +58,6 @@ const Profile = ({session}) => {
 
   return (
     <section className="w-full flex flex-col">
-          <div>
-            <h1 className="head_text text_full"> 
-              {/* <span className="blue_gradient">
-                My Profile
-              </span> */}
-            </h1>
-          </div>
 
           <div className="flex flex-row mt-5 mb-5 justify-between">
 
@@ -71,16 +65,16 @@ const Profile = ({session}) => {
                 { session?.user.image ? (
                   <Image
                   src={session?.user.image}
-                  width={100}
-                  height={100}
+                  width={85}
+                  height={85}
                   className="rounded-full"
                   alt="profile"
                 />
                 ) : (
                   <Image
                   src={'/assets/images/placeholder-logo.svg'}
-                  width={100}
-                  height={100}
+                  width={85}
+                  height={85}
                   className="rounded-full"
                   alt="profile"
                 />
@@ -94,18 +88,39 @@ const Profile = ({session}) => {
               </div>
 
               <div className="flex items-center">
-                <button className='edit_profile_btn'>
-                  Edit My Profile
-                </button>
+                <Link href="/edit-profile">
+                  <button className='edit_profile_btn'>
+                    Edit My Profile
+                  </button>
+                </Link>
               </div>
                 
 
                 
             </div> 
+
+            <div className="flex flex-row mx-auto mb-2">
+              <button className="cta_btn space-x-1">
+
+                <Image
+                    src="/assets/icons/icons8-sparkling-48-left.png"
+                    width={15}
+                    height={15}
+                />
+                <span>
+                  Get Premium Features
+                </span>
+                <Image
+                  src="/assets/icons/icons8-sparkling-48-right.png"
+                  width={15}
+                  height={15}
+                />
+              </button>
+            </div>
                 
             
 
-            <div className="flex flex-row space-x-1 justify-center mt-3">
+            <div className="hidden sm:flex flex-row space-x-1 justify-center mt-3">
 
               { filter !== 'upvotes' ? 
                 <button className='profile_btn_unclicked' onClick={() => changeFilterMode(PROFILE_REQ.UPVOTES)}>Upvotes</button> : 
@@ -120,6 +135,25 @@ const Profile = ({session}) => {
               { filter !== 'accepted' ? 
                 <button className='profile_btn_unclicked' onClick={() => changeFilterMode(PROFILE_REQ.ACCEPTED)}>Accepted Submissions</button> : 
                 <button className='profile_btn_clicked' onClick={() => {}}>Accepted Submissions</button>
+              }
+
+            </div>
+
+            <div className="sm:hidden flex flex-row space-x-1 justify-center mt-3">
+
+              { filter !== 'upvotes' ? 
+                <button className='profile_btn_unclicked_mobile' onClick={() => changeFilterMode(PROFILE_REQ.UPVOTES)}>Upvotes</button> : 
+                <button className='profile_btn_clicked_mobile' onClick={() => {}}>Upvotes</button>
+              }
+
+              { filter !== 'pending' ? 
+                <button className='profile_btn_unclicked_mobile' onClick={() => changeFilterMode(PROFILE_REQ.PENDING)}>Pending Submissions</button> : 
+                <button className='profile_btn_clicked_mobile' onClick={() => {}}>Pending Submissions</button>
+              }
+
+              { filter !== 'accepted' ? 
+                <button className='profile_btn_unclicked_mobile' onClick={() => changeFilterMode(PROFILE_REQ.ACCEPTED)}>Accepted Submissions</button> : 
+                <button className='profile_btn_clicked_mobile' onClick={() => {}}>Accepted Submissions</button>
               }
 
             </div>
