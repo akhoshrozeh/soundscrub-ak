@@ -11,6 +11,6 @@ const EditProfile = () => {
               </p>
           </div>
     )
-  }
-  
-  export default EditProfile
+}
+
+export default EditProfile

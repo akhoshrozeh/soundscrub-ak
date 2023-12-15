@@ -37,8 +37,8 @@ const Nav = () => {
 
             {/* Navbar Links */}
             <div className="md:flex hidden">
-                <Link href="/archive" className="ml-6 mt-3 text-white text-md font-semibold">
-                    Archive
+                <Link href="/how-it-works" className="ml-6 mt-3 text-white text-md font-semibold">
+                    How It Works
                 </Link>
                 {/* <Link href="/blog" className="ml-6 mt-4 text-white text-md font-semibold">
                     Blog
@@ -70,11 +70,11 @@ const Nav = () => {
                         Feed
                     </Link>
                     <Link
-                        href="/archive"
+                        href="/how-it-works"
                         className="menu_link font-bold text-xl"
                         onClick={() => setToggleMenu(false)}
                     >
-                        Archive
+                        How It Works
                     </Link>
                     <Link
                         href="/about"

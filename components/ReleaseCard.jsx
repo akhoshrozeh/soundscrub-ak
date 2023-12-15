@@ -19,16 +19,17 @@ const ReleaseCard = ({release = initRelease}) => {
   return (
     
     <div className='bg-white rounded-lg overflow-hidden'>
-      <div className='p-4'>
+      <div className='p-6'>
 
-        <div className='flex flex-row'>
+        <div className='flex flex-col justify-center items-center'>
+          
           {release.coverImage ? (
               <Image 
                   src={release.coverImage}
                   alt="Placeholder"
                   width={200}
                   height={200}
-                  className="ml-4 mr-4 rounded-lg object-cover h-80 w-80"
+                  className="mt-4 mb-4 ml-4 mr-4 rounded-lg object-cover h-80 w-80"
               /> 
           ) : (
               <Image 
@@ -36,12 +37,12 @@ const ReleaseCard = ({release = initRelease}) => {
                   alt="Placeholder"
                   width={80}
                   height={80}
-                  className="ml-4 mr-4"
+                  className="mt-4 mb-4 ml-4 mr-4"
               /> 
           )}
         
         <div className='flex flex-col'>
-          <h1 className='text-2xl font-bold mb-2'>{release.title}</h1>
+          <h1 className='text-2xl font-bold '>{release.title}</h1>
           <p className='text-lg font-semibold text-gray-700 mb-4'>{release.artist}</p>
 
           {release.link && (

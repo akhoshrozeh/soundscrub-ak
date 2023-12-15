@@ -81,8 +81,34 @@ const ReleaseItem = ({ release }) => {
 
     return (
 
-        <li className="w-full grid grid-cols-4 justify-items-stretch col-auto py-2 px-1">
-            <div className="flex flex-row">
+        <li className="w-full grid grid-cols-4 justify-items-stretch col-auto py-2 mb-2">
+            
+            {/* Desktop View */}
+            <div className="hidden sm:flex flex-row">
+                <Link href={`/releases/${release._id}`} onClick={handleLink}>
+                
+                    {release.coverImage ? (
+                        <Image 
+                            src={release.coverImage}
+                            alt="Placeholder"
+                            width={50}
+                            height={50}
+                            className="ml-4 mr-4 rounded-lg object-cover h-28 w-28	"
+                        /> 
+                    ) : (
+                        <Image 
+                            src="/assets/images/placeholder-logo.svg" 
+                            alt="Placeholder"
+                            width={80}
+                            height={80}
+                            className="ml-4 mr-4 rounded-lg object-cover h-28 w-28"
+                        /> 
+                    )}
+                </Link>
+            </div>
+
+            {/* Mobile View */}
+            <div className="sm:hidden flex flex-row">
                 <Link href={`/releases/${release._id}`} onClick={handleLink}>
                 
                     {release.coverImage ? (
@@ -99,7 +125,7 @@ const ReleaseItem = ({ release }) => {
                             alt="Placeholder"
                             width={80}
                             height={80}
-                            className="ml-4 mr-4"
+                            className="ml-4 mr-4 rounded-lg object-cover h-20 w-20"
                         /> 
                     )}
                 </Link>
@@ -109,7 +135,7 @@ const ReleaseItem = ({ release }) => {
             <div className="hidden sm:flex flex-col justify-center">
                 <Link href={`/releases/${release._id}`} onClick={handleLink} className="flex flex-col">
                     <span className="text-xl font-semibold">{release.title}</span>
-                    <span className="text-sm text-gray-600">{release.artist}</span>
+                    <span className="text-md text-gray-600">{release.artist}</span>
                 </Link>
             </div>
 

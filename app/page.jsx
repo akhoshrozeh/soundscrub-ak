@@ -1,8 +1,11 @@
+import EmailPrompt from '@components/EmailPrompt'
 import Feed from '@components/Feed'
 
 const Home = () => {
   return (
-    <section className="w-full flex-center flex-col mt-6 mb-6">
+    <section className="w-full flex flex-center flex-col mt-6 mb-6">
+      
+      {/* Headline */}
       <div className='mb-6'>
         <h1 className="head_text text-center">
             Discover & Drop 
@@ -16,9 +19,11 @@ const Home = () => {
           and lesser-known artists & producers.
         </p>
       </div>
-      {/* Feed */}
 
-      <br/>
+      {/* Email Signup */}
+      <EmailPrompt/>
+
+      {/* Feed */}
       <Feed/>
     </section>
   )

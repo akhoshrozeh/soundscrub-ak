@@ -9,33 +9,29 @@ export const PATCH = async (request, { params }) => {
 
         if (voteType === "upvote"){
 
-            const existingRelease = await Release.findOneAndUpdate(
-                { _id: params.id},
-                { 
-                    $addToSet: { upvotes: user },
-                    $inc: { upvotesLength: 1 }
-                }
-            );
-    
-            if(!existingRelease) return new Response("Release not found", {status:404});
-    
-            return new Response(JSON.stringify(existingRelease), {status:200})
+            const existingRelease = await Release.findById(params.id);
+            if (!existingRelease) return new Response("Release not found", { status: 404 });
 
+            if (!existingRelease.upvotes.includes(user)) {
+                existingRelease.upvotes.push(user);
+                existingRelease.upvotesLength++;
+                await existingRelease.save();
+            }
+
+            return new Response(JSON.stringify(existingRelease), { status: 200 });
         }
         else if (voteType === "downvote"){
 
-            const existingRelease = await Release.findOneAndUpdate(
-                {_id: params.id},
-                {
-                    $pull: { upvotes: user },
-                    $inc: { upvotesLength: -1 }
-                }
-            )
+            const existingRelease = await Release.findById(params.id);
+            if (!existingRelease) return new Response("Release not found", { status: 404 });
 
-            if(!existingRelease) return new Response("Release not found", {status:404});
-    
-            return new Response(JSON.stringify(existingRelease), {status:200})
+            if (existingRelease.upvotes.includes(user)) {
+                existingRelease.upvotes.pull(user);
+                existingRelease.upvotesLength--;
+                await existingRelease.save();
+            }
 
+            return new Response(JSON.stringify(existingRelease), { status: 200 });
         }
 
 

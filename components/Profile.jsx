@@ -59,7 +59,7 @@ const Profile = ({session}) => {
   return (
     <section className="w-full flex flex-col">
 
-          <div className="flex flex-row mt-5 mb-5 justify-between">
+          <div className="flex flex-row mt-8 mb-5 justify-between">
 
             <div className="flex flex-row">
                 { session?.user.image ? (
@@ -97,9 +97,9 @@ const Profile = ({session}) => {
                 
 
                 
-            </div> 
+          </div> 
 
-            <div className="flex flex-row mx-auto mb-2">
+            <div className="flex flex-row mx-auto mb-5">
               <button className="cta_btn space-x-1">
 
                 <Image
@@ -118,8 +118,6 @@ const Profile = ({session}) => {
               </button>
             </div>
                 
-            
-
             <div className="hidden sm:flex flex-row space-x-1 justify-center mt-3">
 
               { filter !== 'upvotes' ? 
