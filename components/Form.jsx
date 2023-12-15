@@ -21,17 +21,17 @@ const Form = ( { type, releaseSubmission, setReleaseSubmission, submitting, hand
         <section className="w-full max-w-full flex-start flex-col pb-20">
             <form 
                 onSubmit={handleSubmit}
-                className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
+                className="mt-10 w-full max-w-2xl flex flex-col gap-7"
             >
 
             <h1 className="head_text text-left">
-            <span className="blue_gradient">{type} Your Submission</span>
+                <span>Submit Your Music</span>
             </h1>
             <p className="desc text-left max-w-md">
                 {type} a submission for your newest release. If we like your submission, it'll be posted on our main feed for the world to see!
             </p>
             <p className='text-sm text-center'>
-                <a href="/about" className="font-semibold text-red-400">How does it work? Click here!</a>
+                <a href="/how-it-works" className="font-semibold text-red-400">How does it work? Click here!</a>
             </p>
 
 

@@ -8,7 +8,6 @@ const About = () => {
                     </span>
                 </h1>
                 <p className=" text-sm text_full">
-                    
                 </p>
             </div>
         </div>

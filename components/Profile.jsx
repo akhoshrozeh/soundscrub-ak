@@ -88,7 +88,7 @@ const Profile = ({session}) => {
               </div>
 
               <div className="flex items-center">
-                <Link href="/edit-profile">
+                <Link href="/profile/edit-profile">
                   <button className='edit_profile_btn'>
                     Edit My Profile
                   </button>
@@ -100,22 +100,23 @@ const Profile = ({session}) => {
           </div> 
 
             <div className="flex flex-row mx-auto mb-5">
-              <button className="cta_btn space-x-1">
-
-                <Image
-                    src="/assets/icons/icons8-sparkling-48-left.png"
+              <Link href="/profile/get-premium">
+                <button className="cta_btn space-x-1">
+                  <Image
+                      src="/assets/icons/icons8-sparkling-48-left.png"
+                      width={15}
+                      height={15}
+                  />
+                  <span>
+                    Get Premium Features
+                  </span>
+                  <Image
+                    src="/assets/icons/icons8-sparkling-48-right.png"
                     width={15}
                     height={15}
-                />
-                <span>
-                  Get Premium Features
-                </span>
-                <Image
-                  src="/assets/icons/icons8-sparkling-48-right.png"
-                  width={15}
-                  height={15}
-                />
-              </button>
+                  />
+                </button>
+              </Link>
             </div>
                 
             <div className="hidden sm:flex flex-row space-x-1 justify-center mt-3">
