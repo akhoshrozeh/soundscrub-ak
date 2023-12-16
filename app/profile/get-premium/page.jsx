@@ -5,7 +5,7 @@ const PremiumPage = () => {
             <div className="flex mt-8 mb-12">
             <h1 className="head_text text_full"> 
                 <span className="">
-                    How It Works
+                    Get Premium
                 </span>
             </h1>
             <p className=" text-sm text_full">

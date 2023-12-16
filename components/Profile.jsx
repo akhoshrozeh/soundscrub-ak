@@ -87,13 +87,13 @@ const Profile = ({session}) => {
                 </div>
               </div>
 
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <Link href="/profile/edit-profile">
                   <button className='edit_profile_btn'>
                     Edit My Profile
                   </button>
                 </Link>
-              </div>
+              </div> */}
                 
 
                 
