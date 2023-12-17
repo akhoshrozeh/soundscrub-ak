@@ -15,14 +15,12 @@ const RootLayout = ({children, modal}) => {
   return (
     <html lang="en">
         <body suppressHydrationWarning={true}>
-            
             <Provider>
                 <PlaybackProvider>
                     <ReleaseViewProvider>
                         <div className="main">
                             <div className="gradient"/>
                         </div>
-                        
                         <main>
                             <Nav className="app_navbar"/>
                                 <div className="app">
@@ -31,7 +29,6 @@ const RootLayout = ({children, modal}) => {
                                 </div>
                             <PlaybackFooter className="app_footer"/>  
                         </main>
-                        
                     </ReleaseViewProvider>
                 </PlaybackProvider>
             </Provider>

@@ -20,7 +20,8 @@ export const PlaybackProvider = ({ children }) => {
         playing: false,
         seeking: false,
         volume: 1,
-        seek: 0.0
+        seek: 0.0,
+        duration: 0.0
     }
     const [playbackState, setPlaybackState] = useState(initPlaybackState)
     return (
