@@ -174,16 +174,16 @@ const PlaybackFooter = () => {
 
             )}
             {/* Desktop Navigation */}
-            <div className="hidden sm:flex flex-row items-center justify-between">
+            <div className="hidden sm:grid grid-cols-4 gap-4 items-center justify-between">
                 {/* Left Section: Now Playing */}
-                <div className="flex flex-grow-0 flex-shrink flex-basis-1/4  max-w-[25%] justify-start">
+                <div className="col-span-1 justify-start">
                     <Link href={`/releases/${playbackState.currentSong.id}`} onClick={handleLink}>
                         <div className="flex px-1 py-1">
 
                             {playbackState.currentSong.coverImage ? (
 
                                 <Image
-                                    className=" mr-1 rounded-md object-cover h-12 w-12	"
+                                    className="mr-1 rounded-md object-cover h-12 w-12"
                                     src={playbackState.currentSong.coverImage}
                                     alt="placeholder"
                                     width={35}
@@ -191,6 +191,7 @@ const PlaybackFooter = () => {
                                 />
                             ) : (
                                 <Image
+                                    className=" mr-1 rounded-md object-cover h-12 w-12"
                                     src="/assets/images/placeholder-logo.svg"
                                     alt="placeholder"
                                     width={35}
@@ -209,7 +210,7 @@ const PlaybackFooter = () => {
                 </div>
 
                 {/* Center Section: Control Buttons */}
-                <div className="flex flex-grow flex-shrink flex-basis-1/2  flex-col justify-center">
+                <div className="col-span-2 flex flex-col justify-center">
                     <div className="flex justify-center space-x-7 mb-2">
                         <button onClick={handleBackArrow}>
                             <Image 
@@ -270,7 +271,7 @@ const PlaybackFooter = () => {
                 </div>
 
                 {/* Right Section: Volume Slider */}
-                <div className="flex flex-grow-0 flex-shrink flex-basis-1/4 justify-end ml-4">
+                <div className="col-span-1 justify-end ml-4">
                     <input
                         type="range"
                         className="purple-slider"
@@ -301,6 +302,7 @@ const PlaybackFooter = () => {
                                 />
                             ) : (
                                 <Image
+                                    className=" mr-1 rounded-md object-cover h-10 w-10	"
                                     src="/assets/images/placeholder-logo.svg"
                                     alt="placeholder"
                                     width={35}

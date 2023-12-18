@@ -1,7 +1,7 @@
 
 const EmailPrompt = () => {
     return (
-        <>
+        <section>
             {/* Desktop Prompt */}
             <div className='hidden md:flex w-full flex-row mb-5 items-center p-4 rounded-full shadow-md bg-gradient-to-r from-purple-300 to-orange-200 justify-between'>
                 <span className="font-semibold">
@@ -33,7 +33,7 @@ const EmailPrompt = () => {
                     </button>
                 </div>
             </div>
-        </>
+        </section>
     )
 }
 
