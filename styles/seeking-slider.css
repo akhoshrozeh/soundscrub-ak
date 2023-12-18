@@ -1,0 +1,126 @@
+/* Base style for the slider */
+.purple-seeking-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none; /* Removes default focus outline */
+    border-radius: 15px;
+}
+
+/* WebKit (Chrome, Safari) - Thumb */
+.purple-seeking-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px; /* Width of the thumb */
+    height: 10px; /* Height of the thumb */
+    background: #8b5cf6; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+.purple-seeking-slider::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px; /* Width of the thumb */
+    height: 10px; /* Height of the thumb */
+    background: #e9d5ff; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+/* WebKit (Chrome, Safari) - Track */
+.purple-seeking-slider::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 3px;
+    background: #8b5cf6; /* Tailwind purple-200 for the track */
+    cursor: pointer;
+    border-radius: 8px; /* Increased border-radius for rounded effect */
+}
+
+
+/* Mozilla (Firefox) - Thumb */
+.purple-seeking-slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background: #8b5cf6;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Mozilla (Firefox) - Track */
+.purple-seeking-slider::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    background: #e9d5ff;
+    cursor: pointer;
+    border-radius: 8px; /* Increased border-radius for rounded effect */
+}
+
+/* Microsoft Edge - Thumb */
+.purple-seeking-slider::-ms-thumb {
+    width: 25px;
+    height: 25px;
+    background: #8b5cf6;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* Microsoft Edge - Track */
+.purple-seeking-slider::-ms-track {
+    width: 100%;
+    height: 8px;
+    background: #e9d5ff;
+    cursor: pointer;
+    border-radius: 8px; /* Increased border-radius for rounded effect */
+}
+
+/* Internet Explorer - Lower and Upper Track */
+.purple-seeking-slider::-ms-fill-lower,
+.purple-seeking-slider::-ms-fill-upper {
+    background: #e9d5ff;
+    border-radius: 8px; /* Increased border-radius for rounded effect */
+}
+
+/* Mobile Slider */
+
+/* Base style for the slider */
+.purple-seeking-slider-sm {
+    width:70px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none; /* Removes default focus outline */
+    border-radius: 15px;
+}
+
+/* WebKit (Chrome, Safari) - Thumb */
+.purple-seeking-slider-sm::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    background: #8b5cf6; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+.purple-seeking-slider-sm::-webkit-slider-thumb:hover {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
+    background: #e9d5ff; /* Tailwind purple-500 for the thumb */
+    cursor: pointer;
+    border-radius: 50%;
+    margin-top: -4px; /* Align thumb with the track */
+}
+
+/* WebKit (Chrome, Safari) - Track */
+.purple-seeking-slider-sm::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #8b5cf6; /* Tailwind purple-200 for the track */
+    cursor: pointer;
+    border-radius: 8px; /* Increased border-radius for rounded effect */
+}

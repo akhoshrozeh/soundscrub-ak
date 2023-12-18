@@ -143,7 +143,7 @@ const Nav = () => {
         {/* Mobile Navigation*/}
         <div className="md:hidden flex relative">
             {session?.user ? (
-                <div className="flex ml-3">
+                <div className="flex ">
                     <Image
                         src={session?.user.image}
                         alt="SoundScrub Logo"
