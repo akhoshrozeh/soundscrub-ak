@@ -83,7 +83,7 @@ const Profile = ({session}) => {
               
                 <div className="ml-5 pt-3">
                     <text className='text-xl font-bold text-center'> {session?.user.name} </text>
-                    <h3 className='text-stone-500'> Here's goes the headline!</h3>
+                    {/* <h3 className='text-stone-500'> Here's goes the headline!</h3> */}
                 </div>
               </div>
 
@@ -99,7 +99,8 @@ const Profile = ({session}) => {
                 
           </div> 
 
-            <div className="flex flex-row mx-auto mb-5">
+            {/* Premium Button */}
+            {/* <div className="flex flex-row mx-auto mb-5">
               <Link href="/profile/get-premium">
                 <button className="cta_btn space-x-1">
                   <Image
@@ -117,7 +118,7 @@ const Profile = ({session}) => {
                   />
                 </button>
               </Link>
-            </div>
+            </div> */}
                 
             <div className="hidden sm:flex flex-row space-x-1 justify-center mt-3">
 

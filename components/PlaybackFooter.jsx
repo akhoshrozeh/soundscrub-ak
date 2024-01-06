@@ -16,12 +16,14 @@ const PlaybackFooter = () => {
     
     const playerRef = useRef(null);
     const rafIdRef = useRef(null);
+    
 
     useEffect(() => {
         return () => clearRAF();
     }, []);
 
     const renderSeekPos = () => {
+        // console.log(playbackState.playing)
         if (!playbackState.seeking) {
             setPlaybackState(prevState => ({
                 ...prevState,
@@ -34,42 +36,36 @@ const PlaybackFooter = () => {
     };
 
     const handleOnLoad = () => {
-        setPlaybackState({...playbackState,
+        setPlaybackState(prevState => ({...prevState,
             loaded: true,
             duration: playerRef.current.duration()
         })
+        )
     }
-
 
     const handleOnPlay = () => {
-        // setPlaybackState(prevState => ({
-        //     ...prevState,
-        //     playing: true
-        // }));
-        // renderSeekPos();
-    }
-
-    const handlePlayButtonClick = () => {
         setPlaybackState(prevState => ({
             ...prevState,
             playing: true
         }));
+        renderSeekPos();
     }
 
     const handlePauseButtonClick = () => {
         playerRef.current.stop()
-        setPlaybackState(prevState => ({
-            ...prevState,
+        setPlaybackState({
+            ...playbackState,
             playing: false
-        }));
+        });
         renderSeekPos();
     }
 
+
     const handleVolumeChange = (e) => {
         console.log("changing volume")
-        setPlaybackState({...playbackState,  
+        setPlaybackState(prevState => ({...prevState,  
             volume: parseFloat(e.target.value)
-        })
+        }))
     }
     
     const handleBackArrow = (e) => {
@@ -77,20 +73,17 @@ const PlaybackFooter = () => {
         if (playbackState.currentSongIdx > 0){
             let prevSongIdx = playbackState.currentSongIdx - 1;
             let prevSong = playbackState.playlist[prevSongIdx];
-            setPlaybackState({
-                ...playbackState, 
+            setPlaybackState(prevState => ({
+                ...prevState, 
                 currentSong: prevSong,
                 currentSongIdx: prevSongIdx,
                 playing: false
             })
+            )
         }
     }
 
     const handleOnEnd = (e) => {
-        setPlaybackState({
-            ...playbackState,
-            playing: false
-        })
         clearRAF()
     }
 
@@ -106,19 +99,19 @@ const PlaybackFooter = () => {
         if (playbackState.currentSongIdx < playbackState.playlist.length - 1){
             let nextSongIdx = playbackState.currentSongIdx + 1;
             let nextSong = playbackState.playlist[nextSongIdx];
-            setPlaybackState({
-                ...playbackState, 
+            setPlaybackState(prevState => ({
+                ...prevState, 
                 currentSong: nextSong,
                 currentSongIdx: nextSongIdx,
                 playing: false
-            })
+            }))
         }
     }
 
     const handleMouseSeekUp = (e) => {
         setPlaybackState(prevState => ({
             ...prevState,
-            seeking: false
+            seeking: false,
         }));
       
         playerRef.current.seek(e.target.value)
@@ -167,6 +160,7 @@ const PlaybackFooter = () => {
                     playing={playbackState.playing}
                     onLoad={handleOnLoad}
                     onEnd={handleOnEnd}
+                    onPlay={handleOnPlay}
                     volume={playbackState.volume}
                     ref={playerRef}
                 />
@@ -221,7 +215,7 @@ const PlaybackFooter = () => {
                             />
                         </button>
                         {!playbackState.playing ? (
-                            <button onClick={handlePlayButtonClick}>
+                            <button onClick={handleOnPlay}>
                                 <Image 
                                     src="/assets/images/play-button.svg"
                                     alt="Play button"
@@ -249,12 +243,14 @@ const PlaybackFooter = () => {
                             />
                         </button>
                     </div>
-                    <div className='flex flex-row text-white justify-center items-center text-center '>
+                    <div className='flex flex-row text-white text-xs justify-center items-center text-center '>
                         <div className='pr-2'>
-                            {formatSecondsToMinutes(playbackState.seek.toFixed(2))}
+                            <span>
+                                {formatSecondsToMinutes(playbackState.seek.toFixed(2))}
+                            </span>
                         </div>
                         <input
-                            className='w-6/12 purple-seeking-slider'
+                            className='w-8/12 purple-seeking-slider'
                             type='range'
                             min='0'
                             max={playbackState.duration ? playbackState.duration.toFixed(2) : 0}
@@ -265,13 +261,15 @@ const PlaybackFooter = () => {
                             onMouseUp={handleMouseSeekUp}
                         />
                         <div className='pl-2'>
-                            {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : 'NaN'}
+                            <span>
+                                {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : 'NaN'}
+                            </span>
                         </div>
                     </div>
                 </div>
 
                 {/* Right Section: Volume Slider */}
-                <div className="col-span-1 justify-end ml-4">
+                <div className="col-span-1 justify-self-end ml-4">
                     <input
                         type="range"
                         className="purple-slider"
@@ -334,7 +332,7 @@ const PlaybackFooter = () => {
                             />
                         </button>
                         {!playbackState.playing ? (
-                            <button onClick={handlePlayButtonClick}>
+                            <button onClick={handleOnPlay}>
                                 <Image 
                                     src="/assets/images/play-button.svg"
                                     alt="Play button"
@@ -362,12 +360,14 @@ const PlaybackFooter = () => {
                             />
                         </button>
                     </div>
-                    <div className='flex flex-row text-white justify-center items-center text-center  w-full max-w-xs '>
-                        <div className='pr-2 text_xxs justify-start'>
-                            {formatSecondsToMinutes(playbackState.seek.toFixed(2))}
+                    <div className='flex flex-row text-white text_xxs justify-center items-center text-center  w-full max-w-md '>
+                        <div className='pr-2 justify-start'>
+                            <span>
+                                {formatSecondsToMinutes(playbackState.seek.toFixed(2))}
+                            </span>
                         </div>
                         <input
-                            className='w-4/12 purple-seeking-slider justify-center items-center'
+                            className='w-6/12 purple-seeking-slider justify-center items-center'
                             type='range'
                             min='0'
                             max={playbackState.duration ? playbackState.duration.toFixed(2) : 0}
@@ -377,8 +377,10 @@ const PlaybackFooter = () => {
                             onMouseDown={handleMouseSeekDown}
                             onMouseUp={handleMouseSeekUp}
                         />
-                        <div className='pl-2 text_xxs justify-end'>
-                            {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : 'NaN'}
+                        <div className='pl-2 justify-end'>
+                            <span>
+                                {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : 'NaN'}
+                            </span>
                         </div>
                     </div>
                 </div>
