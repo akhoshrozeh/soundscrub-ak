@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { PROFILE_REQ } from '@constants/enums';
 import { useState, useEffect } from 'react';
 import Link from 'next/link'
+export const dynamic = 'force-dynamic'
 
 import ReleaseItem from '@components/ReleaseItem'
 

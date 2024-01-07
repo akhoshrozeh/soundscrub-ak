@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import ReleaseItem from '@components/ReleaseItem'
 import { PlaybackContext } from '@contexts/PlaybackContext';
+export const dynamic = 'force-dynamic'
 
 
 const ReleaseList = ({data}) => {
