@@ -7,7 +7,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import {VOTE_TYPES} from '@constants/enums';
 import Link from 'next/link';
 import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
-export const dynamic = 'force-dynamic'
 
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
