@@ -1,7 +1,7 @@
 import { connectToDB } from '@utils/database';
 import Release from '@models/release';
 
-export const GET = async () => {
+export const GET = async (request) => {
     try {
         await connectToDB();
         
