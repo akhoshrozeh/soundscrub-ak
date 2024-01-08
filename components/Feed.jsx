@@ -37,7 +37,7 @@ const Feed = () => {
   useEffect(() => {
 
       const fetchReleases = async () => {
-        const response = await fetch('/api/releases');
+        const response = await fetch('/api/releases', { cache: 'no-store' });
 
         try {
           const data = await response.json();
