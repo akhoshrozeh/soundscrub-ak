@@ -4,8 +4,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import ReleaseItem from '@components/ReleaseItem'
 import { PlaybackContext } from '@contexts/PlaybackContext';
-import useSWR from 'swr';
-
 
 const ReleaseList = ({data}) => {
   return (
@@ -30,35 +28,53 @@ const getPlaylist = (songArr) => {
   }));
 };
 
-const fetcher = url => fetch(url, { cache: 'no-store' }).then(res => res.json());
-
 const Feed = () => {
 
+  const router = useRouter();
   const [releases, setReleases] = useState([]);
   const {playbackState, setPlaybackState} = useContext(PlaybackContext);
 
-  const { data, error } = useSWR('/api/releases', fetcher, {
-    revalidateOnMount: true,
-    onSuccess: (data) => {
-      console.log('Data successfully retrieved');
-      setReleases(data);  // Update the releases state
+  useEffect(() => {
 
-      const playlist = getPlaylist(data);
-      const playlistIdx = playbackState.currentSongIdx;
-      let currSong = playlist[playlistIdx] || {};
+      const fetchReleases = async () => {
+        const response = await fetch('/api/releases');
 
-      if (!playbackState.isPlaying) {
-        setPlaybackState({
-          ...playbackState, 
-          currentSong: currSong,
-          playlist: playlist,
-        });
+        try {
+          const data = await response.json();
+
+          console.log('Data successfully retrieved')
+          setReleases(data);
+
+          const playlist = getPlaylist(data);
+
+          const playlistIdx = playbackState.currentSongIdx;
+
+          let currSong = {
+            title: playlist[playlistIdx].title,
+            artist: playlist[playlistIdx].artist,
+            id: playlist[playlistIdx].id,
+            audioUrl: playlist[playlistIdx].audioUrl,
+            coverImage: playlist[playlistIdx].coverImage
+          }
+          console.log(currSong)
+          if (!playbackState.isPlaying){
+            setPlaybackState({...playbackState, 
+              currentSong: currSong,
+              playlist: playlist,
+            })
+          }
+
+        } catch(error){
+          console.log('error getting json', error)
+        }
+        
       }
-    },
-    onError: (error) => {
-      console.log('Error fetching releases:', error);
-    }
-  });
+
+      fetchReleases();
+
+
+      
+  }, []);
 
   return ( 
 
