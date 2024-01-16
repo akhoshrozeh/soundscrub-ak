@@ -1,6 +1,8 @@
 import { connectToDB } from '@utils/database';
 import Release from '@models/release';
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request) => {
     try {
         await connectToDB();
