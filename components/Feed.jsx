@@ -30,7 +30,7 @@ const getPlaylist = (songArr) => {
   }));
 };
 
-const fetcher = url => fetch(url).then(res => res.json());
+const fetcher = url => fetch(url, { cache: 'no-store' }).then(res => res.json());
 
 const Feed = () => {
 
