@@ -38,6 +38,7 @@ const Feed = () => {
   const {playbackState, setPlaybackState} = useContext(PlaybackContext);
 
   const { data, error } = useSWR('/api/releases', fetcher, {
+    revalidateOnMount: true,
     onSuccess: (data) => {
       console.log('Data successfully retrieved');
       setReleases(data);  // Update the releases state
