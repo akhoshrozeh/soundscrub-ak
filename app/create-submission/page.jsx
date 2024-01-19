@@ -46,87 +46,76 @@ const CreateSubmission = () => {
         }
     }
 
+    const getPresignedUrl = async (fileName, fileType) => {
+        const response = await fetch(`/api/submission/new/get-presigned-url?fileName=${fileName}&fileType=${fileType}`);
+        const data = await response.json();
+        return data;
+    }
+
+    const directUploadToS3 = async (file) => {
+        const { presignedUrl, key } = await getPresignedUrl(file.name, file.type);
+
+        // Upload the file directly to S3 using the presigned URL
+        const response = await fetch(presignedUrl, {
+            method: "PUT",
+            headers: {
+                "Content-Type": file.type
+            },
+            body: file
+        });
+
+        if (response.ok) {
+            // The file URL in S3
+            const fileUrl = `https://${process.env.NEXT_PUBLIC_STORAGE_BUCKET_NAME}.s3.${process.env.NEXT_PUBLIC_STORAGE_BUCKET_REGION}.amazonaws.com/${key}`;
+            return fileUrl;
+        } else {
+            throw new Error('Failed to upload file to S3');
+        }
+
+    }
+
+
     const createSubmission = async(e) => {
         e.preventDefault();
         setSubmitting(true);
 
-        let imageUrl = releaseSubmission.imgUrl;
-        let audioUrl = releaseSubmission.audioUrl;
-
-        let uploadSuccessful = false;
-
         try {
             console.log("Attempting to create submission");
 
-            // Storage Logic
-            if (uploadState.image || uploadState.audio){
-                console.log("Attempting to send storage request")
-                const formData = new FormData();
-                formData.append("image", uploadState.image)
-                formData.append("audio", uploadState.audio)
-
-
-                const uploadResponse = await fetch('/api/submission/new/form-asset-upload', {
-                    method: "POST",
-                    body: formData
-                })
+            const imageUrl = await directUploadToS3(uploadState.image);
+            const audioUrl = await directUploadToS3(uploadState.audio);
         
-
-                console.log(uploadResponse)
-
-                if (uploadResponse.ok){
-                    uploadSuccessful = true;
-                }
-                else {
-                    throw new Error("Failed to upload assets.");
-                }
-
-                const uploadData = await uploadResponse.json();
-                console.log(uploadData);
-
-                if (uploadData && uploadData.data.imageUrl && uploadData.data.audioUrl) {
-                    imageUrl = uploadData.data.imageUrl;
-                    audioUrl = uploadData.data.audioUrl;
-                }
-            } else {
-                console.log("Either image or audio not selected")
+            if (!imageUrl || !audioUrl) {
+                throw new Error('Failed to get image or audio URL');
             }
-
-            if (uploadSuccessful) {
                      
-                // Database Logic
-                const response = await fetch('/api/submission/new', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        userId: session?.user.id,
-                        title: releaseSubmission.title,
-                        artist: releaseSubmission.artist,
-                        link: releaseSubmission.link,
-                        description: releaseSubmission.description,
-                        coverImage: imageUrl,
-                        releaseType: releaseSubmission.releaseType,
-                        tags: releaseSubmission.tags,
-                        audioUrl: audioUrl,
-                    })
+            // Database Logic
+            const response = await fetch('/api/submission/new', {
+                method: 'POST',
+                body: JSON.stringify({
+                    userId: session?.user.id,
+                    title: releaseSubmission.title,
+                    artist: releaseSubmission.artist,
+                    link: releaseSubmission.link,
+                    description: releaseSubmission.description,
+                    coverImage: imageUrl,
+                    releaseType: releaseSubmission.releaseType,
+                    tags: releaseSubmission.tags,
+                    audioUrl: audioUrl,
                 })
-                console.log("Sending new submission...");
+            })
+            console.log("Sending new submission...");
 
-                console.log(response);
-
-                if(response.ok) {
-                    console.log("Pushing to router")
-                    Router.push('/');
-                }
+            if(response.ok) {
+                console.log("Pushing to router")
+                Router.push('/');
             }
             
         } catch (error) {
-            console.log('Error creating new submission...')
-            console.log(error);
+            console.error('Error creating new submission:', error);
         } finally {
             setSubmitting(false);
         }
-
-
     }
 
     return (

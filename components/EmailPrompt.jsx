@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 const EmailPrompt = () => {
-    const [email, setEmail] = useState(null);
+    const [email, setEmail] = useState('');
     const [emailValid, setEmailValid] = useState(false);
 
     const validateEmail = (email) => {

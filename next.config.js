@@ -13,7 +13,12 @@ const nextConfig = {
                 port: '',
             }
         ]
+    },
+    env: {
+        // Add your environment variables here
+        NEXT_PUBLIC_STORAGE_BUCKET_NAME: process.env.AWS_S3_BUCKET_NAME,
+        NEXT_PUBLIC_STORAGE_BUCKET_REGION: process.env.AWS_S3_REGION,
     }
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
