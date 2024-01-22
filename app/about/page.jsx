@@ -18,10 +18,10 @@ const About = () => {
                 </p>
             </div>
 
-            <div className="glassmorphism [">
+            <div className="mb-12 glassmorphism ">
                 
 
-                <h2 className="mt-4 head_text">Why SoundScrub?</h2>
+                <h2 className="mt-2 head_text">Why SoundScrub?</h2>
                 <p className="desc">
                     In today's digital age, music promotion is often at the mercy of complex algorithms. These algorithms, while powerful, can inadvertently stifle creativity and diversity, promoting a narrow spectrum of sounds and artists. This not only limits the exposure of incredibly talented musicians but also restricts listeners from discovering the full richness of musical diversity.
                 </p>
@@ -36,6 +36,15 @@ const About = () => {
                     - <strong className="blue_gradient">Community-Driven Discovery:</strong> At SoundScrub, we harness the collective power of our community to unearth...
                 </p>
                 {/* You can continue with the rest of the content here */}
+            </div>
+
+            <div className="glassmorphism ">
+                
+
+                <h2 className="mt-2 head_text">Contact Us</h2>
+                <p className="desc">
+                    You can contact at me at soundscrubme@gmail.com. Feel free to ask any questions at all!
+                </p>
             </div>
         </div>
     )
