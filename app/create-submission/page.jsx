@@ -1,7 +1,8 @@
 'use client'
-import { useState } from 'react';
-import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import ModalSpinner from '@components/ModalSpinner';
 
 import Form from '@components/Form';
 
@@ -13,10 +14,9 @@ const CreateSubmission = () => {
         image: null,
         audio: null
     }
-
-    const { data: session } = useSession();
     const [submitting, setSubmitting] = useState(false);
     const [uploadState, setUploadState] = useState(initUploadState);
+    const { data: session } = useSession(false);
     
     const [releaseSubmission, setReleaseSubmission] = useState({
         title: '',
@@ -28,6 +28,12 @@ const CreateSubmission = () => {
         tags: [],
         audioUrl: ''
     }); 
+
+    useEffect(() => {
+        if (!session?.user) {
+          Router.push('/');
+        }
+      }, [session, Router]);
 
     const handleImgFileChange = (e) => {
         const newImage = e.target.files[0];
@@ -120,16 +126,25 @@ const CreateSubmission = () => {
 
     return (
         <section className="pb-5">
-            <Form
-                type="Create"
-                releaseSubmission={releaseSubmission}
-                setReleaseSubmission={setReleaseSubmission}
-                submitting={submitting}
-                handleSubmit={createSubmission}
-                handleImgFileChange={handleImgFileChange}
-                uploadState={uploadState}
-                handleAudioFileChange={handleAudioFileChange}
-            />
+            {session?.user ? (
+                <div>
+                    <Form
+                        type="Create"
+                        releaseSubmission={releaseSubmission}
+                        setReleaseSubmission={setReleaseSubmission}
+                        submitting={submitting}
+                        handleSubmit={createSubmission}
+                        handleImgFileChange={handleImgFileChange}
+                        uploadState={uploadState}
+                        handleAudioFileChange={handleAudioFileChange}
+                    />
+                    <ModalSpinner isLoading={submitting}/>
+                </div>
+            ) : (
+                <>   
+                </>
+            )}
+
         </section>
     )
 
