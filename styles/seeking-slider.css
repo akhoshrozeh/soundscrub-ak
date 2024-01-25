@@ -10,23 +10,23 @@
 .purple-seeking-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px; /* Width of the thumb */
-    height: 10px; /* Height of the thumb */
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
     background: #8b5cf6; /* Tailwind purple-500 for the thumb */
     cursor: pointer;
     border-radius: 50%;
-    margin-top: -4px; /* Align thumb with the track */
+    margin-top: -6px; /* Align thumb with the track */
 }
 
 .purple-seeking-slider::-webkit-slider-thumb:hover {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px; /* Width of the thumb */
-    height: 10px; /* Height of the thumb */
+    width: 15px; /* Width of the thumb */
+    height: 15px; /* Height of the thumb */
     background: #e9d5ff; /* Tailwind purple-500 for the thumb */
     cursor: pointer;
     border-radius: 50%;
-    margin-top: -4px; /* Align thumb with the track */
+    margin-top: -6px; /* Align thumb with the track */
 }
 
 /* WebKit (Chrome, Safari) - Track */
