@@ -90,15 +90,15 @@ const EmailPrompt = () => {
 
                 { (emailValid) ? (
 
-                    <div>
+                    <>
                         <span className='text-gray-400 text-sm'>
                             You're email has been recorded!
                         </span>
-                    </div>
+                    </>
 
                 ) : (
 
-                    <div>
+                    <>
                         <input
                             placeholder='Email'
                             className='w-32 rounded-xl p-2'
@@ -108,7 +108,7 @@ const EmailPrompt = () => {
                         <button className="ml-3 mr-2 p-2 bg-red-400 hover:bg-red-200 rounded-full text-white" onClick={handleJoinButtonClick}>
                             Join
                         </button>
-                    </div>
+                    </>
 
                 )}
                 

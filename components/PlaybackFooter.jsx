@@ -24,11 +24,13 @@ const PlaybackFooter = () => {
 
     const renderSeekPos = () => {
         // console.log(playbackState.playing)
-        if (!playbackState.seeking && playbackState.playing) {
+        if (!playbackState.seeking) {
             setPlaybackState(prevState => ({
                 ...prevState,
                 seek: playerRef.current.seek()
             }));
+        }
+        if (playbackState.playing) {
             rafIdRef.current = raf(renderSeekPos);
         }
     };
@@ -46,25 +48,22 @@ const PlaybackFooter = () => {
             ...prevState,
             playing: true
         }));
-        if (!playbackState.seeking) {
-            rafIdRef.current = raf(renderSeekPos);
-        }
+        renderSeekPos();
     }
 
     const handlePauseButtonClick = () => {
-
-        setPlaybackState(prevState => ({
-            ...prevState,
+        playerRef.current.stop()
+        setPlaybackState({
+            ...playbackState,
             playing: false
-        }));
+        });
         renderSeekPos();
     }
 
 
     const handleVolumeChange = (e) => {
         console.log("changing volume")
-        setPlaybackState(prevState => ({
-            ...prevState,  
+        setPlaybackState(prevState => ({...prevState,  
             volume: parseFloat(e.target.value)
         }))
     }
@@ -110,22 +109,15 @@ const PlaybackFooter = () => {
     }
 
     const handleMouseSeekUp = (e) => {
-        playerRef.current.seek(e.target.value)
         setPlaybackState(prevState => ({
             ...prevState,
             seeking: false,
         }));
       
-        if (playbackState.playing) {
-            rafIdRef.current = raf(renderSeekPos);
-        }
+        playerRef.current.seek(e.target.value)
     }
 
     const handleMouseSeekDown = (e) => {
-        if (rafIdRef.current) {
-            raf.cancel(rafIdRef.current);
-            rafIdRef.current = null;
-        }
         setPlaybackState(prevState => ({
             ...prevState,
             seeking: true
@@ -270,7 +262,7 @@ const PlaybackFooter = () => {
                         />
                         <div className='pl-2'>
                             <span>
-                                {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : '0:00'}
+                                {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : 'NaN'}
                             </span>
                         </div>
                     </div>
@@ -387,7 +379,7 @@ const PlaybackFooter = () => {
                         />
                         <div className='pl-2 justify-end'>
                             <span>
-                                {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : '0:00'}
+                                {(playbackState.duration) ? formatSecondsToMinutes(playbackState.duration.toFixed(2)) : 'NaN'}
                             </span>
                         </div>
                     </div>
