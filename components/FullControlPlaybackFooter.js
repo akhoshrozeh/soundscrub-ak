@@ -3,6 +3,7 @@ import React from 'react'
 import ReactHowler from 'react-howler'
 import "@styles/volume-slider.css"
 import "@styles/seeking-slider.css"
+import "@styles/loading-spinner.css"
 import Image from 'next/image';
 import Link from 'next/link';
 import raf from 'raf' // requestAnimationFrame polyfill
@@ -33,8 +34,7 @@ class FullControlPlaybackFooter extends React.Component {
         coverImage: ''
       },
       playlist: [],
-      currentSongIdx: 0,
-      playing: false
+      currentSongIdx: 0
     }
 
     this.handleToggle = this.handleToggle.bind(this)
@@ -57,7 +57,7 @@ class FullControlPlaybackFooter extends React.Component {
 
   componentDidMount() {
     // Sync with context when the component mounts
-    this.setState(this.context.playbackState);
+    this.playerState = (this.context.playbackState);
   }
 
   componentDidUpdate(prevState) {
@@ -157,29 +157,36 @@ class FullControlPlaybackFooter extends React.Component {
 
   handleBackArrow () {
     console.log("set prev song")
-    if (this.state.currentSongIdx > 0){
-        let prevSongIdx = this.state.currentSongIdx - 1;
-        let prevSong = this.state.playlist[prevSongIdx];
-        setState(prevState => ({
-            ...prevState, 
-            currentSong: prevSong,
-            currentSongIdx: prevSongIdx,
-            playing: false
-        })
-        )
+    if (this.playerState.currentSongIdx > 0){
+        let prevSongIdx = this.playerState.currentSongIdx - 1;
+        let prevSong = this.playerState.playlist[prevSongIdx];
+        this.playerState.currentSong = prevSong;
+        this.playerState.currentSongIdx = prevSongIdx;
+
+        this.setState(prevState => ({
+          loaded: false,
+          playing: false,
+          isSeeking: false,
+          seek: 0.0,
+          duration: 0.0
+        }))
     }
   }
 
   handleForwardArrow () {
     console.log("set next song")
-    if (this.state.currentSongIdx < this.state.playlist.length - 1){
-        let nextSongIdx = this.state.currentSongIdx + 1;
-        let nextSong = this.state.playlist[nextSongIdx];
-        setState(prevState => ({
-            ...prevState, 
-            currentSong: nextSong,
-            currentSongIdx: nextSongIdx,
-            playing: false
+    if (this.playerState.currentSongIdx < this.playerState.playlist.length - 1){
+        let nextSongIdx = this.playerState.currentSongIdx + 1;
+        let nextSong = this.playerState.playlist[nextSongIdx];
+        this.playerState.currentSong = nextSong;
+        this.playerState.currentSongIdx = nextSongIdx;
+
+        this.setState(prevState => ({
+            loaded: false,
+            playing: false,
+            isSeeking: false,
+            seek: 0.0,
+            duration: 0.0
         }))
     }
   }
@@ -216,6 +223,7 @@ class FullControlPlaybackFooter extends React.Component {
 
           <ReactHowler
             src={this.playerState.currentSong.audioUrl}
+            html5={true}
             playing={this.state.playing}
             onLoad={this.handleOnLoad}
             onPlay={this.handleOnPlay}
@@ -259,8 +267,14 @@ class FullControlPlaybackFooter extends React.Component {
                         </span>
                         <h2 className='text-stone-400 text-sm'> {this.playerState.currentSong.artist}</h2>
                     </div>
+
+                    <div className='mt-1'>
+                        {!this.state.loaded && <div className="loader"></div>}
+                    </div>
                 </div>
-              </Link>
+            </Link>
+
+            
           </div>
 
           {/* Center Section: Control Buttons */}
