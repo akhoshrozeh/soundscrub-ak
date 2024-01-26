@@ -5,7 +5,7 @@ import { ReleaseViewProvider } from '@contexts/ReleaseViewContext'
 import { PlaybackProvider } from '@contexts/PlaybackContext'
 import PlaybackFooter from '@components/PlaybackFooter'
 import Head from 'next/head';
-import PlaybackCtrlFooter from '@components/PlaybackCtrlFooter'
+import FullControlPlaybackFooter from '@components/FullControlPlaybackFooter'
 
 
 export const metadata = {
@@ -29,7 +29,7 @@ const RootLayout = ({children, modal}) => {
                                     {modal}
                                 </div>
                             {/* <PlaybackFooter className="app_footer"/>   */}
-                            <PlaybackCtrlFooter/>
+                            <FullControlPlaybackFooter/>
                         </main>
                     </ReleaseViewProvider>
                 </PlaybackProvider>

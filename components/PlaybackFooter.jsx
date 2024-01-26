@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { PlaybackContext } from '@contexts/PlaybackContext';
 import { ReleaseViewContext } from '@contexts/ReleaseViewContext';

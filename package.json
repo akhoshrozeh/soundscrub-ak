@@ -13,6 +13,7 @@
     "@aws-sdk/s3-request-presigner": "^3.495.0",
     "@radix-ui/react-slider": "^1.0.0",
     "bcrypt": "^5.1.1",
+    "lodash": "^4.17.21",
     "mongodb": "^6.2.0",
     "mongoose": "^7.6.3",
     "next": "13.5.6",

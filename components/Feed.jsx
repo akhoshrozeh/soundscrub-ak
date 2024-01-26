@@ -57,13 +57,13 @@ const Feed = () => {
             coverImage: playlist[playlistIdx].coverImage
           }
           console.log(currSong)
-          if (!playbackState.isPlaying){
-            setPlaybackState({...playbackState, 
-              currentSong: currSong,
-              playlist: playlist,
-            })
-          }
-
+          setPlaybackState(prevState => ({...prevState, 
+            currentSong: currSong,
+            playlist: playlist,
+          }))
+          
+          console.log(playlist)
+          
         } catch(error){
           console.log('error getting json', error)
         }
@@ -72,8 +72,6 @@ const Feed = () => {
 
       fetchReleases();
 
-
-      
   }, []);
 
   return ( 
