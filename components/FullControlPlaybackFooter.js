@@ -17,6 +17,15 @@ class FullControlPlaybackFooter extends React.Component {
     super(props)
 
     this.state = {
+        currentSong: {
+          id: null,
+          title: 'No Songs Loaded',
+          artist: 'N/A',
+          audioUrl: '',
+          coverImage: ''
+        },
+        playlist: [],
+        currentSongIdx: 0,
         loaded: false,
         playing: false,
         isSeeking: false, 
@@ -36,6 +45,8 @@ class FullControlPlaybackFooter extends React.Component {
       playlist: [],
       currentSongIdx: 0
     }
+
+
 
     this.handleToggle = this.handleToggle.bind(this)
     this.handleOnLoad = this.handleOnLoad.bind(this)
@@ -57,14 +68,31 @@ class FullControlPlaybackFooter extends React.Component {
 
   componentDidMount() {
     // Sync with context when the component mounts
-    this.playerState = (this.context.playbackState);
+    if (!lodash.isEqual(this.playerState, this.context.playbackState)) {
+      this.playerState = this.context.playbackState;
+      
+    }
   }
 
-  componentDidUpdate(prevState) {
+  componentDidUpdate() {
+
+    console.log("component did update")
+    console.log(this.context)
 
       // Sync local state with context if context data changes
       if (!lodash.isEqual(this.playerState, this.context.playbackState)) {
         this.playerState = this.context.playbackState;
+
+        if (!lodash.isEqual(this.playerState.currentSongIdx, this.context.playbackState.currentSongIdx)){
+          this.handleStop()
+          this.setState(prevState => ({
+            loaded: false,
+            playing: true,
+            isSeeking: false,
+            seek: 0.0,
+            duration: 0.0
+          }))
+        }
       }
   }
 
@@ -156,6 +184,7 @@ class FullControlPlaybackFooter extends React.Component {
   }
 
   handleBackArrow () {
+    this.handleStop();
     console.log("set prev song")
     if (this.playerState.currentSongIdx > 0){
         let prevSongIdx = this.playerState.currentSongIdx - 1;
@@ -174,7 +203,9 @@ class FullControlPlaybackFooter extends React.Component {
   }
 
   handleForwardArrow () {
+    this.handleStop();
     console.log("set next song")
+    console.log(this.playerState.currentSongIdx)
     if (this.playerState.currentSongIdx < this.playerState.playlist.length - 1){
         let nextSongIdx = this.playerState.currentSongIdx + 1;
         let nextSong = this.playerState.playlist[nextSongIdx];
@@ -189,6 +220,7 @@ class FullControlPlaybackFooter extends React.Component {
             duration: 0.0
         }))
     }
+    console.log(this.playerState.currentSongIdx)
   }
 
   handleLink () {
@@ -207,6 +239,7 @@ class FullControlPlaybackFooter extends React.Component {
     // Format the time. Pad the seconds with a leading zero if necessary
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
+  static contextType = PlaybackContext;
 
   render () {
 

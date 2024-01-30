@@ -1,15 +1,20 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const EmailPrompt = () => {
     const [email, setEmail] = useState('');
     const [emailValid, setEmailValid] = useState(false);
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        // This effect runs only on the client, after mounting
+        setIsClient(true);
+    }, []);
 
     const validateEmail = (email) => {
-        console.log(email)
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,16}$/;
         return regex.test(email);
-    }
+    };
 
     const addEmailToWaitlist = async (emailData) => {
         try {
@@ -20,35 +25,33 @@ const EmailPrompt = () => {
                 },
                 body: JSON.stringify({ email: emailData })
             });
-    
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-    
+
             const res = await response.json();
-            console.log(res)
-            
-    
+            console.log(res);
         } catch (error) {
             console.log('Error in fetching:', error.message);
         }
-    }
-    
+    };
+
     const handleJoinButtonClick = async () => {
         if (validateEmail(email)) {
             await addEmailToWaitlist(email);
             setEmailValid(true);
-            // Additional actions on successful validation
         } else {
             setEmailValid(false);
             alert('Invalid Email!');
         }
-    }
+    };
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
-    }
+    };
 
+    // Only render the dynamic parts after the component has mounted (client-side)
     return (
         <>
             {/* Desktop Prompt */}
@@ -56,30 +59,23 @@ const EmailPrompt = () => {
                 <span className="font-semibold">
                     Join our newsletter waitlist!
                 </span>
-                { (emailValid) ? (
-
-                    <>
-                        <span className='text-gray-400 text-md'>
-                            You're email has been recorded!
-                        </span>
-                    </>
-
-                    ) : (
-
-                        <div>
-                            <input
-                                placeholder='Email'
-                                className='w-72 rounded-xl p-2'
-                                value={email}
-                                onChange={handleEmailChange}
-                            />
-                            <button className="ml-3 mr-2 p-2 bg-red-400 hover:bg-red-200 rounded-full text-white" onClick={handleJoinButtonClick}>
-                                Join
-                            </button>
-                        </div>
-
-                    )}
-                
+                {isClient && (emailValid ? (
+                    <span className='text-gray-400 text-md'>
+                        Your email has been recorded!
+                    </span>
+                ) : (
+                    <div>
+                        <input
+                            placeholder='Email'
+                            className='w-72 rounded-xl p-2'
+                            value={email}
+                            onChange={handleEmailChange}
+                        />
+                        <button className="ml-3 mr-2 p-2 bg-red-400 hover:bg-red-200 rounded-full text-white" onClick={handleJoinButtonClick}>
+                            Join
+                        </button>
+                    </div>
+                ))}
             </div>
 
             {/* Mobile Prompt */}
@@ -88,16 +84,11 @@ const EmailPrompt = () => {
                     Join our newsletter waitlist!
                 </span>
 
-                { (emailValid) ? (
-
-                    <>
-                        <span className='text-gray-400 text-sm'>
-                            You're email has been recorded!
-                        </span>
-                    </>
-
+                {isClient && (emailValid ? (
+                    <span className='text-gray-400 text-sm'>
+                        Your email has been recorded!
+                    </span>
                 ) : (
-
                     <div>
                         <input
                             placeholder='Email'
@@ -109,12 +100,10 @@ const EmailPrompt = () => {
                             Join
                         </button>
                     </div>
-
-                )}
-                
+                ))}
             </div>
         </>
-    )
-}
+    );
+};
 
 export default EmailPrompt;
