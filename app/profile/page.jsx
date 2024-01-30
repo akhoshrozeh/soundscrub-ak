@@ -15,7 +15,7 @@ const MyProfile = () => {
   }, [session, Router]);
   
   return (
-    <>
+    <div>
       {session?.user ? (
                 
           <Profile
@@ -26,7 +26,7 @@ const MyProfile = () => {
         <>
         </>
       )}
-    </>
+    </div>
   )
 }
 
