@@ -19,8 +19,8 @@ class FullControlPlaybackFooter extends React.Component {
     this.state = {
         loaded: false,
         playing: false,
-        isSeeking: false,
-        volume: 1.0,
+        isSeeking: false, 
+        volume: 0.2,
         seek: 0.0,
         duration: 0.0
     }
@@ -165,7 +165,7 @@ class FullControlPlaybackFooter extends React.Component {
 
         this.setState(prevState => ({
           loaded: false,
-          playing: false,
+          playing: true,
           isSeeking: false,
           seek: 0.0,
           duration: 0.0
@@ -183,7 +183,7 @@ class FullControlPlaybackFooter extends React.Component {
 
         this.setState(prevState => ({
             loaded: false,
-            playing: false,
+            playing: true,
             isSeeking: false,
             seek: 0.0,
             duration: 0.0
@@ -331,9 +331,9 @@ class FullControlPlaybackFooter extends React.Component {
                       max={this.state.duration ? this.state.duration.toFixed(2) : 0}
                       step='.01'
                       value={this.state.seek}
-                      onChange={this.handleSeekingChange}
-                      onMouseDown={this.handleMouseDownSeek}
-                      onMouseUp={this.handleMouseUpSeek}
+                      onChange={()=>{}}
+                      onMouseDown={()=>{alert('Seeking is not currently supported!')}}
+                      onMouseUp={()=>{}}
                   />
                   <div className='pl-2'>
                       <span>

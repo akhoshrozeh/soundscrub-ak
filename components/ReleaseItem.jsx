@@ -8,6 +8,7 @@ import {VOTE_TYPES} from '@constants/enums';
 import Link from 'next/link';
 import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
 
+
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
     const router = useRouter();
