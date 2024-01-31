@@ -16,7 +16,6 @@ export const PlaybackProvider = ({ children }) => {
         },
         playlist: [],
         currentSongIdx: 0,
-        playing: false,
     }
     const [playbackState, setPlaybackState] = useState(initPlaybackState)
     return (

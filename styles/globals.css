@@ -238,3 +238,40 @@
 .flex-between {
   @apply flex justify-between items-center;
 }
+
+.image-container {
+  position: relative;
+  display: inline-block; /* or flex, depending on your layout */
+  cursor: pointer;
+}
+
+.image-container img {
+  display: block; /* Ensures the image takes up the full space of its container */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Grey overlay */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .overlay {
+  opacity: 1; /* Show overlay on hover */
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none; /* Hide by default */
+}
+
+.image-container:hover .play-button {
+  display: block; /* Show on hover */
+}

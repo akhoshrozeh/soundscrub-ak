@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import {VOTE_TYPES} from '@constants/enums';
 import Link from 'next/link';
 import { ReleaseViewContext } from '@contexts/ReleaseViewContext';
+import { PlaybackContext } from '@contexts/PlaybackContext';
 
 const ReleaseItem = ({ release }) => {
     const pathName = usePathname();
@@ -16,10 +17,15 @@ const ReleaseItem = ({ release }) => {
     const { data: session } = useSession();
     const releaseUpvotes = release.upvotes;
     const releaseId = release._id;
+    const releaseTitle = release.title;
+    const releaseArtist = release.artist;
+    const releaseAudio = release.audioUrl;
+    const releaseImg = release.coverImage;
 
-    const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
+    const {playbackState, setPlaybackState} = useContext(PlaybackContext);
     useEffect(() => {
         // console.log(typeof(releaseUpvotes))
+        console.log(release)
         if(typeof(releaseUpvotes) === 'object'){
             // console.log('array type confirmed')
             setUpvotes(releaseUpvotes.length)
@@ -67,9 +73,21 @@ const ReleaseItem = ({ release }) => {
 
     }
 
-    const handleLink = (e) => {
-        setCurrentRelease(release);
-        console.log(currentRelease)
+    const handleLink = () => {
+        const selectedSongIndex = playbackState.playlist.findIndex(song => song.id === releaseId);
+        if (selectedSongIndex >= 0) {
+            setPlaybackState({...playbackState,
+                currentSong: {
+                    id: releaseId,
+                    title: releaseTitle,
+                    artist: releaseArtist,
+                    audioUrl: releaseAudio,
+                    coverImage: releaseImg
+                },
+                currentSongIdx: selectedSongIndex
+            });
+        }
+        console.log(selectedSongIndex)
     }
 
     function formatUrl(link) {
@@ -85,26 +103,36 @@ const ReleaseItem = ({ release }) => {
             
             {/* Desktop View */}
             <div className="hidden sm:flex flex-row">
-                <Link href={`/releases/${release._id}`} onClick={handleLink}>
-                
-                    {release.coverImage ? (
-                        <Image 
-                            src={release.coverImage}
-                            alt="Placeholder"
-                            width={50}
-                            height={50}
-                            className="ml-4 mr-4 rounded-lg object-cover h-28 w-28	"
-                        /> 
-                    ) : (
-                        <Image 
-                            src="/assets/images/placeholder-logo.svg" 
-                            alt="Placeholder"
-                            width={80}
-                            height={80}
-                            className="ml-4 mr-4 rounded-lg object-cover h-28 w-28"
-                        /> 
-                    )}
-                </Link>
+                <div className='image-container' onClick={handleLink}>
+                    <div className='image-wrapper'>
+                        {release.coverImage ? (
+                            <Image 
+                                src={release.coverImage}
+                                alt="Placeholder"
+                                width={50}
+                                height={50}
+                                className="rounded-lg object-cover h-28 w-28"
+                            />
+                        ) : (
+                            <Image 
+                                src="/assets/images/placeholder-logo.svg" 
+                                alt="Placeholder"
+                                width={80}
+                                height={80}
+                                className="rounded-lg object-cover h-28 w-28"
+                            /> 
+                        )}
+                    </div>
+                    <div className='overlay rounded-lg'></div>
+                    <div className='play-button'>
+                        {/* Replace with your play button icon */}
+                        <Image
+                            src="/assets/icons/play-button-releaseItem.svg"
+                            width={30}
+                            height={30}
+                        />
+                    </div>
+                </div>
             </div>
 
             {/* Mobile View */}
