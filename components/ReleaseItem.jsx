@@ -23,6 +23,7 @@ const ReleaseItem = ({ release }) => {
     const releaseImg = release.coverImage;
 
     const {playbackState, setPlaybackState} = useContext(PlaybackContext);
+    const {currentRelease, setCurrentRelease} = useContext(ReleaseViewContext);
     useEffect(() => {
         // console.log(typeof(releaseUpvotes))
         console.log(release)
@@ -70,10 +71,10 @@ const ReleaseItem = ({ release }) => {
     }
     
     const notifySignInRequired = (e) => {
-
+        alert("You must be signed in to vote!")
     }
 
-    const handleLink = () => {
+    const handlePlaySong = () => {
         const selectedSongIndex = playbackState.playlist.findIndex(song => song.id === releaseId);
         if (selectedSongIndex >= 0) {
             setPlaybackState({...playbackState,
@@ -87,7 +88,10 @@ const ReleaseItem = ({ release }) => {
                 currentSongIdx: selectedSongIndex
             });
         }
-        console.log(selectedSongIndex)
+    }
+    const handleLink = () => {
+
+        setCurrentRelease(release);
     }
 
     function formatUrl(link) {
@@ -97,13 +101,21 @@ const ReleaseItem = ({ release }) => {
         return link;
     }
 
+    const truncateString = ( str, n, useWordBoundary ) => {
+        if (str.length <= n) { return str; }
+        const subString = str.slice(0, n-1); // the original check
+        return (useWordBoundary 
+          ? subString.slice(0, subString.lastIndexOf(" ")) 
+          : subString) + "&hellip;";
+    };
+
     return (
 
         <li className="w-full grid grid-cols-4 justify-items-stretch col-auto py-2 mb-2">
             
             {/* Desktop View */}
             <div className="hidden sm:flex flex-row">
-                <div className='image-container' onClick={handleLink}>
+                <div className='image-container' onClick={handlePlaySong}>
                     <div className='image-wrapper'>
                         {release.coverImage ? (
                             <Image 

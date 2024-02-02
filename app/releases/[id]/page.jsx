@@ -25,7 +25,7 @@ const ReleasePageView = ({params}) => {
 }, []);
 
   return (
-    <section className="w-full">
+    <section className="w-9/12 pt-12">
       <ReleaseCard release={release}/>
     </section>
   )

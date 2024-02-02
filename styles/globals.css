@@ -239,6 +239,10 @@
   @apply flex justify-between items-center;
 }
 
+.link_btn {
+  @apply rounded-xl border-2 border-stone-900 bg-stone-900	 py-1 px-4 text-white transition-all hover:bg-white hover:text-purple-500 text-sm;
+}
+
 .image-container {
   position: relative;
   display: inline-block; /* or flex, depending on your layout */
