@@ -29,54 +29,43 @@ const getPlaylist = (songArr) => {
 };
 
 const Feed = () => {
-
   const router = useRouter();
   const [releases, setReleases] = useState([]);
-  const {playbackState, setPlaybackState} = useContext(PlaybackContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadKey, setLoadKey] = useState(0); // Added a key to force re-render
+  const { playbackState, setPlaybackState } = useContext(PlaybackContext);
 
   useEffect(() => {
-
-      const fetchReleases = async () => {
+    let isMounted = true; // Track if component is mounted
+    const fetchReleases = async () => {
+      setIsLoading(true);
+      try {
         const response = await fetch('/api/releases');
-
-        try {
-          const data = await response.json();
-
-          console.log('Data successfully retrieved')
+        if (!response.ok) throw new Error('Network response was not ok');
+        const data = await response.json();
+        if (isMounted) { // Only update state if component is mounted
           setReleases(data);
-
-          const playlist = getPlaylist(data);
-
-          const playlistIdx = playbackState.currentSongIdx;
-
-          let currSong = {
-            title: playlist[playlistIdx].title,
-            artist: playlist[playlistIdx].artist,
-            id: playlist[playlistIdx].id,
-            audioUrl: playlist[playlistIdx].audioUrl,
-            coverImage: playlist[playlistIdx].coverImage
-          }
-          console.log(currSong)
-          setPlaybackState(prevState => ({...prevState, 
-            currentSong: currSong,
-            playlist: playlist,
-          }))
-          
-          console.log(playlist)
-          
-        } catch(error){
-          console.log('error getting json', error)
+          setIsLoading(false);
+          setLoadKey(prevKey => prevKey + 1); // Increment key to force re-render
+          // Handle setting playback state here...
         }
-        
+      } catch (error) {
+        console.error('Failed to fetch releases:', error);
+        if (isMounted) setIsLoading(false);
       }
+    };
 
-      fetchReleases();
+    fetchReleases();
 
-  }, []);
+    return () => { isMounted = false; }; // Cleanup function to set isMounted to false
+  }, []); // Ensure dependencies are correct
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return ( 
 
-    <section className="w-full mt-2 pb-24">
+    <section className="w-full mt-2 pb-24"  key={loadKey}>
       <div className="w-full flex flex-col container mt-2 bg-transparent mb-2">
         <div className='flex flex-col p-3 pb-3'>
           <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
