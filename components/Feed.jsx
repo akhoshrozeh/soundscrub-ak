@@ -43,8 +43,27 @@ const Feed = () => {
         const response = await fetch('/api/releases');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
+        console.log(data)
         if (isMounted) { // Only update state if component is mounted
           setReleases(data);
+
+          // Set up Playlist
+          const playlist = getPlaylist(data);
+          const playlistIdx = playbackState.currentSongIdx;
+
+          let currSong = {
+            title: playlist[playlistIdx].title,
+            artist: playlist[playlistIdx].artist,
+            id: playlist[playlistIdx].id,
+            audioUrl: playlist[playlistIdx].audioUrl,
+            coverImage: playlist[playlistIdx].coverImage
+          }
+          console.log(currSong)
+          setPlaybackState(prevState => ({...prevState, 
+            currentSong: currSong,
+            playlist: playlist,
+          }))
+
           setIsLoading(false);
           setLoadKey(prevKey => prevKey + 1); // Increment key to force re-render
           // Handle setting playback state here...

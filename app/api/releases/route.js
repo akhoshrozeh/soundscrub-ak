@@ -8,6 +8,8 @@ export const GET = async (request) => {
     const today = new Date();
     today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
 
+    console.log(today)
+
     const searchCriteria = {
         postDate: { 
             $gte: today
