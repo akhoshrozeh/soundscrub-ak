@@ -5,18 +5,32 @@ export const dynamic = 'force-dynamic';
 
 export const GET = async (request) => {
 
-    const today = new Date();
-    today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
+    // const today = new Date();
+    // today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
 
-    console.log(today)
+    // console.log(today)
 
-    // const searchCriteria = {
-    //     postDate: { 
-    //         $gte: today
-    //     },
-    //     isAccepted: true
-    // }
-    const searchCriteria = { isAccepted: true };
+    // // const searchCriteria1 = {
+    // //     postDate: { 
+    // //         $gte: today
+    // //     },
+    // //     isAccepted: true
+    // // }
+
+    const twoWeeksAgo = new Date();
+    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // Go back 14 days
+    twoWeeksAgo.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
+
+    console.log(twoWeeksAgo)
+
+    const searchCriteria = {
+        postDate: { 
+            $gte: twoWeeksAgo
+        },
+        isAccepted: true
+    };
+
+    // const searchCriteria = { isAccepted: true };
     try {
         await connectToDB();
         
