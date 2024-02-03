@@ -52,6 +52,10 @@ const ReleaseSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  postDate: {
+    type: Date,
+    default: null,
+  },
 }, {
   strict: false,
   timestamps: true,
