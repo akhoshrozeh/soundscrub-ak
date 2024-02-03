@@ -10,12 +10,13 @@ export const GET = async (request) => {
 
     console.log(today)
 
-    const searchCriteria = {
-        postDate: { 
-            $gte: today
-        },
-        isAccepted: true
-    }
+    // const searchCriteria = {
+    //     postDate: { 
+    //         $gte: today
+    //     },
+    //     isAccepted: true
+    // }
+    const searchCriteria = { isAccepted: true };
     try {
         await connectToDB();
         
