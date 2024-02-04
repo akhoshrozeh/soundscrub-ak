@@ -1,12 +1,16 @@
 import { connectToDB } from '@utils/database';
 import Release from '@models/release';
+import { lte } from 'lodash';
 
 export const dynamic = 'force-dynamic';
 
 export const GET = async (request) => {
 
-    const today = new Date("2023-12-09T23:58:03.148+00:00");
+    let today = new Date();
     today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
+    today = today.toLocaleString("en-US", {
+        timeZone: "America/Los_Angeles"
+      })
 
     const searchCriteria = {
         postDate: { 
