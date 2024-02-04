@@ -6,18 +6,24 @@ export const dynamic = 'force-dynamic';
 
 export const GET = async (request) => {
 
-    let today = new Date();
-    today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
-    today = today.toLocaleString("en-US", {
-        timeZone: "America/Los_Angeles"
-      })
+    const laTimeZone = 'America/Los_Angeles';
+    
+    // Start of today in LA timezone
+    let today = new Date(new Date().toLocaleString("en-US", {timeZone: laTimeZone}));
+    today.setHours(0, 0, 0, 0);
+
+    // Start of next day in LA timezone
+    let tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
     const searchCriteria = {
         postDate: { 
-            $gte: today
+            $gte: today,
+            $lt: tomorrow
         },
         isAccepted: true
-    }
+    };
+
     try {
         await connectToDB();
         
