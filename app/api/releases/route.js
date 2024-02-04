@@ -1,36 +1,29 @@
 import { connectToDB } from '@utils/database';
 import Release from '@models/release';
+import { lte } from 'lodash';
 
 export const dynamic = 'force-dynamic';
 
 export const GET = async (request) => {
 
-    // const today = new Date();
-    // today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
+    const laTimeZone = 'America/Los_Angeles';
+    
+    // Start of today in LA timezone
+    let today = new Date(new Date().toLocaleString("en-US", {timeZone: laTimeZone}));
+    today.setHours(0, 0, 0, 0);
 
-    // console.log(today)
-
-    // // const searchCriteria1 = {
-    // //     postDate: { 
-    // //         $gte: today
-    // //     },
-    // //     isAccepted: true
-    // // }
-
-    const twoWeeksAgo = new Date();
-    twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14); // Go back 14 days
-    twoWeeksAgo.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
-
-    console.log(twoWeeksAgo)
+    // Start of next day in LA timezone
+    let tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
 
     const searchCriteria = {
         postDate: { 
-            $gte: twoWeeksAgo
+            $gte: today,
+            $lt: tomorrow
         },
         isAccepted: true
     };
 
-    // const searchCriteria = { isAccepted: true };
     try {
         await connectToDB();
         
