@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic';
 
 export const GET = async (request) => {
 
-    const today = new Date();
+    const today = new Date("2023-12-09T23:58:03.148+00:00");
     today.setHours(0,0,0,0); // Resets hours, minutes, seconds, and milliseconds to 0
 
     const searchCriteria = {
