@@ -1,6 +1,5 @@
 import { connectToDB } from '@utils/database';
 import Release from '@models/release';
-import { lte } from 'lodash';
 
 export const dynamic = 'force-dynamic';
 

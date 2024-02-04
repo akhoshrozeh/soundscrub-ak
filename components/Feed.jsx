@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/navigation';
 import ReleaseItem from '@components/ReleaseItem'
 import { PlaybackContext } from '@contexts/PlaybackContext';
+import "@styles/loading-spinner.css"
 
 const ReleaseList = ({data}) => {
   return (
@@ -80,7 +81,10 @@ const Feed = () => {
   }, []); // Ensure dependencies are correct
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mt-6 page-loader">
+      </div>
+    );
   }
   return ( 
 
