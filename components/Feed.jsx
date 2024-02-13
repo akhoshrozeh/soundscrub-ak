@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import ReleaseItem from '@components/ReleaseItem'
 import { PlaybackContext } from '@contexts/PlaybackContext';
 import "@styles/loading-spinner.css"
+import { format } from 'date-fns'
+
 
 const ReleaseList = ({data}) => {
   return (
@@ -35,6 +37,20 @@ const Feed = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [loadKey, setLoadKey] = useState(0); // Added a key to force re-render
   const { playbackState, setPlaybackState } = useContext(PlaybackContext);
+  
+  // Set up time
+  const laTimeZone = 'America/Los_Angeles';
+
+  let today = new Date(new Date().toLocaleString("en-US", {timeZone: laTimeZone}));
+  today.setHours(0, 0, 0, 0);
+
+  // Calculate last Monday
+  let lastMonday = new Date(today);
+  lastMonday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
+
+  // Calculate next Sunday
+  let nextSunday = new Date(lastMonday);
+  nextSunday.setDate(lastMonday.getDate() + 6); // From last Monday to next Sunday is always +6 days
 
   useEffect(() => {
     let isMounted = true; // Track if component is mounted
@@ -93,7 +109,7 @@ const Feed = () => {
         <div className='flex flex-col p-3 pb-3'>
           <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
             <h1 className="text-3xl font-bold">
-              Today's Releases
+              Week from {format(lastMonday.toString(), "MMMM do")} to {format(nextSunday.toString(), "MMMM do")}
             </h1>
             <div className='flex flex-row'>
               <button className='flex flex-row items-center hover:text-purple-500'>

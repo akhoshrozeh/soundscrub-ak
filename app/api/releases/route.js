@@ -4,21 +4,25 @@ import Release from '@models/release';
 export const dynamic = 'force-dynamic';
 
 export const GET = async (request) => {
-
     const laTimeZone = 'America/Los_Angeles';
     
-    // Start of today in LA timezone
+    // Get today's date in LA timezone
     let today = new Date(new Date().toLocaleString("en-US", {timeZone: laTimeZone}));
     today.setHours(0, 0, 0, 0);
 
-    // Start of next day in LA timezone
-    let tomorrow = new Date(today);
-    tomorrow.setDate(tomorrow.getDate() + 1);
+    // Calculate last Monday
+    let lastMonday = new Date(today);
+    lastMonday.setDate(today.getDate() - (today.getDay() === 0 ? 6 : today.getDay() - 1));
 
+    // Calculate next Sunday
+    let nextSunday = new Date(lastMonday);
+    nextSunday.setDate(lastMonday.getDate() + 6); // From last Monday to next Sunday is always +6 days
+
+    // Adjust searchCriteria to include releases from last Monday to next Sunday
     const searchCriteria = {
         postDate: { 
-            $gte: today,
-            $lt: tomorrow
+            $gte: lastMonday,
+            $lt: nextSunday
         },
         isAccepted: true
     };
@@ -26,7 +30,7 @@ export const GET = async (request) => {
     try {
         await connectToDB();
         
-        // Eventually filter based on date
+        // Filter based on updated date range
         const releases = await Release.find(searchCriteria).populate('creator').sort({ upvotesLength: -1 });
         console.log('Awaiting release retrieval...')
         // console.log(releases)
