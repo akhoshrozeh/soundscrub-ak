@@ -108,9 +108,19 @@ const Feed = () => {
       <div className="w-full flex flex-col container mt-2 bg-transparent mb-2">
         <div className='flex flex-col p-3 pb-3'>
           <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
-            <h1 className="text-3xl font-bold">
-              Week from {format(lastMonday.toString(), "MMMM do")} to {format(nextSunday.toString(), "MMMM do")}
-            </h1>
+            <div className='flex flex-row items-end'>
+              <h1 className="text-3xl font-bold mr-2">
+                This Week's Releases
+              </h1>
+              
+              {/* Vertical gray line separator with Tailwind CSS */}
+              <div className="w-px bg-gray-300 self-stretch"></div>
+              
+              <h2 className='text-md text-stone-600 ml-2 mb-1'>
+                {format(lastMonday.toString(), "MMMM do")} to {format(nextSunday.toString(), "MMMM do")}
+              </h2>
+            </div>
+
             <div className='flex flex-row'>
               <button className='flex flex-row items-center hover:text-purple-500'>
                 <span className="text-md font-light mr-1">
