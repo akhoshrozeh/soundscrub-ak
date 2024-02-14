@@ -124,19 +124,22 @@ const Nav = () => {
                     </Link>
                 </div>
             ) : (
-                <>
-                    
+                <div className="flex gap-3 md:gap-5">
+                
+                    <button href="/create-submission" className="black_btn" onClick={() => {alert(`Sign in to submit a release!`)}}>
+                        Submit Music
+                    </button>
                     {providers && Object.values(providers).map((provider) => (
                         <button
                             type="button"
                             key={provider.name}
                             onClick={() => signIn(provider.id)}
-                            className='black_btn'
+                            className=' text-white text-sm'
                         >
                             Sign In
                         </button>
                     ))}
-                </>
+                </div>
             )}
         </div>
 
