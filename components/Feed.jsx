@@ -106,6 +106,8 @@ const Feed = () => {
 
     <section className="w-full mt-2 pb-24"  key={loadKey}>
       <div className="w-full flex flex-col container mt-2 bg-transparent mb-2">
+
+        {/* Date Header */}
         <div className='flex flex-col p-3 pb-3'>
           <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
             <div className='flex flex-row items-end'>
@@ -138,6 +140,8 @@ const Feed = () => {
           </div>
           <div className="flex-grow border-t border-stone-300"/>
         </div>
+
+        {/* Release Feed */}
         <ol className="w-full flex flex-col divide-y ">
           <ReleaseList
             data={releases}
