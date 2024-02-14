@@ -36,6 +36,14 @@ const About = () => {
                     - <strong className="blue_gradient">Community-Driven Discovery:</strong> At SoundScrub, we harness the collective power of our community to unearth...
                 </p>
                 {/* You can continue with the rest of the content here */}
+
+                <h2 className="mt-4 head_text">Contact Us</h2>
+                <p className="desc">
+                    - <strong className="blue_gradient">Questions & Feedback:</strong> 
+                    Feel free to email us at soundscrubme@gmail.com for any questions or feedback!
+                </p>
+
+
             </div>
         </div>
     )
