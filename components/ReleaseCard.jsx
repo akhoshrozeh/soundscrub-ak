@@ -109,6 +109,13 @@ const ReleaseCard = ({release = initRelease}) => {
     alert("You must be signed in to vote!")
   }
 
+  function formatUrl(link) {
+    if (!link.startsWith('http://') && !link.startsWith('https://')) {
+        return `https://${link}`;
+    }
+    return link;
+  }
+
 
   return (
     
@@ -209,7 +216,7 @@ const ReleaseCard = ({release = initRelease}) => {
               
                 {release.link && (
                   <a
-                    href={release.link}
+                    href={formatUrl(release.link)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className='link_btn flex justify-center items-center'
