@@ -10,7 +10,7 @@ export const POST = async (req) => {
     try {
         await connectToDB();
         // currently isAccepted is set to true for development mode
-        const newRelease = new Release({ creator: userId, title, artist, link, description, coverImage, releaseType, tags, audioUrl, isAccepted: true});
+        const newRelease = new Release({ creator: userId, title, artist, link, description, coverImage, releaseType, tags, audioUrl, isAccepted: false});
         console.log(newRelease)
         console.log("Attempting to save the new Release to db")
         await newRelease.save();
