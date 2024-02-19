@@ -107,8 +107,8 @@ const Feed = () => {
     <section className="w-full mt-2 pb-24"  key={loadKey}>
       <div className="w-full flex flex-col container mt-2 bg-transparent mb-2">
 
-        {/* Date Header */}
-        <div className='flex flex-col p-3 pb-3'>
+        {/* Desktop Date Header */}
+        <div className='hidden sm:flex flex-col p-3 pb-3'>
           <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
             <div className='flex flex-row items-end'>
               <h1 className="text-3xl font-bold mr-2">
@@ -136,6 +136,40 @@ const Feed = () => {
                   className="rounded-full"
                 />
               </button>
+            </div>
+          </div>
+          <div className="flex-grow border-t border-stone-300 "/>
+        </div>
+
+        {/* Mobile Date Header */}
+        <div className='sm:hidden flex flex-col p-3 pb-3 '>
+          <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
+            <div className='flex flex-row items-end'>
+              <h1 className="text-lg font-bold mr-2">
+                This Week's Releases
+              </h1>
+              
+              {/* Vertical gray line separator with Tailwind CSS */}
+              <div className="w-px bg-gray-300 self-stretch"></div>
+              
+              <h2 className='text-xs text-stone-600 ml-2 mb-1'>
+                {format(lastMonday.toString(), "MMMM do")} <br/> to {format(nextSunday.toString(), "MMMM do")}
+              </h2>
+            </div>
+
+            <div className='flex flex-row'>
+              {/* <button className='flex flex-row items-center hover:text-purple-500'>
+                <span className="text-md font-light mr-1">
+                  Type
+                </span>
+                <Image
+                  src="/assets/icons/chevron-down.svg"
+                  alt="chevron down"
+                  width={15}
+                  height={15}
+                  className="rounded-full"
+                />
+              </button> */}
             </div>
           </div>
           <div className="flex-grow border-t border-stone-300"/>

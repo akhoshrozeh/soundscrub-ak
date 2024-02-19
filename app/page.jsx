@@ -11,7 +11,7 @@ const Home = () => {
       <div className='mb-6'>
         <div className='mb-6'>
           <h1 className="head_text text-center">
-              Drop Your Bangers 🔥
+              Drop Your Music 🔥
               <br className="max-xs:hidden"/>
               <span className="text-4xl text-purple-500 ">
                 Let's Ditch the Algorithm Together

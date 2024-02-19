@@ -80,7 +80,7 @@ const EmailPrompt = () => {
 
             {/* Mobile Prompt */}
             <div className='md:hidden w-full flex flex-row mb-5 items-center p-4 rounded-full shadow-md bg-gradient-to-r from-purple-300 to-orange-200 justify-between'>
-                <span className="font-semibold">
+                <span className="text-sm font-semibold">
                     Join our newsletter waitlist!
                 </span>
 
@@ -89,7 +89,7 @@ const EmailPrompt = () => {
                         Your email has been recorded!
                     </span>
                 ) : (
-                    <div>
+                    <div className='flex flex-row'>
                         <input
                             placeholder='Email'
                             className='w-32 rounded-xl p-2'
