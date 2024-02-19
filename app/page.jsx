@@ -28,16 +28,19 @@ const Home = () => {
       </div>
 
          
-      {/* Feed */}
-      {/* <Feed/> */}
-      <div className='mb-36'>
+      
+      {/* Message */}
+      {/* <div className='mb-36'>
       <div className="flex-grow border-t border-stone-300"/>
         <h1 className="head_text text-center">
             Voting Period Starts <span className='text-red-400'>Feb. 19th </span>
             <br/>
             <span className='text-purple-500'>Submit Your Music Now!</span>
         </h1>
-      </div>
+      </div> */}
+
+      {/* Feed */}
+      <Feed/>
 
     </section>
   )
