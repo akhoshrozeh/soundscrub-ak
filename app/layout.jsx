@@ -6,6 +6,7 @@ import { PlaybackProvider } from '@contexts/PlaybackContext'
 import PlaybackFooter from '@components/PlaybackFooter'
 import Head from 'next/head';
 import FullControlPlaybackFooter from '@components/FullControlPlaybackFooter'
+import { Analytics } from '@vercel/analytics/react';
 
 
 export const metadata = {
@@ -27,6 +28,7 @@ const RootLayout = ({children, modal}) => {
                                 <div className="app">
                                     {children}
                                     {modal}
+                                    <Analytics />
                                 </div>
                             {/* <PlaybackFooter className="app_footer"/>   */}
                             <FullControlPlaybackFooter/>
