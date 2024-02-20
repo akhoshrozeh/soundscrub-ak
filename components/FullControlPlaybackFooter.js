@@ -63,6 +63,7 @@ class FullControlPlaybackFooter extends React.Component {
     this.handleForwardArrow = this.handleForwardArrow.bind(this)
     this.handleLink = this.handleLink(this)
     this.formatSecondsToMinutes = this.formatSecondsToMinutes.bind(this)
+    this.truncateString = this.truncateString.bind(this)
   }
   static contextType = PlaybackContext;
 
@@ -239,6 +240,15 @@ class FullControlPlaybackFooter extends React.Component {
     // Format the time. Pad the seconds with a leading zero if necessary
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
+
+  truncateString( str, n, useWordBoundary ) {
+    if (str.length <= n) { return str; }
+    const subString = str.slice(0, n-1); // the original check
+    return (useWordBoundary 
+      ? subString.slice(0, subString.lastIndexOf(" ")) 
+      : subString) + "...";
+  };
+
   static contextType = PlaybackContext;
 
   render () {
@@ -436,10 +446,10 @@ class FullControlPlaybackFooter extends React.Component {
                                 />
         
                             <div className='flex flex-col px-2'>
-                                <span className='text-white text-md'>
-                                    {this.playerState.currentSong.title}
+                                <span className='text-white text_xxs'>
+                                    {this.truncateString(this.playerState.currentSong.title, 15, true)}
                                 </span>
-                                <h2 className='text-stone-400 text-sm'> {this.playerState.currentSong.artist}</h2>
+                                <h2 className='text-stone-400 text_xxs'> {this.truncateString(this.playerState.currentSong.artist, 15, true)}</h2>
                             </div>
         
                             <div className='mt-1'>
@@ -518,14 +528,15 @@ class FullControlPlaybackFooter extends React.Component {
                 </button>
             </div>
 
-            <div className='flex flex-row text-white text-xs justify-center items-center text-center '>
+            {/* Seeking Slider */}
+            <div className='flex flex-row text-white text-xs justify-center items-center text-center'>
                 <div className='pr-2'>
-                    <span>
+                    <span className='text_xxs'>
                         {this.formatSecondsToMinutes(this.state.seek.toFixed(2))}
                     </span>
                 </div>
                 <input
-                    className='w-8/12 purple-seeking-slider'
+                    className='w-6/12 purple-seeking-slider'
                     type='range'
                     min='0'
                     max={this.state.duration ? this.state.duration.toFixed(2) : 0}
@@ -536,7 +547,7 @@ class FullControlPlaybackFooter extends React.Component {
                     onMouseUp={()=>{}}
                 />
                 <div className='pl-2'>
-                    <span>
+                    <span className='text_xxs'>
                         {(this.state.duration) ? this.formatSecondsToMinutes(this.state.duration.toFixed(2)) : '0:00'}
                     </span>
                 </div>

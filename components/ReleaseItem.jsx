@@ -182,13 +182,13 @@ const ReleaseItem = ({ release }) => {
             {/* Mobile View */}
             <div className="sm:hidden flex flex-col justify-center ml-7">
                 <Link href={`/releases/${release._id}`} onClick={handleLink} className="flex flex-col">
-                    <span className="text-md font-semibold">{release.title}</span>
+                    <span className="text-sm font-semibold">{release.title}</span>
                     <span className="text_xxs text-gray-600">{release.artist}</span>
                 </Link>
             </div>
                 
             <div className="flex flex-row m-auto">
-                <a href={formatUrl(release.link)} target="_blank" rel="noopener noreferrer">
+                <a href={handlePlaySong} target="_blank" rel="noopener noreferrer">
                     <Image
                         src="/assets/icons/url-link.svg"
                         width={30}

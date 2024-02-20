@@ -105,7 +105,7 @@ const Feed = () => {
   return ( 
 
     <section className="w-full mt-2 pb-24"  key={loadKey}>
-      <div className="w-full flex flex-col container mt-2 bg-transparent mb-2">
+      <div className="w-full flex flex-col container bg-transparent mb-2">
 
         {/* Desktop Date Header */}
         <div className='hidden sm:flex flex-col p-3 pb-3'>

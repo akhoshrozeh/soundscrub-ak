@@ -119,7 +119,9 @@ const ReleaseCard = ({release = initRelease}) => {
 
   return (
     
-    <div className='bg-white rounded-lg overflow-hidden border-2 border-black'>
+    <div>
+      {/* Desktop */}
+    <div className='hidden sm:flex bg-white rounded-lg overflow-hidden border-2 border-black'>
       <div className='w-full p-6'>
 
         <div className='flex flex-col mt-4 mb-4 ml-4 mr-4'>
@@ -243,6 +245,139 @@ const ReleaseCard = ({release = initRelease}) => {
             </div>
           </div>  
       </div>
+    </div>
+
+      {/* Mobile */}
+    <div className='sm:hidden flex bg-white rounded-lg overflow-hidden border-2 border-black'>
+      <div className='w-full p-6'>
+
+        <div className='flex flex-col mt-4 mb-4 ml-4 mr-4'>
+          
+          {/* Art & Title*/}
+          <div className='w-full flex flex-row p-2 justify-between'>
+
+            {/* Cover Art */}
+            <div className='flex flex-row'>
+              {release.coverImage ? (
+                  <Image 
+                      src={release.coverImage}
+                      alt="Placeholder"
+                      width={300}
+                      height={300}
+                      className=" rounded-lg object-cover h-40 w-40"
+                  /> 
+              ) : (
+                  <Image 
+                      src="/assets/images/placeholder-logo.svg" 
+                      alt="Placeholder"
+                      width={80}
+                      height={80}
+                      className=""
+                  /> 
+              )}
+            </div>
+
+            {/* Title & Buttons */}
+            <div className='w-5/12 flex flex-col p-1 ml-3'>
+              <div className='flex flex-row justify-between'>
+                
+                <div className='flex flex-col items-start mr-4'>
+                  <h1 className='text-sm font-bold '>{release.title}</h1>
+                  <p className='text_xxs font-semibold text-gray-700 mb-1'>{release.artist}</p>
+                </div>
+                
+                <button className='mb-2' onClick={handlePlaySong}>
+                  <Image
+                    src="/assets/icons/play-button-purple.svg"
+                    alt="play-button-purple"
+                    width={40}
+                    height={40}
+                  />
+                </button>
+              </div>
+
+              <div className='flex flex-row mt-5'>
+              {release.link && (
+                    <a
+                      href={formatUrl(release.link)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className='flex sm_link_btn  justify-center items-center mr-2'
+                    >
+                     <span className='text_xxs'> Website 🔗</span>
+                    </a>
+                  )}
+
+                {(voted ) ? (
+                <button className="voted_btn mt-3 mb-2" onClick={() => updateVote(VOTE_TYPES.DOWNVOTE)}>
+                  <div className="flex flex-col items-center  ml-1 mr-1">
+                    <Image
+                      src="/assets/icons/216604_come_icon.svg"
+                      width={10}
+                      height={10}
+                      className="black_arrow_svg"
+                      alt="black arrow"
+                    />
+                    <span className="mb-1">{upvotes}</span>
+                  </div>
+                </button>
+                ) : session?.user  ? (
+
+                  <button className="vote_btn mt-3 mb-2" onClick={() => updateVote(VOTE_TYPES.UPVOTE)}>
+                  <div className="flex flex-col items-center  ml-1 mr-1">
+                    <Image
+                      src="/assets/icons/216604_come_icon.svg"
+                      width={10}
+                      height={10}
+                      className="black_arrow_svg"
+                      alt="black arrow"
+                    />
+                    <span className="mb-1">{upvotes}</span>
+                  </div>
+                </button>
+
+
+                )
+                : (
+
+                  <button className="vote_btn mt-3 mb-3" onClick={notifySignInRequired}>
+                  <div className="flex flex-col items-center  ml-1 mr-1">
+                    <Image
+                      src="/assets/icons/216604_come_icon.svg"
+                      width={10}
+                      height={10}
+                      className="black_arrow_svg"
+                      alt="black arrow"
+                    />
+                    <span className="mb-1">{upvotes}</span>
+                  </div>
+                </button>
+
+                )}
+                
+
+
+              </div>
+              </div>
+          </div>
+
+          {/* Link */}
+
+          
+
+
+          {/* Description */}
+            <div className='mt-4 pb-10'>
+              {release.genre && <p className='text-sm text-gray-600'>Genre: {release.genre}</p>}
+              {release.tags.length > 0 && <p className='text-sm text-gray-600'>Tags: {release.tags.join(', ')}</p>}
+              {release.description && <p className='text_xxs mt-2 text-gray-800 my-3'>{truncateString(release.description, 200, true)}</p>}
+              <p className='text-xs text-gray-600'>Release Date: {formattedDate}</p>
+              {/* <p className='text-sm text-gray-600'>UpvotesLength: {release.upvotesLength}</p>
+              <p className='text-sm text-gray-600'>Upvotes: {release.upvotes.length}</p> */}
+            </div>
+          </div>  
+      </div>
+    </div>
     </div>
   );
 }
