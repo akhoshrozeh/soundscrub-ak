@@ -4,7 +4,7 @@ const HowPage = () => {
     <section>
 
       {/* Desktop */}
-      <div className="hidden sm:w-full flex flex-col p-2">
+      <div className="hidden sm:flex w-full flex-col p-2">
 
         <div className="flex mt-8 mb-12">
           <h1 className="head_text text_full"> 
@@ -60,7 +60,7 @@ const HowPage = () => {
 
 
       {/* Mobile */}
-      <div className="sm:hidden w-full flex flex-col p-2 pb-24">
+      <div className="sm:hidden flex w-full  flex-col p-2 pb-24">
 
       <div className="flex mt-8 mb-12 p-2">
                 <h1 className="head_text text_full"> 
