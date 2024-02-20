@@ -10,6 +10,13 @@ const Nav = () => {
     const [toggleDropdown, setToggleDropdown] = useState(false);
     const [toggleMenu, setToggleMenu] = useState(false);
     const [providers, setProviders] = useState(null);
+    const [forceRenderKey, setForceRenderKey] = useState(0);
+
+    // Force a re-render when the session changes
+    useEffect(() => {
+        setForceRenderKey(prevKey => prevKey + 1);
+    }, [session]);
+
 
     useEffect(() => {
         const setUpProviders = async () => {
@@ -21,7 +28,7 @@ const Nav = () => {
     }, [])
     return (
 
-    <nav className="w-full z-20 flex flex-between mb-16 px-6 pt-3 pb-3 bg-stone-800 fixed top-0">
+    <nav key={forceRenderKey} className="w-full z-20 flex flex-between mb-16 px-6 pt-3 pb-3 bg-stone-800 fixed top-0">
         <div className="hidden md:flex flex-row gap-2 items-center">
             <Link href="/">
                 <div className="flex w-[200px] h-[50px] overflow-hidden items-center">
