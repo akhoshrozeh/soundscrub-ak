@@ -245,32 +245,34 @@ class FullControlPlaybackFooter extends React.Component {
 
     return (
       <div>
-      <footer className='hidden sm:block w-full z-20 bg-stone-800 shadow-full px-4 py-4 fixed bottom-0'>
-
         {!this.playerState.currentSong.audioUrl ? (
 
-        <>
-        </>
+          <>
+          </>
 
 
-        ) : (
+          ) : (
 
-          <ReactHowler
-            src={this.playerState.currentSong.audioUrl}
-            html5={true}
-            playing={this.state.playing}
-            onLoad={this.handleOnLoad}
-            onPlay={this.handleOnPlay}
-            onEnd={this.handleOnEnd}
-            loop={this.state.loop}
-            mute={this.state.mute}
-            volume={this.state.volume}
-            ref={(ref) => (this.player = ref)}
-          />
+            <ReactHowler
+              src={this.playerState.currentSong.audioUrl}
+              html5={true}
+              playing={this.state.playing}
+              onLoad={this.handleOnLoad}
+              onPlay={this.handleOnPlay}
+              onEnd={this.handleOnEnd}
+              loop={this.state.loop}
+              mute={this.state.mute}
+              volume={this.state.volume}
+              ref={(ref) => (this.player = ref)}
+            />
 
 
-        )}
-        
+          )}
+
+      {/* Desktop */}
+      <footer className='hidden sm:block w-full z-20 bg-stone-800 shadow-full px-4 py-4 fixed bottom-0'>
+
+
 
         <div className="grid grid-cols-4 gap-4 items-center justify-between">
 
@@ -413,32 +415,8 @@ class FullControlPlaybackFooter extends React.Component {
         </div>
       </footer>
 
+      {/* Mobile */}
       <footer className='sm:hidden block w-full z-20 bg-stone-800 shadow-full px-4 py-4 fixed bottom-0'>
-
-      {!this.playerState.currentSong.audioUrl ? (
-
-      <>
-      </>
-
-
-      ) : (
-
-        <ReactHowler
-          src={this.playerState.currentSong.audioUrl}
-          html5={true}
-          playing={this.state.playing}
-          onLoad={this.handleOnLoad}
-          onPlay={this.handleOnPlay}
-          onEnd={this.handleOnEnd}
-          loop={this.state.loop}
-          mute={this.state.mute}
-          volume={this.state.volume}
-          ref={(ref) => (this.player = ref)}
-        />
-
-
-      )}
-
 
       <div className="grid grid-cols-4 gap-4 items-center justify-between">
 
