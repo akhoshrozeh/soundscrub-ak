@@ -143,7 +143,7 @@ const Feed = () => {
 
         {/* Mobile Date Header */}
         <div className='sm:hidden flex flex-col p-3 pb-3 '>
-          <div className='flex flex-row mb-2 justify-between items-center'> {/* Added items-center */}
+          <div className='flex flex-row mb-3 justify-between items-center'> {/* Added items-center */}
             <div className='flex flex-row items-end'>
               <h1 className="text-lg font-bold mr-2">
                 This Week's Releases

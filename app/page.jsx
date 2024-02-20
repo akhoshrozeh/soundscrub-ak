@@ -11,15 +11,16 @@ const Home = () => {
       <div className='mb-6'>
 
         {/* Desktop Headline */}
-        <div className='hidden sm:flex mb-6'>
-          <h1 className="head_text text-center">
+        <div className='hidden sm:flex mb-6 pb-4'>
+          <h1 className="head_text text-center mr-4">
               Drop Your Music 🔥
               <br className="max-xs:hidden"/>
               <span className="text-4xl text-purple-500 ">
                 Let's Ditch the Algorithm Together
               </span>
           </h1>
-          <p className="desc text-center">
+          <div className="w-px bg-gray-300 self-stretch"></div>
+          <p className="ml-4 py-4 desc justify-center text-center">
             SoundScrub is a human-sourced music discovery platform. <br/> Built by and for up-and-coming artists & producers.
           </p>
         </div>
